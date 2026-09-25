@@ -100,3 +100,50 @@ Do not add major feature surface until we can answer:
 ## Safety/product principles
 
 Collect minimal child data. Parent owns the account and communication settings. Avoid public child profiles and unrestricted child-to-child communication in V1. Keep AI content assistance behind the Barmoj team review process.
+
+
+## Curriculum direction — systems before syntax
+
+Barmoj is not primarily a coding course. Programming is one medium for learning how to reason about and build systems.
+
+The core learning cycle is:
+
+**Understand → Decompose → Model → Build → Test → Debug → Improve → Explain**
+
+Children should repeatedly practice:
+- defining goals, constraints and missing information;
+- decomposing messy problems into parts and relationships;
+- modeling inputs, rules, state and outputs;
+- spotting patterns and choosing abstractions;
+- predicting behavior before running a solution;
+- testing edge cases and failure modes;
+- debugging causes rather than guessing fixes;
+- comparing solutions and explaining trade-offs;
+- using AI as a collaborator whose proposals must be specified, tested and critiqued.
+
+### Starter track: Think in Systems
+
+1. Observe before solving — patterns and constraints
+2. Turn chaos into steps — sequencing and decomposition
+3. Draw a system — inputs, rules, state, outputs
+4. Find the pattern — repetition before syntax
+5. What if? — conditions and decisions
+6. Break the system — edge cases and failure modes
+7. Fix the cause — debugging and reasoning
+8. Make it simpler — abstraction and reuse
+9. Ask AI to propose — specification and critique
+10. Test AI — verification and assumptions
+11. Build your system — project from a real-world problem
+12. Explain your decisions — demonstrate and defend the design
+
+### Branded learning assets
+
+The visual world should carry pedagogy, not decoration:
+- **The Sender / المُرسِل** — gives an underspecified goal; the learner must ask questions.
+- **The Path / المسار** — represents steps, states and relationships.
+- **The Fault / العطل** — introduces bugs, contradictions and failure cases.
+- **The Lab / المختبر** — encourages controlled experiments and iteration.
+
+Real-world system challenges should gradually replace isolated code puzzles: water tanks, traffic flows, queues, delivery routes, simple games, sensors, household systems and small AI-assisted tools.
+
+Code is introduced when it is the useful executable representation of a system—not as the learning objective by itself.
