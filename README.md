@@ -1,78 +1,82 @@
 # Barmoj — برموج
 
-Arabic-first learning product for children in Morocco, focused on **problem solving → computational thinking → programming → digital creation**.
+Arabic-first learning product for children in Morocco, focused on **systems thinking, problem solving, modeling, testing, debugging and explaining decisions**.
 
 > نتعلّم كيف نفكّر، ثم كيف نبرمج.
+>
+> لا نعلّم الطفل كتابة الكود. نعلّمه بناء نظام.
 
-## MVP
+## Current prototype
 
-The first release is deliberately narrow:
+The repository now contains a runnable Vite + React + TypeScript pilot prototype.
 
-- Parent signup and child profile
-- One learning track with 10–12 short missions
-- Mission player with progress and XP
-- Kid home with a clear “continue learning” loop
-- Parent progress dashboard and weekly summary
-- Optional WhatsApp sharing/reminders
-- Lightweight internal content console
+Core flow:
 
-AI initially assists the Barmoj team with curriculum/content production and review. It is not an unrestricted child-facing tutor in V1.
+**Landing → parent setup → Kid Home → Mission Lab → learning evidence → Parent Dashboard**
 
-## Product loop
+Implemented mission labs:
 
-Parent signup → child profile → learning track → mission → result + XP → progress → weekly parent summary → return.
+- **خزان لا يفيض** — sensor → rule → output, normal/failure tests, safeguard and explanation
+- **رتّب التوصيلات** — constraints, sequencing and re-planning after a blocked road
+- **تقاطع آمن** — state conflicts and a safety interlock
+- **لعبة لا تنكسر** — feedback loops, runaway rewards and rule tuning
 
-## Pilot
+The learning cycle is:
 
-Start with 20–30 Moroccan families. Measure:
+**Observe → Question → Model → Predict → Build → Break → Debug → Improve → Explain**
 
-1. First-mission completion
-2. Three missions completed within seven days
-3. Weekly child return
-4. Parent-summary engagement
-5. Intent to continue
+The first track remains `فكّر كنظام` with 12 missions. Code and AI are execution tools, not the learning objective.
 
-Community, a store, public leaderboards and broad AI features stay outside the MVP until this loop is validated.
+## Run locally
 
-## Design
+```bash
+npm install
+npm run dev
+```
 
-- Arabic / RTL first
-- Alexandria typography
-- Ink: `#151515`
-- Paper: `#F7F7F2`
-- Learn: `#39DD59`
-- Explore: `#FFC107`
-- Challenge: `#FF164D`
-- Deep green: `#173E2B`
+Production check:
+
+```bash
+npm run build
+npm run preview
+```
+
+## Product principles
+
+- Arabic-first and RTL throughout
+- Designed for ages 7–14
+- Parents own the account and communication layer
+- Minimal child data in V1
+- No public child profiles, community, store, public leaderboard or unrestricted child-facing AI chat
+- Parent reporting focuses on observable evidence: `يفهم / يمثّل / يتوقّع / يختبر / يفسّر`
+- No reward for speed; missions reward reasoning, testing and explanation
+
+## Visual system
+
+- Ink `#151515`
+- Paper `#F7F7F2`
+- Learn green `#39DD59`
+- Explore yellow `#FFC107`
+- Challenge red `#FF164D`
+- Deep green `#173E2B`
+- Tactile geometry, dark outlines, system diagrams and functional color
+- Avoid generic SaaS/AI styling, glassmorphism, decorative gradients and stock education art
+- Brando Arabic is the preferred brand typeface when a licensed webfont is available; the prototype currently falls back to Noto Kufi Arabic
 
 Figma: https://www.figma.com/design/IUHArEYFbaEqPcX66Q1rRh/barmoj
 
-## Planned app architecture
+## Pilot target
 
-```
-apps/web
-  public landing
-  parent onboarding
-  kid home
-  mission player
-  parent dashboard
-  internal content console
+Start with 20–30 Moroccan families and evaluate:
 
-packages/
-  ui
-  curriculum
-  analytics
-```
+1. Can the child complete a mission without adult explanation?
+2. Can the child explain the model and predict the result before running it?
+3. Can the child identify and test a failure case?
+4. Does the parent understand the learning evidence without educational jargon?
+5. Do families want to return for another mission?
 
-Initial implementation target: TypeScript, React/Next.js, Tailwind CSS and Firebase for authentication/data/hosting where appropriate.
+## V1 boundary
 
-## Build order
+Do not add community, public leaderboards, stores, live classes, native apps, payments or open-ended child-facing AI until the core learning loop is validated.
 
-1. Design system + responsive landing
-2. Parent onboarding + child setup
-3. Kid home
-4. Mission player + completion state
-5. Parent dashboard
-6. Content console
-7. Analytics instrumentation
-8. Pilot QA and launch
+See `docs/PRODUCT.md` for the product model and curriculum direction.
