@@ -8,7 +8,7 @@ Arabic-first learning product for children in Morocco, focused on **systems thin
 
 ## Current prototype
 
-The repository now contains a runnable Vite + React + TypeScript pilot prototype.
+The repository contains a runnable Vite + React + TypeScript pilot prototype.
 
 Core flow:
 
@@ -26,6 +26,22 @@ The learning cycle is:
 **Observe → Question → Model → Predict → Build → Break → Debug → Improve → Explain**
 
 The first track remains `فكّر كنظام` with 12 missions. Code and AI are execution tools, not the learning objective.
+
+## Firebase Hosting
+
+Live pilot: https://barmoj-266b8.web.app/
+
+Firebase project: `barmoj-266b8`
+
+The repository includes `firebase.json` and `.firebaserc`. Hosting serves the Vite `dist` directory and rewrites SPA routes such as `/kid`, `/mission/water`, and `/parent` to `index.html`, so direct links work after deployment.
+
+Build and deploy manually when needed:
+
+```bash
+npm install
+npm run build
+npx firebase-tools deploy --only hosting --project barmoj-266b8
+```
 
 ## Run locally
 
