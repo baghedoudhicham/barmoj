@@ -9,7 +9,7 @@ import {
   RoutingMission,
   TrafficMission,
   WaterMission,
-} from "./pages";
+} from "./pages-next";
 
 export default function App() {
   return (
