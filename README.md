@@ -38,7 +38,8 @@ The repository includes `firebase.json` and `.firebaserc`. Hosting serves the Vi
 Build and deploy manually when needed:
 
 ```bash
-npm install
+npm ci
+npm test
 npm run build
 npx firebase-tools deploy --only hosting --project barmoj-266b8
 ```
@@ -53,9 +54,37 @@ npm run dev
 Production check:
 
 ```bash
+npm test
 npm run build
 npm run preview
 ```
+
+## Mission notebook pass — October 2026
+
+All four labs now collect a constraint, a prediction and a reason **before each test**. Each saved experiment contains an immutable copy of its settings and actual result. An incorrect prediction remains visible for reflection; it does not block learning.
+
+- Water tests the exact 80% boundary, false sensor readings, and a backup sensor. After the rule changes, normal and boundary tests must be repeated under the improved rule.
+- Delivery uses a visible road network. A comes first; when A–B closes, the alternate route reaches B through C.
+- Traffic separates the requested state from the actual signals. The interlock rejects simultaneous green requests and renders both signals red.
+- Game resources follow an explicit recurrence: `next balance = current balance - 3 + reward`, starting at 10. Five turns expose growth, depletion, or balance; reward 3 balances cost 3.
+
+Completion requires observing a failure, testing the correction, and writing an explanation. Changing the current rule invalidates an incompatible corrected test. Text-length checks ensure an answer is present; **they do not evaluate whether the reasoning is correct**.
+
+Kid Home resumes the most recent unfinished lab and suggests another lab after completion. The Parent Dashboard retains the child's actual constraint, prediction, reason, test settings, result and final explanation. Older completion records are preserved and marked as legacy summaries, without counting them as detailed evidence.
+
+Drafts and evidence remain in this browser's local storage. No Firebase database, child account, cloud synchronization or automatic grading is introduced. Storage failures are shown to the child instead of reporting a successful save.
+
+The workbench follows the Figma Mission Lab direction (`2433:15`): paper work surface, system pieces, deep-green prediction/coaching panels, and the existing green/yellow/red palette. The existing Noto Kufi Arabic fallback remains; Brando Arabic requires a licensed webfont.
+
+## Release
+
+The existing `.github/workflows/ci.yml` deploys **pushes to main** to Firebase project `barmoj-266b8`. Feature branches and pull requests run the tests and build without deploying. Dependencies are locked in `package-lock.json` and CI uses `npm ci`.
+
+After reviewing and merging the feature branch, verify the build and deployment jobs. The deployment job expects the existing repository secret `FIREBASE_SERVICE_ACCOUNT_BARMOJ_266B8`. If it is missing or invalid, a project administrator must configure it; do not commit credentials.
+
+The configured live URL is https://barmoj-266b8.web.app/. The separate URL https://barmoj.web.app/ returned Firebase's **Site Not Found** during inspection. This repository does not establish a hosting target for that short URL; resolve its hosting-site ownership and target separately before deploying there.
+
+See `docs/QA-2026-10.md` for the checks performed on this pass.
 
 ## Product principles
 

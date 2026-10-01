@@ -1,3 +1,7 @@
+import type { LabId, Trial } from "./lab-model";
+import { labIds } from "./lab-model";
+import { validTrial } from "./lab-storage";
+
 export type EvidenceKey = "يفهم" | "يمثّل" | "يتوقّع" | "يختبر" | "يفسّر";
 
 export const missions = [
@@ -28,6 +32,10 @@ export type LearningEvidence = {
   date: string;
   items: EvidenceKey[];
   note: string;
+  labId?: LabId;
+  observation?: string;
+  explanation?: string;
+  trials?: Trial[];
 };
 
 export type Profile = { parent: string; child: string; age: string };
@@ -38,7 +46,13 @@ const EVIDENCE_KEY = "barmoj-evidence";
 export function getProfile(): Profile {
   try {
     const value = localStorage.getItem(PROFILE_KEY);
-    return value ? JSON.parse(value) : { parent: "", child: "سلمى", age: "10" };
+    const p = value ? JSON.parse(value) : null;
+    return p &&
+      typeof p.parent === "string" &&
+      typeof p.child === "string" &&
+      typeof p.age === "string"
+      ? p
+      : { parent: "", child: "سلمى", age: "10" };
   } catch {
     return { parent: "", child: "سلمى", age: "10" };
   }
@@ -51,7 +65,25 @@ export function saveProfile(profile: Profile) {
 export function getEvidence(): LearningEvidence[] {
   try {
     const value = localStorage.getItem(EVIDENCE_KEY);
-    return value ? JSON.parse(value) : [];
+    const entries = value ? JSON.parse(value) : [];
+    if (!Array.isArray(entries)) return [];
+    return entries.filter(
+      (e): e is LearningEvidence =>
+        e &&
+        typeof e.mission === "string" &&
+        typeof e.date === "string" &&
+        Number.isFinite(Date.parse(e.date)) &&
+        typeof e.note === "string" &&
+        Array.isArray(e.items) &&
+        e.items.every((k: unknown) =>
+          evidenceLabels.some(([name]) => name === k),
+        ) &&
+        (e.labId === undefined || labIds.includes(e.labId)) &&
+        (e.trials === undefined ||
+          (Array.isArray(e.trials) && e.trials.every(validTrial))) &&
+        (e.observation === undefined || typeof e.observation === "string") &&
+        (e.explanation === undefined || typeof e.explanation === "string"),
+    );
   } catch {
     return [];
   }
@@ -63,5 +95,10 @@ export function addEvidence(entry: Omit<LearningEvidence, "date">) {
     { ...entry, date: new Date().toISOString() },
     ...current.filter((item) => item.mission !== entry.mission),
   ].slice(0, 8);
-  localStorage.setItem(EVIDENCE_KEY, JSON.stringify(next));
+  try {
+    localStorage.setItem(EVIDENCE_KEY, JSON.stringify(next));
+    return true;
+  } catch {
+    return false;
+  }
 }

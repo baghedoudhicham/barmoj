@@ -1,13 +1,12 @@
 import { Route, Routes } from "react-router-dom";
+import { Landing, Onboarding } from "./pages-next";
 import {
   EconomyMission,
-  Landing,
-  Onboarding,
   Result,
   RoutingMission,
   TrafficMission,
   WaterMission,
-} from "./pages-next";
+} from "./mission-lab";
 import { KidHomeV2, MissionHub, ParentDashboardV2 } from "./pilot";
 
 export default function App() {
