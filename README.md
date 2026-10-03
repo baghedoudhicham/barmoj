@@ -124,4 +124,6 @@ Start with 20–30 Moroccan families and evaluate:
 
 Do not add community, public leaderboards, stores, live classes, native apps, payments or open-ended child-facing AI until the core learning loop is validated.
 
+The proposed Arabic, English and French 12-mission curriculum is in [docs/CURRICULUM-1.0.md](docs/CURRICULUM-1.0.md). The testing sequence, future Resources shelf, finite story format, AI boundaries, language plan and monetization sequence are in [docs/PRODUCT-ROADMAP.md](docs/PRODUCT-ROADMAP.md).
+
 See `docs/PRODUCT.md` for the product model and curriculum direction.

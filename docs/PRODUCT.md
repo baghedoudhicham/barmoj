@@ -82,8 +82,9 @@ Mission target: roughly 4–8 minutes each.
 Do not add major feature surface until we can answer:
 
 - Do children complete the first mission?
-- Do they complete at least three missions in the first seven days?
-- Do they return the following week?
+- Do they return by choice at a pace that feels comfortable to the family?
+- Can they use evidence from a mission to explain or transfer an idea later?
+- Is the activity length and stopping point comfortable for the child?
 - Do parents understand the learning progress?
 - Do families want to continue?
 
