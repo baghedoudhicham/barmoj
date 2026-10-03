@@ -1,6 +1,6 @@
 # Barmoj product roadmap — validate learning before adding surface
 
-**Decision status:** recommended sequence, October 2026  
+**Decision status:** recommended sequence, October 2026
 **Product hypothesis:** Barmoj helps children notice, model, test and explain systems, then transfer that way of thinking to problems they care about. It supports varied ways of learning without ranking children.
 
 ## What to build first

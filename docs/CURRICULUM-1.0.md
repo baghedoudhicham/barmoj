@@ -1,8 +1,8 @@
 # Barmoj curriculum 1.0 — Think in Systems
 
-**Status:** proposed pilot curriculum, October 2026  
-**Audience:** children aged 7–14, with flexible support rather than ability labels  
-**Languages in this curriculum:** Modern Standard Arabic, English and French  
+**Status:** proposed pilot curriculum, October 2026
+**Audience:** children aged 7–14, with flexible support rather than ability labels
+**Languages in this curriculum:** Modern Standard Arabic, English and French
 **Format:** 12 short missions, each with an optional off-screen transfer activity
 
 This is a complete first-track plan and localized set of child-facing prompts. It is not a claim that a twelve-mission course has already been implemented in the app or proven to raise attention, intelligence or school performance. The current app has four interactive Mission Labs; the other missions are curriculum content to build and test in stages.
@@ -42,14 +42,14 @@ Each mission includes a child-facing challenge and a transfer question in all th
 
 ### 01 — راقب قبل أن تحل | Observe before solving | Observe avant de résoudre
 
-**Practice:** selective attention, curiosity and distinguishing evidence from decoration.  
+**Practice:** selective attention, curiosity and distinguishing evidence from decoration.
 **Child challenge**
 
 - **العربية:** ضاع روبوت توصيل في محطة. أمامك خريطة فيها إشارات كثيرة. أيّ ثلاثة أدلّة تحتاجها ليصل إلى الصندوق، وما التفصيل الذي يمكنك تجاهله؟
 - **English:** A delivery robot is lost in a station. The map has many signals. Which three clues does it need to reach the package, and which detail can it ignore?
 - **Français :** Un robot-livreur s’est perdu dans une gare. La carte contient beaucoup d’indices. Quels trois indices lui faut-il pour atteindre le colis, et quel détail peut-il ignorer ?
 
-**Look for:** chooses relevant clues, names the goal, and can change the selection when the goal changes.  
+**Look for:** chooses relevant clues, names the goal, and can change the selection when the goal changes.
 **Transfer**
 
 - **العربية:** ما الإشارات التي تساعدك على إيجاد كتاب في مكان مزدحم؟
@@ -58,14 +58,14 @@ Each mission includes a child-facing challenge and a transfer question in all th
 
 ### 02 — حوّل الفوضى إلى خطوات | Turn a tangle into steps | Transformer le désordre en étapes
 
-**Practice:** sequencing, planning and holding a goal in mind. This is the existing delivery-routing lab’s first appearance.  
+**Practice:** sequencing, planning and holding a goal in mind. This is the existing delivery-routing lab’s first appearance.
 **Child challenge**
 
 - **العربية:** رتّب ثلاث زيارات لتصل الشحنة العاجلة إلى A أولًا، ثم تزور B وC. ارسم خطتك قبل تشغيلها.
 - **English:** Order three stops so the urgent package reaches A first, then visit B and C. Draw your plan before you run it.
 - **Français :** Organise trois étapes pour que le colis urgent arrive d’abord en A, puis visite B et C. Dessine ton plan avant de le lancer.
 
-**Look for:** keeps the priority visible, orders the steps, and can explain why.  
+**Look for:** keeps the priority visible, orders the steps, and can explain why.
 **Transfer**
 
 - **العربية:** كيف ترتّب حقيبتك إذا كان عليك أخذ ثلاثة أشياء قبل الخروج؟
@@ -74,14 +74,14 @@ Each mission includes a child-facing challenge and a transfer question in all th
 
 ### 03 — ارسم نظامًا | Draw a system | Dessiner un système
 
-**Practice:** representation and systems thinking: inputs, rules, state and outputs.  
+**Practice:** representation and systems thinking: inputs, rules, state and outputs.
 **Child challenge**
 
 - **العربية:** ارسم نظام خزان ماء: ما الذي يدخل إليه؟ ما القاعدة التي يتبعها؟ ما الحالة التي تتغير؟ وما النتيجة التي نراها؟
 - **English:** Draw a water-tank system: what goes in, what rule does it follow, what state changes, and what result can we see?
 - **Français :** Dessine un système de réservoir : qu’est-ce qui y entre, quelle règle suit-il, quel état change et quel résultat peut-on observer ?
 
-**Look for:** represents relationships, not just objects, and connects an input to a visible outcome.  
+**Look for:** represents relationships, not just objects, and connects an input to a visible outcome.
 **Transfer**
 
 - **العربية:** مثّل مصباحًا يضيء عندما يدخل أحد الغرفة.
@@ -90,14 +90,14 @@ Each mission includes a child-facing challenge and a transfer question in all th
 
 ### 04 — ابحث عن النمط | Find the pattern | Trouver le motif
 
-**Practice:** working memory, pattern finding and choosing a useful rule.  
+**Practice:** working memory, pattern finding and choosing a useful rule.
 **Child challenge**
 
 - **العربية:** تتكرر مكافآت لعبة وفق قاعدة غير مكتوبة. راقب خمس جولات، ثم اقترح القاعدة وتوقّع الجولة التالية.
 - **English:** A game’s rewards follow an unwritten rule. Watch five turns, suggest the rule, then predict the next turn.
 - **Français :** Les récompenses d’un jeu suivent une règle non écrite. Observe cinq tours, propose la règle, puis prédis le suivant.
 
-**Look for:** distinguishes a repeated pattern from a one-off coincidence and says what evidence could disprove the rule.  
+**Look for:** distinguishes a repeated pattern from a one-off coincidence and says what evidence could disprove the rule.
 **Transfer**
 
 - **العربية:** أين ترى نمطًا يتكرر خلال يومك؟ ما الذي قد يغيّره؟
@@ -106,14 +106,14 @@ Each mission includes a child-facing challenge and a transfer question in all th
 
 ### 05 — ماذا لو؟ | What if? | Et si… ?
 
-**Practice:** conditional reasoning, pausing before acting and considering more than one case. This is the existing traffic-safety lab.  
+**Practice:** conditional reasoning, pausing before acting and considering more than one case. This is the existing traffic-safety lab.
 **Child challenge**
 
 - **العربية:** اختر قاعدة لإشارة المرور: إذا كان اتجاه واحد أخضر، فما لون الاتجاه المتقاطع؟ ماذا يجب أن يحدث إذا طُلب الأخضر للاتجاهين؟
 - **English:** Choose a traffic-light rule: if one direction is green, what should the crossing direction show? What should happen if both directions request green?
 - **Français :** Choisis une règle pour les feux : si une direction est verte, quelle couleur doit avoir la direction qui la croise ? Que faire si les deux demandent le vert ?
 
-**Look for:** states a rule, notices a conflict and predicts the safe outcome before testing.  
+**Look for:** states a rule, notices a conflict and predicts the safe outcome before testing.
 **Transfer**
 
 - **العربية:** اذكر قرارًا يوميًا يتغير إذا تغيّر الطقس.
@@ -122,14 +122,14 @@ Each mission includes a child-facing challenge and a transfer question in all th
 
 ### 06 — اكسر النظام بأمان | Break the system safely | Mettre le système à l’épreuve
 
-**Practice:** edge cases, careful testing and responding to unreliable information. This is the existing water-tank lab.  
+**Practice:** edge cases, careful testing and responding to unreliable information. This is the existing water-tank lab.
 **Child challenge**
 
 - **العربية:** أوقف المضخة عند 80%. جرّب النظام بحساس عادي ثم بحساس يعطي قراءة خاطئة. ماذا يحدث، وما المعلومة التي تثق بها؟
 - **English:** Stop the pump at 80%. Test the system with a normal sensor and one that reports the wrong level. What happens, and which information can you trust?
 - **Français :** Arrête la pompe à 80 %. Teste le système avec un capteur normal, puis avec un capteur qui indique un niveau erroné. Que se passe-t-il et quelle information peux-tu croire ?
 
-**Look for:** tests an ordinary case and a failure case, compares the sensor with the actual level, and proposes a safeguard.  
+**Look for:** tests an ordinary case and a failure case, compares the sensor with the actual level, and proposes a safeguard.
 **Transfer**
 
 - **العربية:** كيف تتحقق من معلومة إذا كان المصدر قد يخطئ؟
@@ -138,14 +138,14 @@ Each mission includes a child-facing challenge and a transfer question in all th
 
 ### 07 — أصلح السبب | Fix the cause | Corriger la cause
 
-**Practice:** causal reasoning, debugging and flexible replanning.  
+**Practice:** causal reasoning, debugging and flexible replanning.
 **Child challenge**
 
 - **العربية:** أُغلق الطريق بين A وB. غيّر خطتك لتصل الشحنة العاجلة إلى A أولًا، ثم إلى B عبر C. ما الدليل أن خطتك الجديدة تعمل؟
 - **English:** The road between A and B is closed. Change your plan so the urgent package reaches A first and then reaches B through C. What evidence shows your new plan works?
 - **Français :** La route entre A et B est fermée. Modifie ton plan pour que le colis urgent arrive d’abord en A, puis atteigne B en passant par C. Quelle preuve montre que ton nouveau plan fonctionne ?
 
-**Look for:** changes a relevant part of the plan, preserves the original priority and retests the new route.  
+**Look for:** changes a relevant part of the plan, preserves the original priority and retests the new route.
 **Transfer**
 
 - **العربية:** عندما يتغيّر موعد أو طريق، كيف تختار ما يجب تغييره أولًا؟
@@ -154,14 +154,14 @@ Each mission includes a child-facing challenge and a transfer question in all th
 
 ### 08 — اجعل النظام أبسط | Make the system simpler | Simplifier le système
 
-**Practice:** abstraction, reusable rules, feedback and noticing unintended outcomes. This is the existing game-economy lab.  
+**Practice:** abstraction, reusable rules, feedback and noticing unintended outcomes. This is the existing game-economy lab.
 **Child challenge**
 
 - **العربية:** تبدأ اللعبة بعشرة موارد. تدفع ثلاثة في كل جولة وتكسب مكافأة. اختر قاعدة تكافئ اللعب دون أن تجعل الموارد تزيد بلا حد أو تنفد.
 - **English:** A game starts with ten resources. Each turn costs three and earns a reward. Choose a rule that keeps play going without making resources grow forever or run out.
 - **Français :** Un jeu commence avec dix ressources. Chaque tour en coûte trois et rapporte une récompense. Choisis une règle qui permet de continuer sans faire croître les ressources sans fin ni les épuiser.
 
-**Look for:** explains a repeated rule, follows its effect over several turns and identifies a trade-off.  
+**Look for:** explains a repeated rule, follows its effect over several turns and identifies a trade-off.
 **Transfer**
 
 - **العربية:** كيف تساعدك قاعدة بسيطة على تنظيم شيء تفعله كل يوم؟
@@ -170,14 +170,14 @@ Each mission includes a child-facing challenge and a transfer question in all th
 
 ### 09 — دع الذكاء الاصطناعي يقترح | Ask AI to suggest | Demander une proposition à l’IA
 
-**Practice:** giving a clear goal, naming constraints and treating AI as a source of suggestions rather than authority. This first activity uses prepared, fictional suggestions; it does not require child-facing AI.  
+**Practice:** giving a clear goal, naming constraints and treating AI as a source of suggestions rather than authority. This first activity uses prepared, fictional suggestions; it does not require child-facing AI.
 **Child challenge**
 
 - **العربية:** طلبت من مساعد ذكي اقتراح حل. اكتب له هدفك وقيدين مهمين. أيّ جزء يجب أن توضحه قبل أن تستطيع تقييم اقتراحه؟
 - **English:** You asked an AI helper for an idea. Give it your goal and two important constraints. What does it need to know before you can judge its suggestion?
 - **Français :** Tu demandes une idée à un assistant d’IA. Donne-lui ton objectif et deux contraintes importantes. Que doit-il savoir avant que tu puisses évaluer sa proposition ?
 
-**Look for:** specifies a goal and constraints, protects private details and keeps the final choice with the child.  
+**Look for:** specifies a goal and constraints, protects private details and keeps the final choice with the child.
 **Transfer**
 
 - **العربية:** ما الشيء الذي لا ينبغي أن تشاركه مع أداة لا تعرفها؟
@@ -186,14 +186,14 @@ Each mission includes a child-facing challenge and a transfer question in all th
 
 ### 10 — اختبر اقتراح الذكاء الاصطناعي | Test an AI suggestion | Vérifier une proposition de l’IA
 
-**Practice:** verification, counterexamples, uncertainty and source awareness. Use a printed or scripted mock answer during the first pilot.  
+**Practice:** verification, counterexamples, uncertainty and source awareness. Use a printed or scripted mock answer during the first pilot.
 **Child challenge**
 
 - **العربية:** يقول اقتراح جاهز: «المضخة تتوقف دائمًا عند الحد». اختر تجربة قد تثبت أن كلمة «دائمًا» غير صحيحة. ما الدليل الذي تحتاجه؟
 - **English:** A prepared suggestion says, “The pump always stops at the limit.” Design a test that could show whether “always” is wrong. What evidence do you need?
 - **Français :** Une proposition préparée affirme : « La pompe s’arrête toujours à la limite. » Imagine un test qui pourrait montrer que « toujours » est faux. De quelles preuves as-tu besoin ?
 
-**Look for:** checks a claim against an example or counterexample, notices what the test cannot prove, and distinguishes a confident answer from a verified one.  
+**Look for:** checks a claim against an example or counterexample, notices what the test cannot prove, and distinguishes a confident answer from a verified one.
 **Transfer**
 
 - **العربية:** عندما تسمع ادعاءً جديدًا، ما السؤال الذي يساعدك على التحقق منه؟
@@ -202,14 +202,14 @@ Each mission includes a child-facing challenge and a transfer question in all th
 
 ### 11 — ابنِ نظامك | Build a system of your own | Construire ton propre système
 
-**Practice:** creativity, learner choice, planning and using strengths through personally meaningful problems.  
+**Practice:** creativity, learner choice, planning and using strengths through personally meaningful problems.
 **Child challenge**
 
 - **العربية:** اختر شيئًا يهمك — لعبة أو نباتًا أو طريقًا أو فكرة أخرى. صمّم نظامًا صغيرًا له هدف وقاعدة واختبار واحد.
 - **English:** Choose something you care about—a game, a plant, a route or another idea. Design a small system with one goal, one rule and one test.
 - **Français :** Choisis un sujet qui te tient à cœur — un jeu, une plante, un trajet ou une autre idée. Imagine un petit système avec un objectif, une règle et un test.
 
-**Look for:** chooses a topic, makes an intentional design choice, tests it and asks for the kind of help they want.  
+**Look for:** chooses a topic, makes an intentional design choice, tests it and asks for the kind of help they want.
 **Transfer**
 
 - **العربية:** ما الفكرة التي تحب أن تحوّلها إلى مشروع في المرة القادمة؟
@@ -218,14 +218,14 @@ Each mission includes a child-facing challenge and a transfer question in all th
 
 ### 12 — اشرح قراراتك | Explain your decisions | Expliquer tes choix
 
-**Practice:** metacognition, clear communication and transfer to a new situation. The child may show a private artifact to a trusted adult; public sharing is not needed.  
+**Practice:** metacognition, clear communication and transfer to a new situation. The child may show a private artifact to a trusted adult; public sharing is not needed.
 **Child challenge**
 
 - **العربية:** اختر تجربة من مسارك. اشرح هدفك، وتوقّعك، وما الذي غيّرته، وما الدليل الذي أقنعك. ثم فكّر: ما الذي سيتغير في حالة جديدة؟
 - **English:** Choose an experiment from your path. Explain your goal, prediction, what you changed and what evidence convinced you. Then ask: what would change in a new situation?
 - **Français :** Choisis une expérience de ton parcours. Explique ton objectif, ta prédiction, ce que tu as changé et la preuve qui t’a convaincu. Puis demande-toi : que faudrait-il modifier dans une nouvelle situation ?
 
-**Look for:** explains a decision with evidence, names uncertainty or a next test, and adapts an idea to a changed constraint.  
+**Look for:** explains a decision with evidence, names uncertainty or a next test, and adapts an idea to a changed constraint.
 **Transfer**
 
 - **العربية:** ما السؤال الذي ستطرحه على نفسك قبل حل مشكلة جديدة؟
