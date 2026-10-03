@@ -482,6 +482,10 @@ function MissionLab({ id }: { id: LabId }) {
             <b>04</b> اشرح بالدليل
           </li>
         </ol>
+        <p className="privacy-hint">
+          اكتب أفكارك عن المهمة فقط. لا تضف اسمك الكامل أو المدرسة أو العنوان
+          أو معلومات تواصل.
+        </p>
         {storageError && (
           <p role="alert" className="storage-alert">
             تعذّر حفظ العمل في هذا المتصفح. أبقِ الصفحة مفتوحة حتى تنتهي.

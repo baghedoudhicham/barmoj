@@ -8,7 +8,7 @@ Arabic-first learning product for children in Morocco, focused on **systems thin
 
 ## Current prototype
 
-The repository contains a runnable Vite + React + TypeScript pilot prototype.
+The repository contains a runnable Vite + React + TypeScript family-supervised pilot.
 
 Core flow:
 
@@ -26,6 +26,10 @@ The learning cycle is:
 **Observe → Question → Model → Predict → Build → Break → Debug → Improve → Explain**
 
 The first track remains `فكّر كنظام` with 12 missions. Code and AI are execution tools, not the learning objective.
+
+The site includes the complete 12-mission curriculum in Arabic, English and French at /curriculum, plus a family-facing privacy and pilot-scope page at /privacy. The rest of the interface remains Arabic-first.
+
+Four missions have interactive labs today. The other eight are curriculum activities with child prompts and screen-free transfer questions; they are not represented as built software lessons.
 
 ## Firebase Hosting
 
@@ -74,7 +78,7 @@ Kid Home resumes the most recent unfinished lab and suggests another lab after c
 
 Drafts and evidence remain in this browser's local storage. No Firebase database, child account, cloud synchronization or automatic grading is introduced. Storage failures are shown to the child instead of reporting a successful save.
 
-The workbench follows the Figma Mission Lab direction (`2433:15`): paper work surface, system pieces, deep-green prediction/coaching panels, and the existing green/yellow/red palette. The existing Noto Kufi Arabic fallback remains; Brando Arabic requires a licensed webfont.
+The workbench follows the Figma Mission Lab direction (`2433:15`): paper work surface, system pieces, deep-green prediction/coaching panels, and the existing green/yellow/red palette. Noto Kufi Arabic is self-hosted under its included SIL Open Font License, and the app makes no Google Fonts request. Brando Arabic remains a future option if a licensed webfont is obtained.
 
 ## Release
 
@@ -86,12 +90,24 @@ The configured live URL is https://barmoj-266b8.web.app/. The separate URL https
 
 See `docs/QA-2026-10.md` for the checks performed on this pass.
 
+## Child and family pilot safeguards
+
+- Onboarding asks only for an optional nickname and requires an adult to confirm they will supervise. This is a reminder, not identity or age verification.
+- Startup removes parent-name and exact-age fields from legacy local profiles and deletes old prototype event logs.
+- Profile, drafts and learning evidence stay in this browser's local storage. There is no account, cloud sync, analytics, advertising, payment, public sharing or child-facing AI.
+- Anyone using the same browser profile can open the parent dashboard. Do not use a shared or public computer without the parent present; do not enter full names, school, address or contact details.
+- The Parent Dashboard can remove every Barmoj local-storage record for this site. Browser storage may also be cleared by the family or browser settings.
+- Hosting still serves the site through Firebase. Its provider processes the technical requests needed to deliver pages; this product code does not send the child's profile or answers to an application backend.
+- This is a moderated, family-supervised pilot, not an unrestricted public release or a legal compliance claim. Before opening public registration, identify the service operator and family contact, then review applicable Moroccan data-protection and guardian-consent requirements.
+
+See docs/PILOT-RELEASE-CHECKLIST.md for the launch boundary and remaining gates.
+
 ## Product principles
 
-- Arabic-first and RTL throughout
+- Arabic-first and RTL interface; the curriculum challenge content also supports English and French
 - Designed for ages 7–14
-- Parents own the account and communication layer
-- Minimal child data in V1
+- A parent or trusted adult supervises the pilot
+- The current pilot stores only an optional nickname and local learning records
 - No public child profiles, community, store, public leaderboard or unrestricted child-facing AI chat
 - Parent reporting focuses on observable evidence: `يفهم / يمثّل / يتوقّع / يختبر / يفسّر`
 - No reward for speed; missions reward reasoning, testing and explanation
@@ -106,7 +122,7 @@ See `docs/QA-2026-10.md` for the checks performed on this pass.
 - Deep green `#173E2B`
 - Tactile geometry, dark outlines, system diagrams and functional color
 - Avoid generic SaaS/AI styling, glassmorphism, decorative gradients and stock education art
-- Brando Arabic is the preferred brand typeface when a licensed webfont is available; the prototype currently falls back to Noto Kufi Arabic
+- Noto Kufi Arabic is self-hosted; Brando Arabic remains a future option if a licensed webfont is obtained
 
 Figma: https://www.figma.com/design/IUHArEYFbaEqPcX66Q1rRh/barmoj
 

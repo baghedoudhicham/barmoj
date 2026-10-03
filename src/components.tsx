@@ -13,7 +13,8 @@ export function Shell({ children }: { children: ReactNode }) {
   const inKid =
     pathname.startsWith("/kid") ||
     pathname.startsWith("/mission") ||
-    pathname === "/result";
+    pathname === "/result" ||
+    pathname === "/curriculum";
   return (
     <div className="app-shell">
       <a className="skip-link" href="#page-content">
@@ -29,12 +30,14 @@ export function Shell({ children }: { children: ReactNode }) {
             {inKid ? (
               <>
                 <Link to="/kid">مساحتي</Link>
+                <Link to="/curriculum">المسار الكامل</Link>
                 <Link to="/parent">للأهل</Link>
               </>
             ) : (
               <>
                 <a href="/#method">كيف نتعلّم؟</a>
                 <a href="/#track">المسار</a>
+                <Link to="/curriculum">المنهج الكامل</Link>
                 <Link to="/parent">للأهل</Link>
               </>
             )}
@@ -67,6 +70,12 @@ export function Shell({ children }: { children: ReactNode }) {
             <Link to="/parent" onClick={() => setOpen(false)}>
               لوحة الأهل
             </Link>
+            <Link to="/curriculum" onClick={() => setOpen(false)}>
+              المنهج الكامل
+            </Link>
+            <Link to="/privacy" onClick={() => setOpen(false)}>
+              الخصوصية في التجربة
+            </Link>
             <Link to="/onboarding" onClick={() => setOpen(false)}>
               بدء جديد
             </Link>
@@ -76,6 +85,17 @@ export function Shell({ children }: { children: ReactNode }) {
       <div id="page-content" tabIndex={-1}>
         {children}
       </div>
+      <footer className="site-footer">
+        <div>
+          <b>برموج</b>
+          <span>نسخة تجربة عائلية بإشراف وليّ الأمر</span>
+        </div>
+        <nav aria-label="روابط العائلة">
+          <Link to="/curriculum">المنهج الكامل</Link>
+          <Link to="/privacy">الخصوصية في التجربة</Link>
+          <Link to="/parent">لوحة الأهل</Link>
+        </nav>
+      </footer>
     </div>
   );
 }

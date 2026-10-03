@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   Check,
@@ -12,7 +13,13 @@ import {
   TriangleAlert,
 } from "lucide-react";
 import { Shell, TankDiagram } from "./components";
-import { evidenceLabels, getEvidence, getProfile, missions } from "./data";
+import {
+  clearFamilyData,
+  evidenceLabels,
+  getEvidence,
+  getProfile,
+  missions,
+} from "./data";
 import { labs, settingsKey } from "./lab-model";
 import type { LabId } from "./lab-model";
 import { initialSettings } from "./lab-model";
@@ -400,6 +407,8 @@ export function KidHomeV2() {
 export function ParentDashboardV2() {
   const profile = getProfile();
   const evidence = getEvidence();
+  const navigate = useNavigate();
+  const [deleteError, setDeleteError] = useState(false);
   const latest = evidence[0];
   const verified = evidence.filter(
     (entry) => entry.labId && entry.trials?.length,
@@ -418,9 +427,14 @@ export function ParentDashboardV2() {
               سنتمرن عليه بعد ذلك.
             </p>
           </div>
-          <Link className="workspace-switch" to="/kid">
-            مساحة {profile.child} <ArrowLeft size={17} />
-          </Link>
+          <div className="parent-actions">
+            <Link className="workspace-switch" to="/curriculum">
+              المنهج الكامل <ArrowLeft size={17} />
+            </Link>
+            <Link className="workspace-switch" to="/kid">
+              مساحة {profile.child} <ArrowLeft size={17} />
+            </Link>
+          </div>
         </header>
 
         <section className="parent-story">
@@ -552,8 +566,38 @@ export function ParentDashboardV2() {
         </section>
         <p className="local-note">
           هذه الأدلة محفوظة محليًا في هذا المتصفح. لا يوجد حساب سحابي أو تقييم
-          آلي للإجابات في هذه النسخة.
+          آلي للإجابات في هذه النسخة. لوحة الأهل لا تتطلب رمزًا؛ استخدمها على
+          جهاز الأسرة مع وجود وليّ الأمر.
         </p>
+        <section className="family-controls" aria-labelledby="family-data-title">
+          <div>
+            <p className="eyebrow">تحكم الأسرة</p>
+            <h2 id="family-data-title">أنت تتحكم في سجل هذا المتصفح.</h2>
+            <p>
+              احذف اللقب وكل المسودات والتجارب والأدلة المحفوظة على هذا الموقع
+              في هذا المتصفح. لا يؤثر ذلك على ملفات أو مواقع أخرى.
+            </p>
+          </div>
+          <button
+            className="button button-ghost family-delete"
+            onClick={() => {
+              const confirmed = window.confirm(
+                "سيُحذف اللقب وكل مسودات المختبرات والأدلة المحفوظة لهذا الموقع في هذا المتصفح. لا يمكن التراجع عن الحذف. هل تريد المتابعة؟",
+              );
+              if (!confirmed) return;
+              if (clearFamilyData()) navigate("/");
+              else setDeleteError(true);
+            }}
+          >
+            حذف سجل التجربة من هذا المتصفح
+          </button>
+          {deleteError && (
+            <p className="storage-alert" role="alert">
+              تعذّر حذف كل البيانات. امسح بيانات هذا الموقع من إعدادات
+              المتصفح.
+            </p>
+          )}
+        </section>
       </main>
     </Shell>
   );

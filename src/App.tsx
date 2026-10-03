@@ -8,6 +8,8 @@ import {
   WaterMission,
 } from "./mission-lab";
 import { KidHomeV2, MissionHub, ParentDashboardV2 } from "./pilot";
+import { CurriculumPage } from "./curriculum";
+import { PrivacyPage } from "./privacy";
 
 export default function App() {
   return (
@@ -22,6 +24,8 @@ export default function App() {
       <Route path="/mission/economy" element={<EconomyMission />} />
       <Route path="/result" element={<Result />} />
       <Route path="/parent" element={<ParentDashboardV2 />} />
+      <Route path="/curriculum" element={<CurriculumPage />} />
+      <Route path="/privacy" element={<PrivacyPage />} />
       <Route path="*" element={<Landing />} />
     </Routes>
   );

@@ -38,28 +38,70 @@ export type LearningEvidence = {
   trials?: Trial[];
 };
 
-export type Profile = { parent: string; child: string; age: string };
+export type Profile = { child: string };
 
 const PROFILE_KEY = "barmoj-profile";
 const EVIDENCE_KEY = "barmoj-evidence";
+const DEFAULT_PROFILE: Profile = { child: "المستكشف" };
+
+function safeNickname(value: unknown) {
+  if (typeof value !== "string") return DEFAULT_PROFILE.child;
+  return Array.from(value.trim()).slice(0, 24).join("") || DEFAULT_PROFILE.child;
+}
 
 export function getProfile(): Profile {
   try {
     const value = localStorage.getItem(PROFILE_KEY);
-    const p = value ? JSON.parse(value) : null;
-    return p &&
-      typeof p.parent === "string" &&
-      typeof p.child === "string" &&
-      typeof p.age === "string"
-      ? p
-      : { parent: "", child: "سلمى", age: "10" };
+    if (!value) return DEFAULT_PROFILE;
+    const stored = JSON.parse(value);
+    const profile = { child: safeNickname(stored?.child) };
+    // Migrate older profiles by dropping parent names and exact ages.
+    if (JSON.stringify(stored) !== JSON.stringify(profile)) {
+      localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+    }
+    return profile;
   } catch {
-    return { parent: "", child: "سلمى", age: "10" };
+    try {
+      localStorage.removeItem(PROFILE_KEY);
+    } catch {
+      // The app can still be used without a saved profile.
+    }
+    return DEFAULT_PROFILE;
   }
 }
 
 export function saveProfile(profile: Profile) {
-  localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+  try {
+    localStorage.setItem(
+      PROFILE_KEY,
+      JSON.stringify({ child: safeNickname(profile.child) }),
+    );
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export function prepareFamilyStorage() {
+  getProfile();
+  try {
+    localStorage.removeItem("barmoj-pilot-events-v1");
+    localStorage.removeItem("barmoj-pilot-session-v1");
+  } catch {
+    // Continue without local storage; the app will show save failures as needed.
+  }
+}
+
+export function clearFamilyData() {
+  try {
+    const keys = Array.from({ length: localStorage.length }, (_, index) =>
+      localStorage.key(index),
+    ).filter((key): key is string => !!key && key.startsWith("barmoj-"));
+    keys.forEach((key) => localStorage.removeItem(key));
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export function getEvidence(): LearningEvidence[] {

@@ -66,7 +66,7 @@ export function Landing() {
       <main>
         <section className="hero wrap hero-logic">
           <div className="hero-copy">
-            <p className="kicker">للأطفال 7–14 · عربي أولًا</p>
+            <p className="kicker">تجربة عائلية بإشراف وليّ الأمر · للأطفال 7–14 · عربي أولًا</p>
             <h1>لا نعلّم الطفل كتابة الكود.<br /><span>نعلّمه بناء نظام.</span></h1>
             <p className="hero-body">يفهم المشكلة، يكتشف ما ينقصها، يرسم العلاقات، يتوقع النتيجة، يكسر الحل عمدًا ثم يحسّنه. الكود والذكاء الاصطناعي أدوات تنفيذ عندما نحتاجها.</p>
             <div className="hero-actions">
@@ -125,25 +125,31 @@ export function Landing() {
 
 export function Onboarding() {
   const initial = getProfile();
-  const [parent, setParent] = useState(initial.parent);
   const [child, setChild] = useState(initial.child);
-  const [age, setAge] = useState(initial.age);
+  const [supervised, setSupervised] = useState(false);
+  const [storageError, setStorageError] = useState(false);
   const navigate = useNavigate();
   function submit(event: FormEvent) {
     event.preventDefault();
-    saveProfile({ parent: parent.trim(), child: child.trim() || "سلمى", age });
+    if (!supervised) return;
+    if (!saveProfile({ child })) {
+      setStorageError(true);
+      return;
+    }
     navigate("/kid");
   }
   return (
     <Shell>
       <main className="wrap narrow section onboarding-wrap">
-        <div className="onboarding-index"><span>01</span><b>وليّ الأمر</b><span>02</span><b>الطفل</b><span>03</span><b>ابدأ</b></div>
-        <SectionTitle eyebrow="إعداد الأسرة" title="بيانات قليلة، بداية مباشرة" body="هذه نسخة تجريبية محلية. البيانات تبقى في هذا المتصفح ولا تُرسل إلى خادم." />
+        <div className="onboarding-index"><span>01</span><b>وليّ الأمر</b><span>02</span><b>لقب اختياري</b><span>03</span><b>ابدأ</b></div>
+        <SectionTitle eyebrow="إعداد الأسرة" title="بداية بسيطة، وبيانات أقل" body="هذه تجربة عائلية بإشراف بالغ. لا نطلب اسم وليّ الأمر أو العمر الدقيق أو البريد الإلكتروني." />
         <form className="form-panel" onSubmit={submit}>
-          <label>اسم وليّ الأمر<input value={parent} onChange={(event) => setParent(event.target.value)} placeholder="مثال: أمينة" /></label>
-          <label>اسم الطفل أو لقبه<input value={child} onChange={(event) => setChild(event.target.value)} placeholder="مثال: سلمى" required /></label>
-          <label>العمر<select value={age} onChange={(event) => setAge(event.target.value)}>{[7,8,9,10,11,12,13,14].map((value) => <option key={value}>{value}</option>)}</select></label>
-          <button className="button" type="submit">ادخل مساحة التعلّم <ArrowLeft size={18} /></button>
+          <label>لقب للطفل (اختياري)<input value={child} onChange={(event) => setChild(event.target.value)} placeholder="مثال: المستكشف" maxLength={24} autoComplete="off" /></label>
+          <p className="privacy-hint">استخدم لقبًا بدل الاسم الكامل. لا تكتب معلومات عن المدرسة أو العنوان أو وسيلة التواصل.</p>
+          <label className="supervision-check"><input type="checkbox" checked={supervised} onChange={(event) => setSupervised(event.target.checked)} required /> أنا وليّ الأمر أو المرافق البالغ، وسأبقى حاضرًا أثناء تجربة الطفل.</label>
+          <p className="pilot-disclosure">التقدم والإجابات محفوظة في هذا المتصفح فقط، ولا تُرسل إلى حساب أو خدمة تحليلات داخل التطبيق. من يستخدم ملف المتصفح نفسه قد يتمكن من رؤية لوحة الأهل. <Link to="/privacy">اقرأ تفاصيل تجربة الأسرة.</Link></p>
+          {storageError && <p role="alert" className="storage-alert">تعذّر حفظ اللقب في هذا المتصفح. تحقق من إعدادات التخزين ثم أعد المحاولة.</p>}
+          <button className="button" type="submit" disabled={!supervised}>ادخل مساحة التعلّم <ArrowLeft size={18} /></button>
         </form>
       </main>
     </Shell>

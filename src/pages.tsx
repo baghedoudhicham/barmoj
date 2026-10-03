@@ -75,22 +75,21 @@ export function Landing() {
 
 export function Onboarding() {
   const initial = getProfile();
-  const [parent, setParent] = useState(initial.parent);
   const [child, setChild] = useState(initial.child);
-  const [age, setAge] = useState(initial.age);
+  const [supervised, setSupervised] = useState(false);
   const navigate = useNavigate();
   function submit(event: FormEvent) {
     event.preventDefault();
-    saveProfile({ parent: parent.trim(), child: child.trim() || "سلمى", age });
+    if (!supervised) return;
+    saveProfile({ child: child.trim() || "المستكشف" });
     navigate("/kid");
   }
   return (
     <Shell><main className="wrap narrow section"><SectionTitle eyebrow="إعداد الأسرة" title="نبدأ بالطفل، لا بالحساب" body="هذه نسخة تجريبية محلية. لا تُرسل البيانات إلى خادم." />
       <form className="form-panel" onSubmit={submit}>
-        <label>اسم وليّ الأمر<input value={parent} onChange={(e) => setParent(e.target.value)} placeholder="مثال: أمينة" /></label>
-        <label>اسم الطفل أو لقبه<input value={child} onChange={(e) => setChild(e.target.value)} placeholder="مثال: سلمى" required /></label>
-        <label>العمر<select value={age} onChange={(e) => setAge(e.target.value)}><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option></select></label>
-        <button className="button" type="submit">ادخل مساحة التعلّم <ArrowLeft size={18} /></button>
+        <label>لقب للطفل (اختياري)<input value={child} onChange={(e) => setChild(e.target.value)} placeholder="مثال: المستكشف" maxLength={24} autoComplete="off" /></label>
+        <label className="supervision-check"><input type="checkbox" checked={supervised} onChange={(e) => setSupervised(e.target.checked)} required /> أنا وليّ الأمر أو المرافق البالغ، وسأبقى حاضرًا أثناء تجربة الطفل.</label>
+        <button className="button" type="submit" disabled={!supervised}>ادخل مساحة التعلّم <ArrowLeft size={18} /></button>
       </form>
     </main></Shell>
   );
