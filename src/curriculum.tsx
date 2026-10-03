@@ -52,6 +52,45 @@ const cardLabels: Record<
   },
 };
 
+const familyValues: Record<
+  Language,
+  { title: string; intro: string; items: { name: string; practice: string }[] }
+> = {
+  ar: {
+    title: "قيم نمارسها معًا",
+    intro: "دعوة عائلية للتأمل، لا نقاطًا تُجمع ولا اختبارًا لقيمة الطفل.",
+    items: [
+      { name: "الصدق · Ṣidq", practice: "صف ما لاحظته، وافصل الدليل عن التخمين." },
+      { name: "الأمانة · Amānah", practice: "احمِ معلومات الآخرين، ولا تشارك بياناتك الخاصة مع أداة لا تعرفها." },
+      { name: "الصبر · Ṣabr", practice: "خذ وقتك؛ قد يقترح الخطأ اختبارًا جديدًا، ولا يحدد قيمتك." },
+      { name: "الشورى · Shūrā", practice: "استمع إلى رأي آخر، وناقش الفكرة مع الأسرة." },
+      { name: "الإحسان · Iḥsān", practice: "حسّن الحل بعناية، وفكّر بمن قد يتأثر به." },
+    ],
+  },
+  en: {
+    title: "Values we practice together",
+    intro: "A family reflection, not points to earn or a test of a child’s worth.",
+    items: [
+      { name: "Truthfulness · Ṣidq", practice: "Describe what you observed; separate evidence from guesses." },
+      { name: "Trust · Amānah", practice: "Protect others’ information; don’t share personal details with unfamiliar tools." },
+      { name: "Patience · Ṣabr", practice: "Take your time. A mistake can suggest a new test and does not define you." },
+      { name: "Consultation · Shūrā", practice: "Listen to another perspective and discuss the idea together." },
+      { name: "Careful excellence · Iḥsān", practice: "Improve the solution with care and think about who may be affected." },
+    ],
+  },
+  fr: {
+    title: "Des valeurs à pratiquer ensemble",
+    intro: "Une invitation à réfléchir en famille, pas des points à gagner ni une mesure de l’enfant.",
+    items: [
+      { name: "Vérité · ṣidq", practice: "Décris ce que tu as observé; distingue les faits des suppositions." },
+      { name: "Responsabilité · amānah", practice: "Protège les informations d’autrui et ne partage pas de données personnelles avec un outil inconnu." },
+      { name: "Patience · ṣabr", practice: "Prends ton temps. Une erreur peut suggérer un nouveau test et ne te définit pas." },
+      { name: "Consultation · shūrā", practice: "Écoute un autre point de vue et discute de l’idée avec ta famille." },
+      { name: "Bien agir · iḥsān", practice: "Améliore la solution avec soin et pense aux personnes concernées." },
+    ],
+  },
+};
+
 const skillFocus: Record<Language, string[]> = {
   ar: [
     "انتقاء الأدلة وتجاهل المشتتات",
@@ -262,6 +301,24 @@ export function CurriculumPage() {
           </div>
           <p>لا يوجد مؤقت أو ترتيب أو عقوبة على التوقف. يمكن للطفل أن يرسم أو يشير أو يشرح شفهيًا بدل الكتابة. الأدلة تصف ما ظهر في نشاط محدد؛ لا تقيس الذكاء ولا تشخّص الانتباه.</p>
           <Link to="/privacy">كيف تُحفظ بيانات التجربة؟</Link>
+          <details
+            className="family-values"
+            lang={language}
+            dir={language === "ar" ? "rtl" : "ltr"}
+          >
+            <summary>{familyValues[language].title}</summary>
+            <div className="family-values-content">
+              <p>{familyValues[language].intro}</p>
+              <ul>
+                {familyValues[language].items.map((item) => (
+                  <li key={item.name}>
+                    <b>{item.name}</b>
+                    <span>{item.practice}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </details>
         </section>
       </main>
     </Shell>

@@ -33,6 +33,7 @@
 5. Run the moderated family pilot, review de-identified observations with caregivers and educators, and build the remaining eight labs only from what the evidence supports.
 6. Complete a name and trademark search before a wider launch. Barmoj is close in sound and spelling to Barmej, which operates in the neighboring Arabic learning category. Keep the current name for the supervised pilot while that risk is checked.
 7. Add accounts, payments, remote analytics, AI or social features only after their separate privacy, security, adult-control and deletion design is ready.
+8. Review the Muslim-family values reflection with parents and Muslim educators across the intended communities. Any later Qur'an or hadith quotation needs verified Arabic text, source and context, a reviewed translation, and must remain outside rewards, scores and streaks.
 
 ## Deployment
 

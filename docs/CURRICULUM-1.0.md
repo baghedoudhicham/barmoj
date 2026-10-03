@@ -259,6 +259,20 @@ Capture only evidence that helps the child or adult choose a useful next step:
 
 Do not collapse these into an IQ-like score, a class rank, a deficit label or an “attention span” grade. Give the child a fresh opportunity to show a skill in a different context before describing a pattern to a parent. Parent reports should show dated examples and say “observed in this activity,” not “your child is.”
 
+## Family values reflection
+
+An optional, collapsible family reflection connects the learning process to values many Muslim families teach. It is not graded and does not infer a child's belief or character from activity data.
+
+| Value | Learning practice |
+| --- | --- |
+| الصدق · Ṣidq | Describe what happened; separate observed evidence from a guess. |
+| الأمانة · Amānah | Protect other people's information and use tools responsibly. |
+| الصبر · Ṣabr | Take time to test again; a mistake does not define the learner. |
+| الشورى · Shūrā | Listen to another perspective and discuss the idea as a family. |
+| الإحسان · Iḥsān | Improve carefully and consider who may be affected. |
+
+English and French versions appear when a family changes the curriculum language. The pilot contains no Qur'an or hadith quotations. Any future quotations require an exact source, context and translation review, including hadith source and grading; they must never be used as points, streaks or completion rewards.
+
 ## Curriculum references
 
 - [Harvard Center on the Developing Child: executive-function activities for children](https://developingchild.harvard.edu/resources/handouts-tools/activities-guide-enhancing-and-practicing-executive-function-skills/) — age-appropriate activities and practice through play.

@@ -71,6 +71,12 @@ Keep AI support optional, explain when it is being used, and evaluate whether it
 
 Do not infer a preferred language from a child’s name or location. Let the parent set the default and let the child ask to switch.
 
+## Muslim family values and religious references
+
+Treat faith as part of the family context, not a child score or engagement mechanic. The curriculum can invite families to connect learning habits with values such as **sidq** (truthfulness with evidence), **amanah** (care with entrusted information), **sabr** (patience through iteration), **shura** (listening and consultation) and **ihsan** (careful work that considers its effects). Keep these reflections optional, practical and open to family interpretation; never infer a child's belief, character or piety from activity data.
+
+The current family reflection uses these value words in Arabic, English and French and contains no scripture quotations. Before adding Qur'an or hadith text, require a Muslim educator or qualified reviewer to verify the exact Arabic source and context. For hadith, verify the source and grading; for translations, name the translator or use a reviewed translation. Keep references optional and respectful: never attach sacred text to points, streaks, badges, speed rewards or completion animations. Invite families to propose corrections to language and framing before public release.
+
 ## Testing and pricing sequence
 
 Keep the first pilot free and do not add billing until families have completed the core learning loop and some return by choice. Once value is clearer:

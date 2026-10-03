@@ -299,6 +299,52 @@
   justify-self: start;
   color: white;
 }
+.family-values {
+  grid-column: 1 / -1;
+  border-top: 1px solid #ffffff55;
+  padding-top: 14px;
+}
+.family-values summary {
+  width: fit-content;
+  color: var(--explore);
+  font-weight: 900;
+  cursor: pointer;
+  text-underline-offset: 4px;
+}
+.family-values summary:focus-visible {
+  outline: 3px solid var(--explore);
+  outline-offset: 4px;
+}
+.family-values-content > p {
+  margin: 12px 0;
+  color: #ffffffd8;
+  line-height: 1.8;
+  font-size: .82rem;
+}
+.family-values-content ul {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 9px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.family-values-content li {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid #ffffff80;
+  background: #244d37;
+  line-height: 1.8;
+  font-size: .76rem;
+}
+.family-values-content li b {
+  color: var(--explore);
+}
+.family-values-content li span {
+  color: #ffffffdf;
+}
 
 .privacy-page {
   padding-block: 62px 90px;
@@ -396,6 +442,9 @@
   .curriculum-grid,
   .family-guide {
     grid-template-columns: 1fr;
+  }
+  .family-values-content ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .curriculum-card {
     min-height: 0;

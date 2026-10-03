@@ -29,6 +29,8 @@ The first track remains `فكّر كنظام` with 12 missions. Code and AI are 
 
 The site includes the complete 12-mission curriculum in Arabic, English and French at /curriculum, plus a family-facing privacy and pilot-scope page at /privacy. The rest of the interface remains Arabic-first.
 
+The family guide also offers an optional, non-scored values reflection in all three curriculum languages, connecting careful reasoning with truthfulness, responsibility, patience, consultation and care. The pilot contains no scripture quotations; direct Qur'an or hadith text requires source, translation and context review before it is added.
+
 Four missions have interactive labs today. The other eight are curriculum activities with child prompts and screen-free transfer questions; they are not represented as built software lessons.
 
 ## Firebase Hosting
