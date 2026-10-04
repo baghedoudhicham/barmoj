@@ -1,0 +1,10 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // BRKAR does not currently accept uploads. Keep Storage private by default.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

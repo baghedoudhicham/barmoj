@@ -21,6 +21,7 @@
 - The adult checkbox is a reminder, not verified guardian identity or legal consent.
 - Typed observations, predictions and explanations are saved locally. Families should not enter a child's full name, school, address, contact details, health information or other sensitive details.
 - Browser storage stays on the device until the family deletes it or the browser clears it. There is no cross-device recovery.
+- Firebase Console has Email/Password and Google providers enabled, but this build has no Firebase Auth integration; provider status is not a parent sign-in or child access gate.
 - Firebase Hosting serves the web pages. The app code does not transmit profile or answer content to an application backend, but the hosting provider still processes technical requests under its own service terms.
 - This is not a claim of legal compliance, clinical benefit or proven improvement in attention or intelligence.
 
@@ -37,4 +38,4 @@
 
 ## Deployment
 
-The production Firebase target is barmoj-266b8 at https://barmoj-266b8.web.app/. Pushes to main run the test/build workflow and deploy Hosting using the repository secret FIREBASE_SERVICE_ACCOUNT_BARMOJ_266B8. Feature branches run checks without deployment. Preview channels should be used to inspect a release candidate before merging it to main.
+The production Firebase target is `barmoj-266b8` at https://barmoj-266b8.web.app/. Pushes to `main` run the app tests, Firestore Rules emulator test and production build, then deploy Hosting using the repository secret `FIREBASE_SERVICE_ACCOUNT_BARMOJ_266B8`. Feature branches run checks without deployment. Preview channels should be used to inspect a release candidate before merging it to `main`.

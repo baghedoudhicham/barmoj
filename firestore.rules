@@ -1,0 +1,11 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // The pilot has no cloud data model or authenticated parent flow yet.
+    // Keep every path closed until both are designed and tested together.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -43,6 +43,8 @@ Firebase project: `barmoj-266b8`
 
 The repository includes `firebase.json` and `.firebaserc`. The current Firebase project and URL retain the earlier Barmoj infrastructure identifiers; the customer-facing product brand is BRKAR. Hosting serves the Vite `dist` directory and rewrites SPA routes such as `/kid`, `/mission/water`, and `/parent` to `index.html`, so direct links work after deployment. A BRKAR custom domain is not configured here.
 
+The current release is still a local-only pilot: it has no parent sign-in flow or cloud sync. The repository defines default-deny Firestore and Storage rules and tests the Firestore rules in the emulator; the current workflow does not deploy those rules. See [docs/FIREBASE-ARCHITECTURE.md](docs/FIREBASE-ARCHITECTURE.md) before connecting live backend services.
+
 Build and deploy manually when needed:
 
 ```bash

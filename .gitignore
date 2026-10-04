@@ -4,4 +4,7 @@ dist/
 firebase-debug.log
 firebase-debug.*.log
 *.local
+.env
+.env.*
+!.env.example
 .DS_Store
