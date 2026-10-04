@@ -70,7 +70,7 @@ export function Landing() {
             <h1>لا نعلّم الطفل كتابة الكود.<br /><span>نعلّمه بناء نظام.</span></h1>
             <p className="hero-body">يفهم المشكلة، يكتشف ما ينقصها، يرسم العلاقات، يتوقع النتيجة، يكسر الحل عمدًا ثم يحسّنه. الكود والذكاء الاصطناعي أدوات تنفيذ عندما نحتاجها.</p>
             <div className="hero-actions">
-              <Link className="button" to="/onboarding">ابدأ تجربة برموج <ArrowLeft size={18} /></Link>
+              <Link className="button" to="/onboarding">ابدأ تجربة بِرْكار <ArrowLeft size={18} /></Link>
               <a className="button button-ghost" href="#method">شاهد طريقة التعلّم</a>
             </div>
           </div>
@@ -94,7 +94,7 @@ export function Landing() {
         </section>
 
         <section className="wrap section" id="method">
-          <SectionTitle eyebrow="منهج برموج" title="التفكير قبل التنفيذ" body="لا نسأل الطفل إن كان يحفظ أمرًا برمجيًا. نسأله إن كان يستطيع فهم النظام، توقعه، اختباره عند الفشل ثم شرح قراره." />
+          <SectionTitle eyebrow="منهج بِرْكار" title="التفكير قبل التنفيذ" body="لا نسأل الطفل إن كان يحفظ أمرًا برمجيًا. نسأله إن كان يستطيع فهم النظام، توقعه، اختباره عند الفشل ثم شرح قراره." />
           <div className="artifact-grid">
             <Artifact name="المُرسِل" tone="yellow">يعطي هدفًا ناقصًا عمدًا. على الطفل أن يسأل عن القيود والمعلومات المفقودة.</Artifact>
             <Artifact name="المسار" tone="green">يمثل الخطوات والحالات والعلاقات حتى يصبح التفكير مرئيًا وقابلًا للمراجعة.</Artifact>

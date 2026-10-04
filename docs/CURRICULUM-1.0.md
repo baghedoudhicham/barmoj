@@ -1,4 +1,4 @@
-# Barmoj curriculum 1.0 — Think in Systems
+# BRKAR curriculum 1.0 — Think in Systems
 
 **Status:** proposed pilot curriculum, October 2026
 **Audience:** children aged 7–14, with flexible support rather than ability labels
@@ -277,4 +277,4 @@ English and French versions appear when a family changes the curriculum language
 
 - [Harvard Center on the Developing Child: executive-function activities for children](https://developingchild.harvard.edu/resources/handouts-tools/activities-guide-enhancing-and-practicing-executive-function-skills/) — age-appropriate activities and practice through play.
 - [UNESCO: AI competency framework for students](https://www.unesco.org/en/articles/ai-competency-framework-students) — human-centred mindset, AI ethics, techniques and applications, system design; understand, apply and create.
-- [UNICEF Parenting: how social media keeps children’s attention](https://www.unicef.org/parenting/digital-parenting/how-social-media-keeps-attention) — explains design features such as infinite scroll, autoplay, notifications and streaks. Barmoj should make stopping easy and use finite activities; it should not diagnose children or claim to reverse social-media effects.
+- [UNICEF Parenting: how social media keeps children’s attention](https://www.unicef.org/parenting/digital-parenting/how-social-media-keeps-attention) — explains design features such as infinite scroll, autoplay, notifications and streaks. BRKAR should make stopping easy and use finite activities; it should not diagnose children or claim to reverse social-media effects.

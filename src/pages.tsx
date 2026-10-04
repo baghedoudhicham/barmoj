@@ -31,7 +31,7 @@ export function Landing() {
             <h1>لا نعلّم الطفل كتابة الكود.<br /><span>نعلّمه بناء نظام.</span></h1>
             <p className="hero-body">يفهم المشكلة، يفككها، يرسم العلاقات، يتوقع النتيجة، يختبر الفشل ثم يحسّن الحل. الكود وAI أدوات تنفيذ عندما نحتاجها.</p>
             <div className="hero-actions">
-              <Link className="button" to="/onboarding">ابدأ تجربة برموج <ArrowLeft size={18} /></Link>
+              <Link className="button" to="/onboarding">ابدأ تجربة بِرْكار <ArrowLeft size={18} /></Link>
               <a className="button button-ghost" href="#method">شاهد كيف نتعلّم</a>
             </div>
           </div>
@@ -43,7 +43,7 @@ export function Landing() {
         </section>
 
         <section className="wrap section" id="method">
-          <SectionTitle eyebrow="منهج برموج" title="التفكير قبل التنفيذ" body="المهمة الجيدة لا تسأل: هل تعرف الأمر البرمجي؟ بل: هل تستطيع فهم النظام، توقعه، كسره، ثم شرحه؟" />
+          <SectionTitle eyebrow="منهج بِرْكار" title="التفكير قبل التنفيذ" body="المهمة الجيدة لا تسأل: هل تعرف الأمر البرمجي؟ بل: هل تستطيع فهم النظام، توقعه، كسره، ثم شرحه؟" />
           <SystemRail active={4} />
           <div className="artifact-grid">
             <Artifact name="المُرسِل" tone="yellow">هدف ناقص عمدًا. على الطفل أن يسأل عن القيود والمعلومات المفقودة.</Artifact>
@@ -105,7 +105,7 @@ export function KidHome() {
         <div><p className="kicker">المهمة الحالية · 06 / العطل</p><h2>صمّم نظامًا يمنع خزان الماء من الفيضان</h2><p>لن نختبر الحالة الصحيحة فقط. سنجعل الحساس يكذب ونرى هل يبقى النظام آمنًا.</p><MissionLink to="/mission/water" label="ابدأ المختبر">افهم → صمّم → اختبر → حسّن</MissionLink></div>
         <TankDiagram level={88} />
       </section>
-      <section className="learning-now"><div><p className="eyebrow">ما يتطور الآن</p><h2>التوقع قبل الضغط على زر التشغيل</h2><p>برموج يعطي قيمة أكبر للتفسير والاختبار من السرعة أو جمع النقاط.</p></div><div className="skill-rail"><span>يتوقّع</span><span>يختبر</span><span>يفسّر</span></div></section>
+      <section className="learning-now"><div><p className="eyebrow">ما يتطور الآن</p><h2>التوقع قبل الضغط على زر التشغيل</h2><p>بِرْكار يعطي قيمة أكبر للتفسير والاختبار من السرعة أو جمع النقاط.</p></div><div className="skill-rail"><span>يتوقّع</span><span>يختبر</span><span>يفسّر</span></div></section>
       <section className="section-tight" id="missions"><SectionTitle eyebrow="المسار الأول" title="فكّر كنظام" />
         <div className="mission-list">{missions.map(([title, desc], index) => {
           const route = index === 1 ? "/mission/routing" : index === 4 ? "/mission/traffic" : index === 5 ? "/mission/water" : index === 7 ? "/mission/economy" : null;

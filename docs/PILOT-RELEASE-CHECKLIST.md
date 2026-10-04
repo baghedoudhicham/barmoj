@@ -1,4 +1,4 @@
-# Barmoj family pilot release boundary
+# BRKAR family pilot release boundary
 
 **Release type:** moderated, parent-supervised product pilot  
 **Interface:** Arabic-first. The full first-track curriculum content is available in Arabic, English and French at /curriculum.  
@@ -10,7 +10,7 @@
 - Uses an optional nickname; older local profiles are migrated to remove the parent-name and exact-age fields.
 - Removes the old prototype's local page-view and feedback event records on startup.
 - Saves mission drafts and evidence in the current browser's local storage.
-- Shows the parent dated examples of thinking and offers a way to remove every Barmoj local-storage record for this site.
+- Shows the parent dated examples of thinking and offers a way to remove all locally stored pilot data for this site.
 - Offers short, finite activities with no timer, streak, public comparison, ads, payments, account sync, child-facing AI or product analytics.
 - Self-hosts the Noto Kufi Arabic font files and includes their SIL Open Font License.
 - Applies a restrictive content policy and baseline browser security headers through Firebase Hosting.
@@ -31,7 +31,7 @@
 3. Replace the supervision reminder with an age-appropriate guardian flow if the product begins collecting or transmitting personal data.
 4. Test keyboard access, screen readers, contrast, reading load and RTL/LTR behavior with families; verify children can stop and resume without pressure.
 5. Run the moderated family pilot, review de-identified observations with caregivers and educators, and build the remaining eight labs only from what the evidence supports.
-6. Complete a name and trademark search before a wider launch. Barmoj is close in sound and spelling to Barmej, which operates in the neighboring Arabic learning category. Keep the current name for the supervised pilot while that risk is checked.
+6. Complete market-specific name, domain and trademark clearance for BRKAR / بِرْكار before a wider launch. The public product now uses BRKAR; Firebase IDs, the hosting URL and legacy local-storage keys still use the earlier Barmoj name for continuity.
 7. Add accounts, payments, remote analytics, AI or social features only after their separate privacy, security, adult-control and deletion design is ready.
 8. Review the Muslim-family values reflection with parents and Muslim educators across the intended communities. Any later Qur'an or hadith quotation needs verified Arabic text, source and context, a reviewed translation, and must remain outside rewards, scores and streaks.
 

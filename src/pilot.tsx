@@ -127,7 +127,7 @@ export function MissionHub() {
       <main className="wrap pilot-page">
         <header className="pilot-hero compact-hero">
           <div>
-            <p className="eyebrow">مختبرات برموج</p>
+            <p className="eyebrow">مختبرات بِرْكار</p>
             <h1>
               نفس طريقة التفكير.
               <br />

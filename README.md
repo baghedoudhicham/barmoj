@@ -1,14 +1,16 @@
-# Barmoj — برموج
+# BRKAR | بِرْكار
 
-Arabic-first learning product for children in Morocco, focused on **systems thinking, problem solving, modeling, testing, debugging and explaining decisions**.
+Arabic-first learning product for children in Morocco and MENA, focused on **systems thinking, problem solving, modeling, testing, debugging and explaining decisions**. The Latin brand is **BRKAR**; it is spoken **Birkar** and written **بِرْكار** in Arabic.
 
 > نتعلّم كيف نفكّر، ثم كيف نبرمج.
 >
 > لا نعلّم الطفل كتابة الكود. نعلّمه بناء نظام.
 
+Brand details and the pronunciation cue are in [docs/BRAND-DIRECTION.md](docs/BRAND-DIRECTION.md).
+
 ## Current prototype
 
-The repository contains a runnable Vite + React + TypeScript family-supervised pilot.
+The repository contains a runnable Vite + React + TypeScript family-supervised BRKAR pilot.
 
 Core flow:
 
@@ -35,11 +37,11 @@ Four missions have interactive labs today. The other eight are curriculum activi
 
 ## Firebase Hosting
 
-Live pilot: https://barmoj-266b8.web.app/
+Live BRKAR pilot: https://barmoj-266b8.web.app/
 
 Firebase project: `barmoj-266b8`
 
-The repository includes `firebase.json` and `.firebaserc`. Hosting serves the Vite `dist` directory and rewrites SPA routes such as `/kid`, `/mission/water`, and `/parent` to `index.html`, so direct links work after deployment.
+The repository includes `firebase.json` and `.firebaserc`. The current Firebase project and URL retain the earlier Barmoj infrastructure identifiers; the customer-facing product brand is BRKAR. Hosting serves the Vite `dist` directory and rewrites SPA routes such as `/kid`, `/mission/water`, and `/parent` to `index.html`, so direct links work after deployment. A BRKAR custom domain is not configured here.
 
 Build and deploy manually when needed:
 
@@ -98,11 +100,11 @@ See `docs/QA-2026-10.md` for the checks performed on this pass.
 - Startup removes parent-name and exact-age fields from legacy local profiles and deletes old prototype event logs.
 - Profile, drafts and learning evidence stay in this browser's local storage. There is no account, cloud sync, analytics, advertising, payment, public sharing or child-facing AI.
 - Anyone using the same browser profile can open the parent dashboard. Do not use a shared or public computer without the parent present; do not enter full names, school, address or contact details.
-- The Parent Dashboard can remove every Barmoj local-storage record for this site. Browser storage may also be cleared by the family or browser settings.
+- The Parent Dashboard can remove all locally stored pilot data for this site. Existing browser-storage keys keep their earlier internal prefix so pilot records survive the brand change.
 - Hosting still serves the site through Firebase. Its provider processes the technical requests needed to deliver pages; this product code does not send the child's profile or answers to an application backend.
 - This is a moderated, family-supervised pilot, not an unrestricted public release or a legal compliance claim. Before opening public registration, identify the service operator and family contact, then review applicable Moroccan data-protection and guardian-consent requirements.
 
-See docs/PILOT-RELEASE-CHECKLIST.md for the launch boundary and remaining gates.
+See [docs/PILOT-RELEASE-CHECKLIST.md](docs/PILOT-RELEASE-CHECKLIST.md) for the launch boundary and remaining gates. The chosen brand is not a substitute for a market-specific name, domain and trademark clearance before public launch.
 
 ## Product principles
 

@@ -299,6 +299,8 @@
   justify-self: start;
   color: white;
 }
+.footer-brand { display: grid; gap: 3px; line-height: 1.2; }
+.footer-brand span:last-child { font-size: .58rem; letter-spacing: .12em; font-weight: 900; }
 .family-values {
   grid-column: 1 / -1;
   border-top: 1px solid #ffffff55;

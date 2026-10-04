@@ -1,4 +1,4 @@
-name: Barmoj CI + Firebase Deploy
+name: BRKAR CI + Firebase Deploy
 
 on:
   push:

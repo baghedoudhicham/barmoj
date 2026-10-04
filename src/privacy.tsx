@@ -7,7 +7,7 @@ export function PrivacyPage() {
     <Shell>
       <main className="wrap narrow privacy-page">
         <p className="eyebrow">للأهل · نسخة تجربة</p>
-        <h1>الخصوصية في تجربة برموج</h1>
+        <h1>الخصوصية في تجربة بِرْكار</h1>
         <p className="privacy-intro">
           صُمّمت هذه النسخة كتجربة عائلية محلية، وليست حسابًا سحابيًا أو خدمة
           تعليمية تجارية مكتملة.

@@ -22,9 +22,19 @@ export function Shell({ children }: { children: ReactNode }) {
       </a>
       <header className="site-header">
         <div className="header-inner">
-          <Link className="brand" to="/" aria-label="برموج">
-            <span className="brand-mark">ب</span>
-            <span>برموج</span>
+          <Link className="brand" to="/" aria-label="بِرْكار، BRKAR، تُنطق بيركار">
+            <span className="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 32 32" focusable="false">
+                <path d="M12 6c0-2 1.8-3.5 4-3.5S20 4 20 6" />
+                <path d="m13 7-5 18m11-18 5 18" />
+                <path d="M6 25c2.8-6.8 6.4-10.2 10-10.2S23.2 18.2 26 25" />
+                <circle cx="16" cy="6" r="1.7" />
+              </svg>
+            </span>
+            <span className="brand-lockup">
+              <span className="brand-arabic" dir="rtl">بِرْكار</span>
+              <span className="brand-latin" dir="ltr">BRKAR · BIRKAR</span>
+            </span>
           </Link>
           <nav className="desktop-nav" aria-label="التنقل الرئيسي">
             {inKid ? (
@@ -87,7 +97,7 @@ export function Shell({ children }: { children: ReactNode }) {
       </div>
       <footer className="site-footer">
         <div>
-          <b>برموج</b>
+          <b className="footer-brand"><span dir="rtl">بِرْكار</span><span dir="ltr">BRKAR · BIRKAR</span></b>
           <span>نسخة تجربة عائلية بإشراف وليّ الأمر</span>
         </div>
         <nav aria-label="روابط العائلة">

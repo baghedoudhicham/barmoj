@@ -30,8 +30,13 @@ h2 { font-size: clamp(1.6rem, 4vw, 3rem); line-height: 1.24; letter-spacing: -.0
 .section-tight { padding-top: 56px; }
 .site-header { position: sticky; top: 0; z-index: 30; border-bottom: var(--line); background: color-mix(in srgb, var(--paper) 94%, transparent); backdrop-filter: blur(10px); }
 .header-inner { width: min(1180px, calc(100% - 32px)); height: 68px; margin: auto; display: flex; align-items: center; gap: 24px; }
-.brand { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 1.15rem; }
-.brand-mark { width: 40px; height: 40px; display: grid; place-items: center; border: var(--line); background: var(--learn); box-shadow: 3px 3px 0 var(--ink); }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 900; }
+.brand-mark { width: 40px; height: 40px; display: grid; place-items: center; flex: 0 0 40px; border: var(--line); background: var(--learn); box-shadow: 3px 3px 0 var(--ink); }
+.brand-mark svg { display: block; width: 27px; height: 27px; fill: none; stroke: var(--ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.brand-mark circle { fill: var(--ink); stroke: none; }
+.brand-lockup { display: grid; gap: 2px; line-height: 1.05; }
+.brand-arabic { font-size: 1.02rem; }
+.brand-latin { text-align: right; font-size: .56rem; letter-spacing: .12em; font-weight: 900; color: #56564f; }
 .desktop-nav { margin-right: auto; display: flex; align-items: center; gap: 22px; font-size: .88rem; font-weight: 800; }
 .desktop-nav a:not(.button):hover { text-decoration: underline; text-underline-offset: 5px; }
 .mobile-menu { display: none; margin-right: auto; }

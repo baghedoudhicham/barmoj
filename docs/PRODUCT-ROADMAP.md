@@ -1,7 +1,7 @@
-# Barmoj product roadmap — validate learning before adding surface
+# BRKAR product roadmap — validate learning before adding surface
 
 **Decision status:** recommended sequence, October 2026
-**Product hypothesis:** Barmoj helps children notice, model, test and explain systems, then transfer that way of thinking to problems they care about. It supports varied ways of learning without ranking children.
+**Product hypothesis:** BRKAR helps children notice, model, test and explain systems, then transfer that way of thinking to problems they care about. It supports varied ways of learning without ranking children.
 
 ## What to build first
 
@@ -89,15 +89,10 @@ Keep the first pilot free and do not add billing until families have completed t
 
 Avoid ads, sale of child data, pay-to-win rewards, artificial urgency and locking a child’s completed work behind a payment screen. Do not set a price until the market, support cost, payment rails and actual repeat value are understood.
 
-## Name decision
+## Brand decision
 
-**Recommendation: treat Barmoj as a working name and explore alternatives before a public launch.** The product has moved beyond teaching code, while “Barmoj” sounds and looks close to “Barmej,” an established Arabic programming-education brand. That creates a plausible confusion and search-discovery problem in the same broad category. This is a brand-risk signal, not a legal conclusion; check names and marks in target markets with qualified help before committing.
+The selected product brand is **BRKAR | بِرْكار**, spoken **Birkar**. بِرْكار is a geometry compass/divider used to draw circles and arcs; the product uses it as a metaphor for giving each child tools to explore from their own starting point and at their own pace. Keep this meaning as a brand story, not a claim that every family already knows the technical word.
 
-The next name should be:
+The interface remains Arabic-first and RTL, with Arabic, English and French curriculum content. BRKAR should feel calm, curious and capable without relying on religious labeling, child rankings or social-feed mechanics. Family values live in reviewed learning experiences and adult guidance.
 
-- broad enough for thinking, learning and making, not only programming;
-- easy to say and spell in Arabic, English and French;
-- distinctive in search and visually ownable;
-- culturally natural in Morocco and understandable across the intended region.
-
-Keep the current repo, domain and palette while testing the product. Do naming interviews and basic domain/trademark clearance before renaming assets. [Barmej’s own site](https://www.barmej.com/) describes an Arabic learning platform and its programming-education origins.
+Before a wider launch, complete market-specific checks for the BRKAR and بِرْكار spellings, domain, social handles and trademarks. The current Firebase host/project, GitHub repository name and local-storage keys retain Barmoj as infrastructure/history; the public product identity is BRKAR. This brand decision is not legal clearance.

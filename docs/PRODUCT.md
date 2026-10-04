@@ -1,8 +1,8 @@
-# Barmoj MVP Product Specification
+# BRKAR MVP Product Specification
 
 ## Goal
 
-Validate a compact Arabic-first learning loop for Moroccan children aged 7–14 before expanding Barmoj into a broader learning platform.
+Validate a compact Arabic-first learning loop for Moroccan children aged 7–14 before expanding BRKAR into a broader learning platform.
 
 ## Users
 
@@ -12,7 +12,7 @@ Creates the account, creates/manages child profiles, understands progress and co
 ### Child
 Completes short structured missions, earns XP and sees a clear next action.
 
-### Barmoj team
+### BRKAR team
 Creates, reviews, publishes and reorders curriculum content through a small internal console.
 
 ## V1 flows
@@ -100,12 +100,12 @@ Do not add major feature surface until we can answer:
 
 ## Safety/product principles
 
-Collect minimal child data. Parent owns the account and communication settings. Avoid public child profiles and unrestricted child-to-child communication in V1. Keep AI content assistance behind the Barmoj team review process.
+Collect minimal child data. Parent owns the account and communication settings. Avoid public child profiles and unrestricted child-to-child communication in V1. Keep AI content assistance behind the BRKAR team review process.
 
 
 ## Curriculum direction — systems before syntax
 
-Barmoj is not primarily a coding course. Programming is one medium for learning how to reason about and build systems.
+BRKAR is not primarily a coding course. Programming is one medium for learning how to reason about and build systems.
 
 The core learning cycle is:
 
