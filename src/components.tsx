@@ -1,10 +1,27 @@
 import type { ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowLeft, Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { BrandArrow, BrandMark, shellCopy, type BrandLanguage } from "./brand";
 
-export function Shell({ children }: { children: ReactNode }) {
+export function Shell({ children, language = "ar" }: { children: ReactNode; language?: BrandLanguage }) {
   const [open, setOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      menuButton.current?.focus();
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [open]);
+  const c = shellCopy[language];
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+    document.title = `BRKAR | بِركار — ${c.tagline}`;
+  }, [language, c.tagline]);
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -16,27 +33,22 @@ export function Shell({ children }: { children: ReactNode }) {
     pathname === "/result" ||
     pathname === "/curriculum";
   return (
-    <div className="app-shell">
+    <div className="app-shell" lang={language} dir={language === "ar" ? "rtl" : "ltr"}>
       <a className="skip-link" href="#page-content">
-        انتقل إلى المحتوى
+        {c.skip}
       </a>
       <header className="site-header">
         <div className="header-inner">
-          <Link className="brand" to="/" aria-label="بِرْكار، BRKAR، تُنطق بيركار">
+          <Link className="brand" to={language === "ar" ? "/" : `/?lang=${language}`} aria-label={c.home}>
             <span className="brand-mark" aria-hidden="true">
-              <svg viewBox="0 0 32 32" focusable="false">
-                <path d="M12 6c0-2 1.8-3.5 4-3.5S20 4 20 6" />
-                <path d="m13 7-5 18m11-18 5 18" />
-                <path d="M6 25c2.8-6.8 6.4-10.2 10-10.2S23.2 18.2 26 25" />
-                <circle cx="16" cy="6" r="1.7" />
-              </svg>
+              <BrandMark />
             </span>
             <span className="brand-lockup">
-              <span className="brand-arabic" dir="rtl">بِرْكار</span>
-              <span className="brand-latin" dir="ltr">BRKAR · BIRKAR</span>
+              <span className="brand-arabic" dir="rtl">بِركار</span>
+              <span className="brand-latin" dir="ltr">BRKAR</span>
             </span>
           </Link>
-          <nav className="desktop-nav" aria-label="التنقل الرئيسي">
+          <nav className="desktop-nav" aria-label={c.nav}>
             {inKid ? (
               <>
                 <Link to="/kid">مساحتي</Link>
@@ -45,49 +57,51 @@ export function Shell({ children }: { children: ReactNode }) {
               </>
             ) : (
               <>
-                <a href="/#method">كيف نتعلّم؟</a>
-                <a href="/#track">المسار</a>
-                <Link to="/curriculum">المنهج الكامل</Link>
-                <Link to="/parent">للأهل</Link>
+                <a href={`/?lang=${language}#method`}>{c.method}</a>
+                <a href={`/?lang=${language}#track`}>{c.track}</a>
+                <Link to={`/curriculum?lang=${language}`}>{c.curriculum}</Link>
+                <a href={`/?lang=${language}#families`}>{c.parents}</a>
               </>
             )}
             <Link
               className="button button-small"
               to={inKid ? "/kid" : "/onboarding"}
             >
-              {inKid ? "المهمات" : "ابدأ التجربة"}
+              {inKid ? "المهمات" : c.start}
             </Link>
           </nav>
           <button
+            ref={menuButton}
+            type="button"
             className="icon-button mobile-menu"
             onClick={() => setOpen(!open)}
-            aria-label="القائمة"
+            aria-label={c.menu}
             aria-expanded={open}
             aria-controls="mobile-navigation"
           >
-            {open ? <X size={20} /> : <Menu size={20} />}
+            {open ? <span className="brand-menu-close" aria-hidden="true">×</span> : <span className="brand-menu-lines" aria-hidden="true"><i/><i/><i/></span>}
           </button>
         </div>
         {open && (
           <nav
             className="mobile-nav"
             id="mobile-navigation"
-            aria-label="التنقل على الهاتف"
+            aria-label={c.nav}
           >
             <Link to="/kid" onClick={() => setOpen(false)}>
-              مساحة الطفل
+              {c.space}
             </Link>
             <Link to="/parent" onClick={() => setOpen(false)}>
-              لوحة الأهل
+              {c.parents}
             </Link>
-            <Link to="/curriculum" onClick={() => setOpen(false)}>
-              المنهج الكامل
+            <Link to={`/curriculum?lang=${language}`} onClick={() => setOpen(false)}>
+              {c.curriculum}
             </Link>
             <Link to="/privacy" onClick={() => setOpen(false)}>
-              الخصوصية في التجربة
+              {c.privacy}
             </Link>
             <Link to="/onboarding" onClick={() => setOpen(false)}>
-              بدء جديد
+              {c.start}
             </Link>
           </nav>
         )}
@@ -96,14 +110,15 @@ export function Shell({ children }: { children: ReactNode }) {
         {children}
       </div>
       <footer className="site-footer">
-        <div>
-          <b className="footer-brand"><span dir="rtl">بِرْكار</span><span dir="ltr">BRKAR · BIRKAR</span></b>
-          <span>نسخة تجربة عائلية بإشراف وليّ الأمر</span>
+        <div className="brand-footer-copy">
+          <b className="footer-brand"><span dir="rtl">بِركار</span><span dir="ltr">BRKAR</span></b>
+          <p>{c.tagline}</p>
+          <span>{c.pilot}</span>
         </div>
-        <nav aria-label="روابط العائلة">
-          <Link to="/curriculum">المنهج الكامل</Link>
-          <Link to="/privacy">الخصوصية في التجربة</Link>
-          <Link to="/parent">لوحة الأهل</Link>
+        <nav aria-label={c.nav}>
+          <Link to={`/curriculum?lang=${language}`}>{c.curriculum}</Link>
+          <Link to="/privacy">{c.privacy}</Link>
+          <Link to="/parent">{c.parents}</Link>
         </nav>
       </footer>
     </div>
@@ -114,15 +129,18 @@ export function SectionTitle({
   eyebrow,
   title,
   body,
+  level = 2,
 }: {
   eyebrow: string;
   title: string;
   body?: string;
+  level?: 1 | 2;
 }) {
+  const Heading = level === 1 ? "h1" : "h2";
   return (
     <div className="section-title">
       <p className="eyebrow">{eyebrow}</p>
-      <h2>{title}</h2>
+      <Heading>{title}</Heading>
       {body && <p>{body}</p>}
     </div>
   );
@@ -175,7 +193,7 @@ export function MissionLink({
     <Link className="text-link" to={to}>
       {children}
       <span>{label}</span>
-      <ArrowLeft size={18} />
+      <BrandArrow />
     </Link>
   );
 }

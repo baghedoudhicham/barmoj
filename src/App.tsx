@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import { Landing, Onboarding } from "./pages-next";
+import { Onboarding } from "./pages-next";
+import { BrandHome } from "./brand-home";
 import {
   EconomyMission,
   Result,
@@ -14,7 +15,7 @@ import { PrivacyPage } from "./privacy";
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Landing />} />
+      <Route path="/" element={<BrandHome />} />
       <Route path="/onboarding" element={<Onboarding />} />
       <Route path="/kid" element={<KidHomeV2 />} />
       <Route path="/missions" element={<MissionHub />} />
@@ -26,7 +27,7 @@ export default function App() {
       <Route path="/parent" element={<ParentDashboardV2 />} />
       <Route path="/curriculum" element={<CurriculumPage />} />
       <Route path="/privacy" element={<PrivacyPage />} />
-      <Route path="*" element={<Landing />} />
+      <Route path="*" element={<BrandHome />} />
     </Routes>
   );
 }

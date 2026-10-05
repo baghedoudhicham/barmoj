@@ -142,7 +142,7 @@ export function Onboarding() {
     <Shell>
       <main className="wrap narrow section onboarding-wrap">
         <div className="onboarding-index"><span>01</span><b>وليّ الأمر</b><span>02</span><b>لقب اختياري</b><span>03</span><b>ابدأ</b></div>
-        <SectionTitle eyebrow="إعداد الأسرة" title="بداية بسيطة، وبيانات أقل" body="هذه تجربة عائلية بإشراف بالغ. لا نطلب اسم وليّ الأمر أو العمر الدقيق أو البريد الإلكتروني." />
+        <SectionTitle level={1} eyebrow="إعداد الأسرة" title="بداية بسيطة، وبيانات أقل" body="هذه تجربة عائلية بإشراف بالغ. لا نطلب اسم وليّ الأمر أو العمر الدقيق أو البريد الإلكتروني." />
         <form className="form-panel" onSubmit={submit}>
           <label>لقب للطفل (اختياري)<input value={child} onChange={(event) => setChild(event.target.value)} placeholder="مثال: المستكشف" maxLength={24} autoComplete="off" /></label>
           <p className="privacy-hint">استخدم لقبًا بدل الاسم الكامل. لا تكتب معلومات عن المدرسة أو العنوان أو وسيلة التواصل.</p>

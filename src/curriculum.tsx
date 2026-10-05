@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { ArrowLeft, BookOpenCheck, CircleHelp } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Shell } from "./components";
 
 type Language = "ar" | "en" | "fr";
@@ -216,7 +215,9 @@ const missions: Mission[] = [
 ];
 
 export function CurriculumPage() {
-  const [language, setLanguage] = useState<Language>("ar");
+  const [params, setParams] = useSearchParams();
+  const requested = params.get("lang");
+  const language: Language = requested === "en" || requested === "fr" ? requested : "ar";
   return (
     <Shell>
       <main className="wrap curriculum-page">
@@ -245,7 +246,7 @@ export function CurriculumPage() {
                 className={language === item ? "selected" : ""}
                 aria-pressed={language === item}
                 key={item}
-                onClick={() => setLanguage(item)}
+                onClick={() => setParams({lang:item}, {replace:true})}
               >
                 {languageNames[item]}
               </button>

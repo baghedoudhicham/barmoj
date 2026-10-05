@@ -7,6 +7,7 @@ import "./styles.css";
 import "./refinement.css";
 import "./mission-lab.css";
 import "./launch.css";
+import "./brand.css";
 
 prepareFamilyStorage();
 
