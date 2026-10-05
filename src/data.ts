@@ -1,6 +1,6 @@
 import type { LabId, Trial } from "./lab-model";
 import { labIds } from "./lab-model";
-import { validTrial } from "./lab-storage";
+import { boundedText, MAX_TRIALS, validTrial } from "./lab-storage";
 
 export type EvidenceKey = "يفهم" | "يمثّل" | "يتوقّع" | "يختبر" | "يفسّر";
 
@@ -107,25 +107,27 @@ export function clearFamilyData() {
 export function getEvidence(): LearningEvidence[] {
   try {
     const value = localStorage.getItem(EVIDENCE_KEY);
+    if (value && value.length > 2_097_152) return [];
     const entries = value ? JSON.parse(value) : [];
     if (!Array.isArray(entries)) return [];
     return entries.filter(
       (e): e is LearningEvidence =>
         e &&
-        typeof e.mission === "string" &&
-        typeof e.date === "string" &&
+        boundedText(e.mission) &&
+        boundedText(e.date, 100) &&
         Number.isFinite(Date.parse(e.date)) &&
-        typeof e.note === "string" &&
+        boundedText(e.note, 1000) &&
         Array.isArray(e.items) &&
+        e.items.length <= evidenceLabels.length &&
         e.items.every((k: unknown) =>
           evidenceLabels.some(([name]) => name === k),
         ) &&
         (e.labId === undefined || labIds.includes(e.labId)) &&
         (e.trials === undefined ||
-          (Array.isArray(e.trials) && e.trials.every(validTrial))) &&
-        (e.observation === undefined || typeof e.observation === "string") &&
-        (e.explanation === undefined || typeof e.explanation === "string"),
-    );
+          (Array.isArray(e.trials) && e.trials.length <= MAX_TRIALS && e.trials.every(validTrial))) &&
+        (e.observation === undefined || boundedText(e.observation)) &&
+        (e.explanation === undefined || boundedText(e.explanation)),
+    ).slice(0, 8);
   } catch {
     return [];
   }

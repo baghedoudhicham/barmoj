@@ -6,6 +6,7 @@ import { BrandArrow, BrandMark, shellCopy, type BrandLanguage } from "./brand";
 export function Shell({ children, language = "ar" }: { children: ReactNode; language?: BrandLanguage }) {
   const [open, setOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
+  const content = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!open) return;
     const closeOnEscape = (event: KeyboardEvent) => {
@@ -20,16 +21,27 @@ export function Shell({ children, language = "ar" }: { children: ReactNode; lang
   useEffect(() => {
     document.documentElement.lang = language;
     document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
-    document.title = `BRKAR | بِركار — ${c.tagline}`;
+    const heading = content.current?.querySelector("h1")?.textContent;
+    document.title = `BRKAR | بِركار — ${heading || c.tagline}`;
   }, [language, c.tagline]);
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
     setOpen(false);
-  }, [pathname]);
+    const heading = content.current?.querySelector("h1");
+    let anchor: HTMLElement | null = null;
+    try { if (hash) anchor = document.getElementById(decodeURIComponent(hash.slice(1))); } catch { /* Ignore a malformed fragment. */ }
+    const target = anchor || heading;
+    if (target) {
+      target.tabIndex = -1;
+      target.focus({ preventScroll: true });
+    }
+    if (anchor) anchor.scrollIntoView({ behavior: "instant" });
+    else window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [pathname, hash]);
   const inKid =
     pathname.startsWith("/kid") ||
     pathname.startsWith("/mission") ||
+    pathname === "/parent" ||
     pathname === "/result" ||
     pathname === "/curriculum";
   return (
@@ -51,9 +63,9 @@ export function Shell({ children, language = "ar" }: { children: ReactNode; lang
           <nav className="desktop-nav" aria-label={c.nav}>
             {inKid ? (
               <>
-                <Link to="/kid">مساحتي</Link>
-                <Link to="/curriculum">المسار الكامل</Link>
-                <Link to="/parent">للأهل</Link>
+                <Link to="/kid" aria-current={pathname === "/kid" ? "page" : undefined}>{c.space}</Link>
+                <Link to={`/curriculum?lang=${language}`} aria-current={pathname === "/curriculum" ? "page" : undefined}>{c.curriculum}</Link>
+                <Link to="/parent" aria-current={pathname === "/parent" ? "page" : undefined}>{c.parents}</Link>
               </>
             ) : (
               <>
@@ -65,9 +77,9 @@ export function Shell({ children, language = "ar" }: { children: ReactNode; lang
             )}
             <Link
               className="button button-small"
-              to={inKid ? "/kid" : "/onboarding"}
+              to={inKid ? "/missions" : "/onboarding"}
             >
-              {inKid ? "المهمات" : c.start}
+              {inKid ? c.track : c.start}
             </Link>
           </nav>
           <button
@@ -106,7 +118,7 @@ export function Shell({ children, language = "ar" }: { children: ReactNode; lang
           </nav>
         )}
       </header>
-      <div id="page-content" tabIndex={-1}>
+      <div ref={content} id="page-content" className="page-content" tabIndex={-1}>
         {children}
       </div>
       <footer className="site-footer">

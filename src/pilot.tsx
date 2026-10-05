@@ -12,7 +12,7 @@ import {
   TrafficCone,
   TriangleAlert,
 } from "lucide-react";
-import { Shell, TankDiagram } from "./components";
+import { Shell } from "./components";
 import {
   clearFamilyData,
   evidenceLabels,
@@ -25,7 +25,6 @@ import type { LabId } from "./lab-model";
 import { initialSettings } from "./lab-model";
 import { latestDraft } from "./lab-storage";
 import { LabDiagram, TrialNotebook } from "./mission-lab";
-import "./pilot.css";
 
 const availableMissions = [
   {
@@ -80,47 +79,9 @@ const cycle = [
 ];
 
 function MissionSystemPreview({ tone }: { tone: string }) {
-  if (tone === "water") return <TankDiagram level={86} />;
-
-  if (tone === "learn") {
-    return (
-      <div className="route-preview" aria-label="نموذج مسار توصيل">
-        <span className="route-node depot">مركز</span>
-        <span className="route-node a">A</span>
-        <span className="route-node b">B</span>
-        <span className="route-node c">C</span>
-        <span className="route-line line-a" />
-        <span className="route-line line-b" />
-        <span className="route-line line-c blocked" />
-        <span className="failure-tag">طريق مغلق</span>
-      </div>
-    );
-  }
-
-  if (tone === "challenge") {
-    return (
-      <div className="traffic-preview" aria-label="نموذج تقاطع إشارات">
-        <div className="road horizontal" />
-        <div className="road vertical" />
-        <span className="signal north green" />
-        <span className="signal west red" />
-        <span className="state-tag">حالة آمنة</span>
-      </div>
-    );
-  }
-
-  return (
-    <div className="economy-preview" aria-label="نموذج حلقة موارد">
-      <span className="economy-node">مورد</span>
-      <span className="economy-arrow">←</span>
-      <span className="economy-node strong">مكافأة</span>
-      <span className="economy-arrow">←</span>
-      <span className="economy-node">قرار</span>
-      <span className="loop-note">راقب الحلقة بعد 5 أدوار</span>
-    </div>
-  );
+  const id: LabId = tone === "water" ? "water" : tone === "learn" ? "routing" : tone === "challenge" ? "traffic" : "economy";
+  return <LabDiagram id={id} settings={initialSettings()} />;
 }
-
 export function MissionHub() {
   return (
     <Shell>
@@ -196,14 +157,9 @@ export function KidHomeV2() {
     ) ||
     "water";
   const focus = labs[nextId];
-  const lastTrial = unfinished?.draft.trials.at(-1);
-  const focusTrial =
-    unfinished &&
-    lastTrial &&
-    settingsKey(nextId, unfinished.draft.settings) ===
-      settingsKey(nextId, lastTrial.settings)
-      ? lastTrial
-      : undefined;
+  const focusTrial = unfinished && [...unfinished.draft.trials].reverse().find(t =>
+    settingsKey(nextId, unfinished.draft.settings) === settingsKey(nextId, t.settings),
+  );
 
   return (
     <Shell>

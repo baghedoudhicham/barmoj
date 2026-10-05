@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Shell } from "./components";
@@ -12,7 +12,7 @@ import {
   simulate,
 } from "./lab-model";
 import type { LabId, Settings, Trial } from "./lab-model";
-import { emptyDraft, readDraft, removeDraft, saveDraft } from "./lab-storage";
+import { emptyDraft, MAX_TRIALS, readDraft, removeDraft, saveDraft } from "./lab-storage";
 import type { LabDraft } from "./lab-storage";
 
 function Field({
@@ -290,6 +290,8 @@ export function LabDiagram({
                   : "var(--challenge)"
             }
           />
+          <text x="250" y="21" fontSize="11" textAnchor="middle">شمال / جنوب</text>
+          <text x="94" y="219" fontSize="11" textAnchor="middle">شرق / غرب</text>
         </svg>
         <p>{trial ? trial.outcome : "طلبك لا يصبح مخرجًا حتى تختبره"}</p>
       </div>
@@ -325,7 +327,7 @@ export function LabDiagram({
               <b>{v}</b>
               <span
                 style={{
-                  height: `${Math.max(6, (v / Math.max(...trial.values!)) * 80)}px`,
+                  height: `${Math.max(6, (v / Math.max(1, ...trial.values!)) * 80)}px`,
                 }}
               />
               <small>جولة {i + 1}</small>
@@ -341,7 +343,7 @@ export function TrialNotebook({ id, trials }: { id: LabId; trials: Trial[] }) {
   return (
     <div className="trial-notebook">
       {trials.map((t, i) => (
-        <article key={t.id}>
+        <article key={t.id} className="trial-entry">
           <header>
             <b>تجربة {i + 1}</b>
             <span className={t.safe ? "trial-safe" : "trial-failure"}>
@@ -381,6 +383,8 @@ function MissionLab({ id }: { id: LabId }) {
   );
   const [storageError, setStorageError] = useState(false);
   const [saveError, setSaveError] = useState(false);
+  const outcome = useRef<HTMLDivElement>(null);
+  const focusOutcome = useRef(false);
   const navigate = useNavigate();
   const s = draft.settings;
   useEffect(() => {
@@ -406,10 +410,12 @@ function MissionLab({ id }: { id: LabId }) {
     }));
   }
   const latest = draft.trials.at(-1);
-  const currentTrial =
-    latest && settingsKey(id, latest.settings) === settingsKey(id, s)
-      ? latest
-      : undefined;
+  useEffect(() => {
+    if (!focusOutcome.current) return;
+    focusOutcome.current = false;
+    outcome.current?.focus();
+  }, [latest?.id]);
+  const currentTrial = [...draft.trials].reverse().find(t => settingsKey(id, t.settings) === settingsKey(id, s));
   const readyToRun =
     draft.observation.trim().length >= 8 &&
     draft.prediction &&
@@ -432,7 +438,8 @@ function MissionLab({ id }: { id: LabId }) {
       reason: draft.reason.trim(),
       ...simulate(id, s),
     };
-    update({ trials: [...draft.trials, trial], prediction: "", reason: "" });
+    focusOutcome.current = true;
+    update({ trials: [...draft.trials, trial].slice(-MAX_TRIALS), prediction: "", reason: "" });
   }
   function finish() {
     if (!complete) return;
@@ -642,7 +649,7 @@ function MissionLab({ id }: { id: LabId }) {
                 onChange={(v) => update({ reason: v })}
                 placeholder="لأن القاعدة..."
               />
-              <p className="run-hint">
+              <p className="run-hint" id="run-hint">
                 {draft.observation.trim().length < 8
                   ? "ابدأ بتحديد المعلومة أو القيد أعلاه (8 أحرف على الأقل)."
                   : !draft.prediction
@@ -654,6 +661,7 @@ function MissionLab({ id }: { id: LabId }) {
               <button
                 className="button secondary full"
                 disabled={!readyToRun}
+                aria-describedby="run-hint"
                 onClick={run}
               >
                 شغّل الاختبار ←
@@ -662,7 +670,11 @@ function MissionLab({ id }: { id: LabId }) {
             {currentTrial && (
               <div
                 className={`current-outcome ${currentTrial.safe ? "safe" : "failed"}`}
+                ref={outcome}
+                tabIndex={-1}
+                key={currentTrial.id}
                 role="status"
+                aria-atomic="true"
               >
                 <b>{currentTrial.outcome}</b>
                 <p>{currentTrial.detail}</p>
@@ -676,6 +688,7 @@ function MissionLab({ id }: { id: LabId }) {
           </section>
         </div>
         <section className="notebook-history">
+          <p className="local-note">يحتفظ هذا المتصفح بآخر 100 تجربة لكل مختبر.</p>
           <div className="notebook-section-head">
             <div>
               <p className="eyebrow">03 / اختبر وحسّن</p>

@@ -214,38 +214,46 @@ const missions: Mission[] = [
   },
 ];
 
+const pageCopy = {
+  ar: { eyebrow: "المسار الأول · فكّر كنظام", title: "منهج كامل، بخطوات يمكن نقلها.", intro: "اثنتا عشرة مهمة لتدريب الملاحظة والتخطيط والتنبؤ والاختبار والتفسير. التجربة قصيرة ويمكن التوقف والعودة إليها في أي وقت.", count: "مهمة في المسار", choose: "اختر لغة المنهج", scope: "المنهج بثلاث لغات؛ المختبرات التفاعلية ولوحة الأهل بالعربية حاليًا.", release: "أربع مهمات لها مختبرات تفاعلية الآن. بقية المهمات موضحة هنا كمنهج وخطوات عائلية، وستُبنى وتُختبر على مراحل.", guide: "دليل الأسرة", guideTitle: "ساعده على التفكير، لا على تخمين الإجابة التي تريدها.", question: "جرّب سؤالًا مفتوحًا", prompts: "ماذا توقعت؟ ما الذي غيّر رأيك؟ ما الاختبار التالي؟", guidance: "لا يوجد مؤقت أو ترتيب أو عقوبة على التوقف. يمكن للطفل أن يرسم أو يشير أو يشرح شفهيًا بدل الكتابة. الأدلة تصف ما ظهر في نشاط محدد؛ لا تقيس الذكاء ولا تشخّص الانتباه.", privacy: "كيف تُحفظ بيانات التجربة؟" },
+  en: { eyebrow: "Track one · Think in systems", title: "A complete path. Thinking you can transfer.", intro: "Twelve missions to practice observation, planning, prediction, testing and explanation. Pause and return whenever you need.", count: "missions in this track", choose: "Choose the curriculum language", scope: "The curriculum has three languages. Interactive labs and the parent dashboard are currently in Arabic.", release: "Four missions have interactive labs today. The other missions are curriculum plans and family activities; their labs will be developed and tested in stages.", guide: "Family guide", guideTitle: "Help them think, rather than guess the answer you want.", question: "Try an open question", prompts: "What did you predict? What changed your mind? What would you test next?", guidance: "There is no timer, ranking or penalty for stopping. Children can draw, point or explain aloud instead of writing. Evidence describes one activity; it does not measure intelligence or diagnose attention.", privacy: "How is pilot data stored? (Arabic)" },
+  fr: { eyebrow: "Premier parcours · Penser en systèmes", title: "Un parcours complet. Des idées à réutiliser.", intro: "Douze missions pour exercer l’observation, la planification, la prédiction, l’expérimentation et l’explication. Faites une pause et revenez quand vous le souhaitez.", count: "missions dans ce parcours", choose: "Choisissez la langue du programme", scope: "Le programme existe en trois langues. Les ateliers interactifs et le tableau des parents sont actuellement en arabe.", release: "Quatre missions proposent un atelier interactif. Les autres sont des plans pédagogiques et des activités en famille ; leurs ateliers seront développés et testés par étapes.", guide: "Guide pour les familles", guideTitle: "Aidez votre enfant à réfléchir, plutôt qu’à deviner la réponse attendue.", question: "Posez une question ouverte", prompts: "Qu’avais-tu prévu ? Qu’est-ce qui t’a fait changer d’avis ? Que testerais-tu ensuite ?", guidance: "Il n’y a ni chronomètre, ni classement, ni pénalité pour une pause. L’enfant peut dessiner, montrer ou expliquer à l’oral plutôt qu’écrire. Les traces décrivent une activité ; elles ne mesurent pas l’intelligence et ne diagnostiquent pas l’attention.", privacy: "Comment les données sont-elles conservées ? (arabe)" },
+} satisfies Record<Language, Record<string, string>>;
+
 export function CurriculumPage() {
   const [params, setParams] = useSearchParams();
   const requested = params.get("lang");
   const language: Language = requested === "en" || requested === "fr" ? requested : "ar";
+  const c = pageCopy[language];
   return (
-    <Shell>
+    <Shell language={language}>
       <main className="wrap curriculum-page">
         <header className="curriculum-hero">
           <div>
-            <p className="eyebrow">المسار الأول · فكّر كنظام</p>
-            <h1>منهج كامل، بخطوات يمكن نقلها.</h1>
-            <p>اثنتا عشرة مهمة لتدريب الملاحظة والتخطيط والتنبؤ والاختبار والتفسير. التجربة قصيرة ويمكن التوقف والعودة إليها في أي وقت.</p>
+            <p className="eyebrow">{c.eyebrow}</p>
+            <h1>{c.title}</h1>
+            <p>{c.intro}</p>
           </div>
           <div className="curriculum-count">
             <BookOpenCheck size={28} aria-hidden="true" />
             <b>12</b>
-            <span>مهمة في المسار</span>
+            <span>{c.count}</span>
           </div>
         </header>
 
-        <section className="curriculum-language" aria-label="لغة محتوى المنهج">
+        <section className="curriculum-language" aria-label={c.choose}>
           <div>
-            <b>اختر لغة التحديات</b>
-            <span>تتغير لغة محتوى المهمات؛ تبقى واجهة التجربة الحالية بالعربية.</span>
+            <b>{c.choose}</b>
+            <span>{c.scope}</span>
           </div>
-          <div className="language-tabs" role="group" aria-label="لغة المنهج">
+          <div className="language-tabs" role="group" aria-label={c.choose}>
             {(Object.keys(languageNames) as Language[]).map((item) => (
               <button
                 type="button"
                 className={language === item ? "selected" : ""}
                 aria-pressed={language === item}
                 key={item}
+                lang={item}
                 onClick={() => setParams({lang:item}, {replace:true})}
               >
                 {languageNames[item]}
@@ -254,7 +262,7 @@ export function CurriculumPage() {
           </div>
         </section>
 
-        <p className="curriculum-release-note">أربع مهمات لها مختبرات تفاعلية الآن. بقية المهمات موضحة هنا كمنهج وخطوات عائلية، وستُبنى وتُختبر على مراحل.</p>
+        <p className="curriculum-release-note">{c.release}</p>
 
         <section
           className="curriculum-grid"
@@ -290,18 +298,18 @@ export function CurriculumPage() {
 
         <section className="family-guide">
           <div>
-            <p className="eyebrow">دليل الأسرة</p>
-            <h2>ساعده على التفكير، لا على تخمين الإجابة التي تريدها.</h2>
+            <p className="eyebrow">{c.guide}</p>
+            <h2>{c.guideTitle}</h2>
           </div>
           <div className="family-guide-prompt">
             <CircleHelp size={23} aria-hidden="true" />
             <div>
-              <b>جرّب سؤالًا مفتوحًا</b>
-              <p>ماذا توقعت؟ ما الذي غيّر رأيك؟ ما الاختبار التالي؟</p>
+              <b>{c.question}</b>
+              <p>{c.prompts}</p>
             </div>
           </div>
-          <p>لا يوجد مؤقت أو ترتيب أو عقوبة على التوقف. يمكن للطفل أن يرسم أو يشير أو يشرح شفهيًا بدل الكتابة. الأدلة تصف ما ظهر في نشاط محدد؛ لا تقيس الذكاء ولا تشخّص الانتباه.</p>
-          <Link to="/privacy">كيف تُحفظ بيانات التجربة؟</Link>
+          <p>{c.guidance}</p>
+          <Link to="/privacy">{c.privacy}</Link>
           <details
             className="family-values"
             lang={language}

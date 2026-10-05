@@ -1,6 +1,12 @@
 import type { LabId, Settings, Trial } from "./lab-model";
 import { initialSettings, labIds } from "./lab-model";
 
+export const MAX_TRIALS = 100;
+export const MAX_DRAFT_BYTES = 262_144;
+export function boundedText(value: unknown, limit = 500): value is string {
+  return typeof value === "string" && value.length <= limit;
+}
+
 export type LabDraft = {
   version: 1;
   updatedAt: string;
@@ -48,17 +54,20 @@ export function validTrial(t: unknown): t is Trial {
   const v = t as Trial;
   return (
     validSettings(v.settings) &&
-    ["id", "at", "prediction", "reason", "outcome", "detail"].every(
-      (k) => typeof v[k as keyof Trial] === "string",
-    ) &&
+    boundedText(v.id, 100) && boundedText(v.at, 100) &&
+    Number.isFinite(Date.parse(v.at)) &&
+    boundedText(v.prediction) && boundedText(v.reason) &&
+    boundedText(v.outcome) && boundedText(v.detail, 1000) &&
     typeof v.safe === "boolean" &&
     (v.values === undefined ||
-      (Array.isArray(v.values) && v.values.every(Number.isFinite)))
+      (Array.isArray(v.values) && v.values.length <= 5 && v.values.every(n => Number.isFinite(n) && n >= 0 && n <= 100)))
   );
 }
 export function readDraft(id: LabId): LabDraft | null {
   try {
-    const d = JSON.parse(localStorage.getItem(`barmoj-lab-v1-${id}`) || "null");
+    const raw = localStorage.getItem(`barmoj-lab-v1-${id}`) || "null";
+    if (raw.length > MAX_DRAFT_BYTES) return null;
+    const d = JSON.parse(raw);
     if (
       !d ||
       d.version !== 1 ||
@@ -69,9 +78,10 @@ export function readDraft(id: LabId): LabDraft | null {
         "prediction",
         "reason",
         "explanation",
-      ].every((k) => typeof d[k] === "string") ||
+      ].every((k) => boundedText(d[k])) ||
       !Number.isFinite(Date.parse(d.updatedAt)) ||
       !Array.isArray(d.trials) ||
+      d.trials.length > MAX_TRIALS ||
       !d.trials.every(validTrial)
     )
       return null;

@@ -1,0 +1,93 @@
+[
+  {
+    "client": 305,
+    "dir": "rtl",
+    "h1": "لكل طفل طريقته.ولكل فكرة مساحة.",
+    "path": "/",
+    "scroll": 305
+  },
+  {
+    "client": 305,
+    "dir": "rtl",
+    "h1": "بداية بسيطة، وبيانات أقل",
+    "path": "/onboarding",
+    "scroll": 305
+  },
+  {
+    "client": 305,
+    "dir": "rtl",
+    "h1": "السلام باحث تجريبي",
+    "path": "/kid",
+    "scroll": 305
+  },
+  {
+    "client": 305,
+    "dir": "rtl",
+    "h1": "نفس طريقة التفكير.أنظمة مختلفة.",
+    "path": "/missions",
+    "scroll": 305
+  },
+  {
+    "client": 305,
+    "dir": "rtl",
+    "h1": "كيف يفكّر باحث تجريبي؟",
+    "path": "/parent",
+    "scroll": 305
+  },
+  {
+    "client": 305,
+    "dir": "rtl",
+    "h1": "خزان لا يفيض",
+    "path": "/mission/water",
+    "scroll": 305
+  },
+  {
+    "client": 305,
+    "dir": "rtl",
+    "h1": "رتّب التوصيلات",
+    "path": "/mission/routing",
+    "scroll": 305
+  },
+  {
+    "client": 305,
+    "dir": "rtl",
+    "h1": "تقاطع آمن",
+    "path": "/mission/traffic",
+    "scroll": 305
+  },
+  {
+    "client": 305,
+    "dir": "rtl",
+    "h1": "لعبة لا تنكسر",
+    "path": "/mission/economy",
+    "scroll": 305
+  },
+  {
+    "client": 305,
+    "dir": "rtl",
+    "h1": "منهج كامل، بخطوات يمكن نقلها.",
+    "path": "/curriculum?lang=ar",
+    "scroll": 305
+  },
+  {
+    "client": 305,
+    "dir": "ltr",
+    "h1": "A complete path. Thinking you can transfer.",
+    "path": "/curriculum?lang=en",
+    "scroll": 305
+  },
+  {
+    "client": 305,
+    "dir": "ltr",
+    "h1": "Un parcours complet. Des idées à réutiliser.",
+    "path": "/curriculum?lang=fr",
+    "scroll": 305
+  },
+  {
+    "client": 305,
+    "dir": "rtl",
+    "h1": "الخصوصية في تجربة بِرْكار",
+    "path": "/privacy",
+    "scroll": 305
+  }
+]

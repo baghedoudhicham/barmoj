@@ -1,0 +1,68 @@
+/* Shared surface and motion rules keep the working pages in the BRKAR family. */
+.route-loading, .route-recovery { min-height: 65vh; padding-block: 80px; }
+.route-loading { display: grid; place-items: center; color: var(--deep); }
+.route-recovery { display: flex; flex-direction: column; align-items: start; gap: 20px; }
+.route-recovery h1 { line-height: 1.5; }
+.route-recovery p { line-height: 2; }
+.page-content h1:focus, .page-content section:focus, .page-content:focus { outline: none; }
+[id] { scroll-margin-top: 90px; }
+.desktop-nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 7px; }
+.workspace-switch, .parent-actions a { min-height: 44px; border-width: 1px; border-radius: 5px; }
+.workspace-v2-head h1, .parent-v2-head h1 { font-size: clamp(2rem, 4.2vw, 3.4rem); overflow-wrap: anywhere; }
+.focus-board { border-width: 1px; border-radius: 9px; box-shadow: 5px 5px 0 #dfe8dd; }
+.focus-system { background: #e0f1ec; border-right-width: 1px; }
+.focus-annotation { border-width: 1px; border-radius: 4px; }
+.parent-v2-head { border-bottom-width: 1px; }
+.story-main, .next-objective { border-width: 1px; border-radius: 9px; }
+.story-main { background: #e5f4e6; }
+.atlas-card { min-height: 0; border-width: 1px; border-radius: 9px; box-shadow: 3px 3px 0 #dfe8dd; }
+.atlas-card.learn, .atlas-card.challenge, .atlas-card.water, .atlas-card.explore { background: #fff; color: var(--ink); }
+.atlas-meta, .atlas-visual { border-bottom-width: 1px; }
+.atlas-visual { min-height: 240px; background: #e3f3db; }
+.atlas-card.challenge .atlas-visual { background: #f7dde3; }
+.atlas-card.water .atlas-visual { background: #e0f1ec; }
+.atlas-card.explore .atlas-visual { background: #faf0cd; }
+.atlas-visual > div { width: min(100%, 340px); }
+.atlas-visual svg { display: block; width: 100%; max-height: 180px; }
+.atlas-visual p { text-align: center; font-size: .75rem; line-height: 1.8; }
+.atlas-copy h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); line-height: 1.6; }
+.curriculum-grid[dir="ltr"] .curriculum-lab-link svg { transform: rotate(180deg); }
+.evidence-matrix, .evidence-rail-v2 { border-width: 1px; border-radius: 7px; overflow: hidden; }
+.evidence-matrix > div.seen, .evidence-rail-v2 > div.active { background: #d8f5df; }
+.evidence-rail-v2 small, .path-stop small, .evidence-matrix p { color: #55594f; }
+.path-lock { color: #606459; }
+.track-path, .path-stop, .parent-lab-history, .history-list, .history-list article { border-width: 1px; }
+.path-stop.current { background: #faf0cd; }
+.family-controls { border-width: 1px; border-radius: 9px; }
+.history-proof summary { min-height: 44px; padding-block: 8px; }
+.notebook-field textarea:focus-visible { outline: 3px solid var(--deep); outline-offset: 3px; box-shadow: none; }
+.prediction-panel textarea:focus-visible, .focus-copy .button:focus-visible { outline-color: var(--explore); }
+.brand-lab:hover { transform: none; }
+.button:disabled:hover { transform: none; }
+.button:disabled { cursor: not-allowed; }
+@media (max-width: 640px) {
+  .workspace-v2-head h1, .parent-v2-head h1 { font-size: clamp(1.9rem, 8vw, 2.5rem); }
+  .workspace-v2-head, .parent-v2-head { gap: 20px; }
+  .focus-system { border-top-width: 1px; }
+  .evidence-matrix > div { grid-template-columns: 20px 62px minmax(0, 1fr); }
+  .family-controls, .story-main, .next-objective { padding: 20px; }
+  .atlas-visual { padding: 18px; }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .brand-lab { transition: transform 160ms ease; }
+  .brand-lab:hover { transform: translateY(-2px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .page-content { animation: page-arrive 180ms ease-out; }
+  .mobile-nav { animation: panel-arrive 140ms ease-out; }
+  .current-outcome { animation: panel-arrive 180ms ease-out; }
+  .trial-entry { animation: panel-arrive 180ms ease-out; }
+  .lab-options button, .workspace-switch { transition: background-color 140ms ease, box-shadow 140ms ease; }
+  .lab-options button:active { transform: translateY(1px); }
+  @keyframes page-arrive { from { opacity: .6; } to { opacity: 1; } }
+  @keyframes panel-arrive { from { opacity: .6; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .button:hover, .brand-lab:hover { transform: none; }
+}
