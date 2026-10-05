@@ -2,6 +2,8 @@
 
 Working plan, 5 October 2026. The founder selected Arabic-speaking Muslim MENA families as the first audience. Recruit a small cross-market cohort through reachable adult communities, rather than launching paid campaigns across the entire region. Arabic leads; English and French support multilingual households. No ads, outreach or expenditure have been initiated by this plan.
 
+Execution has started with the [task handoff](EXECUTION-HANDOFF.md), [trilingual invitation, moderator guide and four demo scripts](launch/PILOT-KIT.md), and [blank private-session tracker template](launch/pilot-session-tracker-template.csv). Public invitations still need operator/support facts. The first cohort is moderated usability testing on one family device per session; it does not open the later authenticated remote-family pilot. Review the first six sessions before expanding to ten.
+
 ## What we can offer today
 
 An adult-supervised, free family pilot with four interactive Arabic labs and a twelve-mission curriculum in Arabic, English and French. Answers stay in the same browser. There is no registration, email capture, cloud sync, billing or automated assessment. The remaining eight interactive labs and English/French interactive interfaces are future work.

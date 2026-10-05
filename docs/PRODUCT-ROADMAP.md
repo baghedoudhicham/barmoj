@@ -3,6 +3,8 @@
 **Decision status:** recommended sequence, October 2026
 **Product hypothesis:** BRKAR helps children notice, model, test and explain systems, then transfer that way of thinking to problems they care about. It supports varied ways of learning without ranking children.
 
+For the next bounded tasks, use [Execution handoff](EXECUTION-HANDOFF.md) and the prepared [pilot kit](launch/PILOT-KIT.md). The first MENA cohort is moderated usability testing; the remote account-based phase below remains gated on its own data/access design.
+
 ## What to build first
 
 The current app is an Arabic-first local-storage prototype with four interactive labs. Use those as a small, guided pilot; do not make the first release a large content platform or a social feed.
@@ -65,8 +67,8 @@ Keep AI support optional, explain when it is being used, and evaluate whether it
 ## Language sequence
 
 1. Keep Modern Standard Arabic as the default written experience and preserve full RTL behavior.
-2. Add English through a real locale layer: shared navigation, onboarding, child labs, parent evidence, accessibility text and formatting all switch together.
-3. French is feasible for the curriculum content at low additional content cost once the source is stable. A French-ready product interface still needs translation review, a language switch, LTR layout checks, text expansion, number/date handling and a full screen QA pass; it is not just a quick extra field.
+2. Landing and curriculum framing/content now support English and French with LTR. Next, extend a real locale layer across onboarding, child labs, parent evidence, accessibility text and formatting so the entire journey switches together.
+3. Full French interactive support still needs translation review, text expansion, number/date handling, saved-evidence language behavior and a full screen QA pass; the trilingual curriculum is not a claim that this entire interface work is complete.
 4. Test whether Moroccan families want Darija explanations or audio alongside MSA. Treat that as a separate, opt-in voice layer rather than mixing dialect inconsistently into written lesson text.
 
 Do not infer a preferred language from a child’s name or location. Let the parent set the default and let the child ask to switch.

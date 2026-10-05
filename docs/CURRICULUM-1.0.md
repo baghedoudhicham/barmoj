@@ -38,7 +38,7 @@ The screen activity stays focused and finite. The existing product target is abo
 
 ## Twelve-mission map
 
-Each mission includes a child-facing challenge and a transfer question in all three languages. Arabic is written in Modern Standard Arabic for the first pass. English and French are full content options in this curriculum plan; the current app interface remains Arabic-only until its text and direction are moved into a localization system.
+Each mission includes a child-facing challenge and a transfer question in all three languages. Arabic is written in Modern Standard Arabic for the first pass. The deployed landing page and curriculum frame/content now support Arabic, English and French. Interactive labs, onboarding, privacy and parent evidence remain Arabic; full journey localization is separate implementation work.
 
 ### 01 — راقب قبل أن تحل | Observe before solving | Observe avant de résoudre
 
