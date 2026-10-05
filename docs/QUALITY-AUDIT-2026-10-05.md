@@ -21,6 +21,7 @@ Baseline screenshots were captured from the current live product before editing.
 - [Parent baseline](qa/2026-10-05/before-parent-mobile.jpg), [final desktop](qa/2026-10-05/after-parent-desktop.jpg), [tablet](qa/2026-10-05/after-parent-tablet.jpg), [expanded mobile evidence](qa/2026-10-05/after-parent-evidence-mobile.jpg): evidence remains inspectable; oversized headings and heavy surfaces refined.
 - [Catalogue desktop](qa/2026-10-05/after-catalogue-desktop.jpg) and [diagram details](qa/2026-10-05/after-catalogue-diagrams-desktop.jpg): shared water, routing, traffic and economy diagrams replace approximate decorative models. Traffic directions are labelled. Small white copy on bright red was replaced with dark copy on pale/white surfaces.
 - [French curriculum mobile](qa/2026-10-05/after-curriculum-french-mobile.jpg): page framing, navigation, guide and lessons follow the chosen language and direction. The Arabic-only interactive availability is explicit.
+- [English homepage mobile](qa/2026-10-05/after-home-english-mobile.jpg) and [French homepage mobile](qa/2026-10-05/after-home-french-mobile.jpg): heading wrapping, reading rhythm and full-width calls to action were visually checked at 390px.
 
 ## Verification
 
@@ -54,3 +55,13 @@ Before recruiting a public cohort, add operator identity, a real adult support c
 Cloud guardian authentication, enforced authorization, private synchronization and billing are separate future releases. Eight curriculum activities are family plans awaiting interactive implementation. No current Figma source was available for direct visual comparison. Cross-browser/device, screen-reader and reduced-motion checks remain part of the pilot release checklist.
 
 The [GTM launch plan](GTM-LAUNCH-PLAN.md) follows the founder's chosen Arabic-speaking MENA audience, with multilingual household support, a six-week pilot, channel experiments, later pricing research and sourced institutional candidates. It initiates no outreach or ad spend.
+
+## Verified production release
+
+Implementation commit: [8ad3548](https://github.com/baghedoudhicham/barmoj/commit/8ad35485560406d9dec40a9b3c78b027df28329f). Live: [BRKAR on Firebase](https://barmoj-266b8.web.app/).
+
+The [GitHub workflow](https://github.com/baghedoudhicham/barmoj/actions/runs/37375065274) completed successfully: application tests, Firestore deny-access emulator test, production build and Hosting deployment all passed. See [recorded step results](qa/2026-10-05/release-workflow-checks.json). A direct Hosting deployment also succeeded while the GitHub publishing runner was queued; both publish the same implementation. No additional manual Firebase deployment step is needed for this release. No database rules, authentication settings or billing settings were changed in this pass.
+
+Final [live HTTP checks](qa/2026-10-05/live-release-checks.json) verify home, kid, parent and French-curriculum routes return HTTP 200, the same HTML build, no-cache and the restrictive CSP. SHA-256 checks confirm the entry JavaScript, CSS and Arabic font bytes exactly match the tested files; all use immutable asset caching. This is a focused deployment check, not a penetration test or exhaustive cross-browser test.
+
+The live Arabic homepage and newly translated French curriculum were also rendered and inspected in the browser: [live homepage](qa/2026-10-05/live-home.jpg), [live French curriculum](qa/2026-10-05/live-curriculum-french.jpg). The public tab was left on the Arabic homepage; browser viewport overrides were reset. Production family data was not modified by the test walkthrough.

@@ -1,0 +1,53 @@
+{
+  "base": "https://barmoj-266b8.web.app",
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "sameBuild": true,
+      "cache": "no-cache",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self'"
+    },
+    {
+      "path": "/kid",
+      "status": 200,
+      "sameBuild": true,
+      "cache": "no-cache",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self'"
+    },
+    {
+      "path": "/parent",
+      "status": 200,
+      "sameBuild": true,
+      "cache": "no-cache",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self'"
+    },
+    {
+      "path": "/curriculum?lang=fr",
+      "status": 200,
+      "sameBuild": true,
+      "cache": "no-cache",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self'"
+    }
+  ],
+  "assets": [
+    {
+      "path": "/assets/index-DDeWXLiQ.js",
+      "status": 200,
+      "exact": true,
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/index-D6xNvrnK.css",
+      "status": 200,
+      "exact": true,
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/fonts/noto-kufi-arabic-arabic-v27.woff2",
+      "status": 200,
+      "exact": true,
+      "cache": "public, max-age=31536000, immutable"
+    }
+  ]
+}
