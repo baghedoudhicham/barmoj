@@ -15,7 +15,7 @@ Updated 5 October 2026. Start here when continuing with a lower-token model. Exe
 
 ## Scope and document order
 
-Use this handoff for execution order, [GTM plan](GTM-LAUNCH-PLAN.md) for launch hypotheses, [pilot boundary](PILOT-RELEASE-CHECKLIST.md) for actual availability, and [launch kit](launch/PILOT-KIT.md) for prepared materials. The curriculum and product roadmap guide later learning work. The backend architecture is a proposal with unresolved decisions, not authorization to choose immutable infrastructure locations.
+Use this handoff for execution order, [GTM plan](GTM-LAUNCH-PLAN.md) for launch hypotheses, [pilot boundary](PILOT-RELEASE-CHECKLIST.md) for actual availability, and [launch kit](launch/PILOT-KIT.md) for prepared materials. Current execution drafts also include a [one-page pilot brief](launch/PILOT-ONE-PAGER.md), [organic content pack](launch/SOCIAL-CONTENT-PACK.md), and [researched partner prospects with unsent notes](launch/PARTNER-PROSPECTS-2026-10-07.md). The curriculum and product roadmap guide later learning work. The backend architecture is a proposal with unresolved decisions, not authorization to choose immutable infrastructure locations.
 
 The first ten families are a moderated usability cohort. Start by observing six sessions; review barriers before scheduling the remaining four. Each session uses one family device/browser and an adult. This reconciles the roadmap's small observed round with the GTM's ten-family first cohort. It does not start the later authenticated remote-family pilot or collect children's records centrally. A voluntary return can be discussed with the adult without cloud tracking.
 
@@ -23,15 +23,16 @@ The first ten families are a moderated usability cohort. Start by observing six 
 
 | ID | Task | Status | Deliverable / acceptance |
 | --- | --- | --- | --- |
-| L00 | Prepare launch operations | Done | Parent invitation in three languages, moderator guide, four model-accurate demo scripts and a blank de-identified tracker in `docs/launch/`. No outreach or spending. |
+| L00 | Prepare launch operations | Done | Parent invitation in three languages, moderator guide, four model-accurate demo scripts, a one-page pilot brief, organic content drafts, researched partner prospects and a blank de-identified tracker in `docs/launch/`. No outreach or spending. |
 | L01 | Publish operator and adult support information | Needs founder facts | `/support` page, footer link and privacy notice with the supplied operator name, verified adult support contact, pilot limits and local deletion instructions. Arabic first; English/French support copy. No invented contact, registration form or backend. |
-| L02 | Produce four demonstrations | Scripts ready; recording remains | Record four captioned 9:16 exports from invented preview data. Use `docs/launch/REELS-SCRIPT-PACK.md` for the reviewed English, French and Arabic voice lines and exact model outputs. Review the finished footage and each caption file before posting. Scripts alone are not exported videos. |
+| L02 | Produce four demonstrations | Scripts/copy ready; recording remains | Record four captioned 9:16 exports from invented preview data. Use `docs/launch/REELS-SCRIPT-PACK.md` for the reviewed English, French and Arabic voice lines and exact model outputs. Review the finished footage and each caption file before posting. Scripts alone are not exported videos. |
 | L03 | Prepare the adult invitation package | Draft ready; needs L01 | Replace draft fields, include current URL and support contact, offer a supervised slot, explain local storage and stopping. Send only to destinations explicitly chosen by the founder. No automatic mass outreach. |
 | L04 | Complete educator/family and device review | Needs reviewers | Use the moderator checklist and record actionable barriers. Test a screen reader, reduced motion, actual Android/iPhone browsers and reading support. No clinical or efficacy conclusion. |
 | L05 | Recruit and observe first cohort | Needs L01/L04 and reachable communities | Ten adult-supervised pairs across at least two reachable MENA markets. Review after six; use private de-identified notes outside this repository. |
 | L06 | Fix observed barriers | After L05 | Small changes tied to concrete session evidence, with appropriate QA and a preview before release. |
-| L07 | Test organic parent content | After initial barriers addressed | Instagram/Facebook demonstrations and a small TikTok creative test using the GTM plan. Compare completed sessions and moderator time. Do not add child pixels. |
+| L07 | Test organic parent content | Drafts prepared; test gated | Caption drafts and a restrained four-week sequence are in `docs/launch/SOCIAL-CONTENT-PACK.md`. Publish/test only after L01, fluent-language review and the first usability barriers are addressed. Compare completed sessions and moderator time. Do not add child pixels. |
 | L08 | Decide whether to expand | After second-cohort review | Report exact counts and denominators. Assess optional return, parent understanding and support effort; then decide next curriculum, account or workshop investment. |
+| L09 | Qualify partner prospects | Research ready; founder selection needed | Three official organization prospects and tailored unsent notes are in `docs/launch/PARTNER-PROSPECTS-2026-10-07.md`. Confirm reachability and fit before any contact; do not imply endorsement or partnership. |
 
 ## L01 implementation brief
 
