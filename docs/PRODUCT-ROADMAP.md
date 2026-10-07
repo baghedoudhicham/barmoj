@@ -7,7 +7,7 @@ For the next bounded tasks, use [Execution handoff](EXECUTION-HANDOFF.md) and th
 
 ## What to build first
 
-The current app is an Arabic-first local-storage prototype with four interactive labs. Use those as a small, guided pilot; do not make the first release a large content platform or a social feed.
+The current app is an Arabic-first, local-storage pilot with four interactive labs in Arabic, English and French. Kid Home, onboarding, privacy and Parent Dashboard remain Arabic. Use the existing optional local nickname and learning flow for supervised trials; add no new profile fields, avatar uploads or community features until family feedback shows a clear need and their privacy and safety design is ready.
 
 ### Stage 0 — small, observed usability round
 
@@ -17,11 +17,13 @@ The current app is an Arabic-first local-storage prototype with four interactive
 - Do not collect recordings or child names for product analysis. Keep notes de-identified.
 - Fix confusing language, controls, reading load and broken assumptions before a broader trial.
 
-The prototype saves drafts and evidence in one browser only. This is suitable for a moderated demonstration on one device, not for remote family accounts or cross-device research.
+The prototype saves drafts and evidence in one browser only, without app-level encryption. This is suitable only for a moderated demonstration on a family device with an adult present, not for remote family accounts or cross-device research. Never enter credentials or secrets into child fields, local storage, public documentation, screenshots or demo data. Keep the Firebase deploy identity in the existing restricted GitHub Actions secret; do not print, download, or commit it. Use least privilege and rotate it if exposed.
 
 ### Stage 1 — four-lab learning pilot
 
-After the observed round, prepare the remote pilot’s parent-owned account and secure data storage, with explicit consent, age-appropriate privacy review, deletion controls and a clear retention window. Keep child profiles to a nickname, age band, language and chosen learning preferences. Do not collect voice, photos, precise location, contacts or behavioral advertising identifiers.
+After the observed rounds and family feedback, first decide whether remote accounts are needed at all. If there is a demonstrated need, design a parent-owned sign-in and secure data service with explicit guardian consent, least-privilege access, encryption in transit and at rest, deletion/export controls and a clear retention window before collecting anything. Keep any future child profile to the minimum fields needed for an agreed feature; do not collect voice, photos, precise location, contacts or behavioral advertising identifiers. Do not add avatar uploads by default.
+
+Do not launch a community feed or social layer as a visual extra. Reconsider one only if families and educators identify a concrete learning need and BRKAR can support guardian controls, moderation, abuse response, data minimization and deletion from the start.
 
 Once those controls are ready, test with roughly 20–30 families over four weeks, one core lab each week and an optional off-screen activity. Keep the core session short and let families choose when to do it. Treat the four labs as a first test of the learning loop, not as evidence for all 12 curriculum missions. Until then, keep testing moderated on one device because the current prototype saves evidence in one browser only.
 
@@ -67,8 +69,8 @@ Keep AI support optional, explain when it is being used, and evaluate whether it
 ## Language sequence
 
 1. Keep Modern Standard Arabic as the default written experience and preserve full RTL behavior.
-2. Landing and curriculum framing/content now support English and French with LTR. Next, extend a real locale layer across onboarding, child labs, parent evidence, accessibility text and formatting so the entire journey switches together.
-3. Full French interactive support still needs translation review, text expansion, number/date handling, saved-evidence language behavior and a full screen QA pass; the trilingual curriculum is not a claim that this entire interface work is complete.
+2. The landing page, curriculum, four interactive labs, lab catalogue and child result page now support Arabic, English and French. Kid Home, onboarding, privacy and Parent Dashboard remain Arabic; translate these surfaces when research shows the need and after review by fluent speakers.
+3. Verify saved-answer language, accessible names, number/date handling and full-screen RTL/LTR behavior on supported devices before claiming the entire journey is localized.
 4. Test whether Moroccan families want Darija explanations or audio alongside MSA. Treat that as a separate, opt-in voice layer rather than mixing dialect inconsistently into written lesson text.
 
 Do not infer a preferred language from a child’s name or location. Let the parent set the default and let the child ask to switch.

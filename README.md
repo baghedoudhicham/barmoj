@@ -29,11 +29,11 @@ The learning cycle is:
 
 The first track remains `فكّر كنظام` with 12 missions. Code and AI are execution tools, not the learning objective.
 
-The site includes the complete 12-mission curriculum in Arabic, English and French at /curriculum, plus a family-facing privacy and pilot-scope page at /privacy. The rest of the interface remains Arabic-first.
+The site includes the complete 12-mission curriculum in Arabic, English and French at /curriculum. The four Mission Labs, lab catalogue and child result screen also support Arabic, English and French with RTL/LTR direction. Kid Home, onboarding, privacy and the Parent Dashboard remain Arabic; this narrower scope is stated before families start.
 
 The family guide also offers an optional, non-scored values reflection in all three curriculum languages, connecting careful reasoning with truthfulness, responsibility, patience, consultation and care. The pilot contains no scripture quotations; direct Qur'an or hadith text requires source, translation and context review before it is added.
 
-Four missions have interactive labs today. The other eight are curriculum activities with child prompts and screen-free transfer questions; they are not represented as built software lessons.
+Four missions have interactive labs today, available in Arabic, English and French. The other eight are curriculum activities with child prompts and screen-free transfer questions; they are not represented as built software lessons.
 
 ## Firebase Hosting
 
@@ -101,6 +101,7 @@ See `docs/QA-2026-10.md` for the checks performed on this pass.
 - Onboarding asks only for an optional nickname and requires an adult to confirm they will supervise. This is a reminder, not identity or age verification.
 - Startup removes parent-name and exact-age fields from legacy local profiles and deletes old prototype event logs.
 - Profile, drafts and learning evidence stay in this browser's local storage. There is no account, cloud sync, analytics, advertising, payment, public sharing or child-facing AI.
+- The app does not store passwords or authentication credentials. Local browser storage is not an encrypted vault; use only a family-controlled device and a non-identifying nickname. Firebase deployment credentials belong in the repository's protected Actions secret, never in source, screenshots or public launch materials.
 - Anyone using the same browser profile can open the parent dashboard. Do not use a shared or public computer without the parent present; do not enter full names, school, address or contact details.
 - The Parent Dashboard can remove all locally stored pilot data for this site. Existing browser-storage keys keep their earlier internal prefix so pilot records survive the brand change.
 - Hosting still serves the site through Firebase. Its provider processes the technical requests needed to deliver pages; this product code does not send the child's profile or answers to an application backend.

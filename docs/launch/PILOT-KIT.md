@@ -10,7 +10,7 @@ Prepared 5 October 2026. This kit is ready for preparation and review. Invitatio
 
 في جلسة قصيرة بإشراف بالغ، سنجرّب مختبرًا واحدًا: خزان ماء، أو طريق توصيل، أو تقاطع، أو قاعدة لعبة. نبدأ بأطفال 9–12 عامًا مع دعم الأسرة، ونريد أن نفهم ما الذي يجعل التجربة واضحة وما الذي يحتاج إلى تحسين.
 
-لا توجد درجة ذكاء أو مقارنة بين الأطفال. يمكن لطفلكم أخذ استراحة أو إنهاء التجربة في أي وقت. المختبرات ولوحة الأهل بالعربية؛ المنهج والتعريف بالمنصة بالعربية والإنجليزية والفرنسية.
+لا توجد درجة ذكاء أو مقارنة بين الأطفال. يمكن لطفلكم أخذ استراحة أو إنهاء التجربة في أي وقت. المختبرات التفاعلية الأربعة متاحة بالعربية والإنجليزية والفرنسية؛ مساحة الطفل والبداية والخصوصية ولوحة الأهل بالعربية. والمنهج والتعريف بالمنصة متاحان باللغات الثلاث.
 
 تُحفظ الإجابات في المتصفح الذي تستخدمونه فقط، ويمكن لمن يستخدم ملف المتصفح نفسه الاطلاع عليها. لا يوجد حساب أو حفظ سحابي. لا نطلب اسم الطفل الكامل أو مدرسته أو عنوانه، ولن نسجّل الجلسة أو نستخدم إجاباته في الإعلان.
 
@@ -28,7 +28,7 @@ Join a free family trial of BRKAR: a space to ask, predict, test an idea and exp
 
 In a short, adult-supervised session, we will try one lab about water, deliveries, traffic or a game's rules. Our first usability group is children aged 9–12 with family support. We want to learn what is clear and what needs improvement.
 
-There are no intelligence scores or comparisons between children. Your child can pause or stop at any time. Interactive labs and parent evidence are currently in Arabic; the curriculum and platform introduction are available in Arabic, English and French.
+There are no intelligence scores or comparisons between children. Your child can pause or stop at any time. The four interactive labs, their catalogue and result page are available in Arabic, English and French. Kid Home, onboarding, privacy and the parent dashboard remain Arabic; the curriculum and platform introduction are also available in all three languages.
 
 Answers stay in the browser you use. Anyone using that browser profile can see them. There is no account or cloud backup. Please do not enter the child's full name, school or address. We will not record the session or use their answers in advertising.
 
@@ -46,7 +46,7 @@ Nous vous invitons à un essai gratuit de BRKAR en famille : un espace pour ques
 
 Pendant une courte séance accompagnée par un adulte, nous essaierons un atelier sur l’eau, les livraisons, la circulation ou les règles d’un jeu. Le premier groupe réunit des enfants de 9 à 12 ans avec le soutien de leur famille. Nous cherchons à comprendre ce qui est clair et ce qui doit être amélioré.
 
-Il n’y a ni score d’intelligence ni comparaison entre enfants. Votre enfant peut faire une pause ou arrêter à tout moment. Les ateliers interactifs et le tableau des parents sont actuellement en arabe ; le programme et la présentation existent en arabe, en anglais et en français.
+Il n’y a ni score d’intelligence ni comparaison entre enfants. Votre enfant peut faire une pause ou arrêter à tout moment. Les quatre ateliers interactifs, leur catalogue et la page de résultat sont disponibles en arabe, en anglais et en français. L’espace enfant, l’accueil, la confidentialité et le tableau des parents restent en arabe ; le programme et la présentation existent aussi dans les trois langues.
 
 Les réponses restent dans le navigateur utilisé. Toute personne utilisant le même profil de navigateur peut les consulter. Il n’y a ni compte ni sauvegarde dans le cloud. N’indiquez pas le nom complet, l’école ou l’adresse de l’enfant. Nous n’enregistrerons pas la séance et n’utiliserons pas ses réponses dans la publicité.
 
@@ -93,7 +93,7 @@ Final slate in each language:
 - English: **Try one lab together. A free, adult-supervised pilot.**
 - French: **Essayez un atelier ensemble. Un pilote gratuit, accompagné par un adulte.**
 
-Include the current Firebase URL and the true availability: **المختبرات بالعربية · المنهج بثلاث لغات** / **Labs in Arabic · curriculum in three languages** / **Ateliers en arabe · programme en trois langues**. Do not use brkar.com until ownership and configuration are confirmed. Produce translated captions only after checking reading/crop and meaning; English/French captions do not imply translated interactive labs.
+Include the current Firebase URL and the true availability: **أربعة مختبرات تفاعلية بثلاث لغات · بعض الصفحات بالعربية** / **Four interactive labs in three languages · some pages remain Arabic** / **Quatre ateliers interactifs en trois langues · certaines pages restent en arabe**. Do not use brkar.com until ownership and configuration are confirmed. Produce translated captions only after checking reading/crop and meaning; captions do not imply that every product surface is translated.
 
 ## Optional parent evidence carousel
 

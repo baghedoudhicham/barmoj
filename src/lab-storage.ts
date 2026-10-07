@@ -15,6 +15,8 @@ export type LabDraft = {
   prediction: string;
   reason: string;
   explanation: string;
+  observationLanguage?: "ar" | "en" | "fr";
+  explanationLanguage?: "ar" | "en" | "fr";
   trials: Trial[];
 };
 export function emptyDraft(): LabDraft {
@@ -58,6 +60,7 @@ export function validTrial(t: unknown): t is Trial {
     Number.isFinite(Date.parse(v.at)) &&
     boundedText(v.prediction) && boundedText(v.reason) &&
     boundedText(v.outcome) && boundedText(v.detail, 1000) &&
+    (v.language === undefined || ["ar", "en", "fr"].includes(v.language)) &&
     typeof v.safe === "boolean" &&
     (v.values === undefined ||
       (Array.isArray(v.values) && v.values.length <= 5 && v.values.every(n => Number.isFinite(n) && n >= 0 && n <= 100)))
@@ -79,13 +82,20 @@ export function readDraft(id: LabId): LabDraft | null {
         "reason",
         "explanation",
       ].every((k) => boundedText(d[k])) ||
+      !["observationLanguage", "explanationLanguage"].every(
+        (k) => d[k] === undefined || ["ar", "en", "fr"].includes(d[k]),
+      ) ||
       !Number.isFinite(Date.parse(d.updatedAt)) ||
       !Array.isArray(d.trials) ||
       d.trials.length > MAX_TRIALS ||
       !d.trials.every(validTrial)
     )
       return null;
-    return d;
+    return {
+      ...d,
+      ...(d.observation && !d.observationLanguage ? { observationLanguage: "ar" } : {}),
+      ...(d.explanation && !d.explanationLanguage ? { explanationLanguage: "ar" } : {}),
+    };
   } catch {
     return null;
   }

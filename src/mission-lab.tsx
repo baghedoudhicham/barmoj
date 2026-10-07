@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Shell } from "./components";
+import type { BrandLanguage } from "./brand";
 import { addEvidence, getEvidence, getProfile } from "./data";
 import {
   canComplete,
-  describeSettings,
-  labs,
   milestones,
   settingsKey,
   simulate,
@@ -14,22 +13,40 @@ import {
 import type { LabId, Settings, Trial } from "./lab-model";
 import { emptyDraft, MAX_TRIALS, readDraft, removeDraft, saveDraft } from "./lab-storage";
 import type { LabDraft } from "./lab-storage";
+import {
+  languageNames,
+  missionWords,
+  outcomeIndex,
+  outcomeLabel,
+  predictionMatches,
+  sharedCopy,
+  settingsDescription,
+  trialDetail,
+} from "./lab-copy";
+
+const direction = (language: BrandLanguage) => language === "ar" ? "rtl" : "ltr";
+const localizedPath = (path: string, language: BrandLanguage) => `${path}?lang=${language}`;
+const labsNumber: Record<LabId, string> = { water: "06", routing: "02", traffic: "05", economy: "08" };
 
 function Field({
   label,
   value,
   onChange,
   placeholder,
+  language = "ar",
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
+  language?: BrandLanguage;
 }) {
   return (
     <label className="notebook-field">
       <span>{label}</span>
       <textarea
+        lang={language}
+        dir="auto"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
@@ -93,12 +110,17 @@ export function LabDiagram({
   id,
   settings,
   trial,
+  language = "ar",
 }: {
   id: LabId;
   settings: Settings;
   trial?: Trial;
+  language?: BrandLanguage;
 }) {
   const s = settings;
+  const copy = sharedCopy[language];
+  const result = trial ? outcomeLabel(id, trial.outcome, language) : "";
+  const detail = trial ? trialDetail(id, trial, language) : "";
   if (id === "water") {
     const level =
       s.scenario === "normal" ? 45 : s.scenario === "limit" ? 80 : 96;
@@ -107,7 +129,7 @@ export function LabDiagram({
         <svg
           viewBox="0 0 360 220"
           role="img"
-          aria-label={`مستوى الماء ${level}%، ${trial ? trial.outcome : "المضخة لم تُختبر"}`}
+          aria-label={language === "ar" ? `مستوى الماء ${level}%، ${result || "المضخة لم تُختبر"}` : language === "fr" ? `Niveau d’eau ${level} %, ${result || "pompe non testée"}` : `Water level ${level}%, ${result || "pump not tested"}`}
         >
           <path
             d="M70 34V186H215V34"
@@ -146,7 +168,7 @@ export function LabDiagram({
             fill={
               !trial
                 ? "var(--soft)"
-                : trial.outcome === "المضخة متوقفة"
+              : outcomeIndex(id, trial.outcome) === 1
                   ? "var(--challenge)"
                   : "var(--learn)"
             }
@@ -165,13 +187,13 @@ export function LabDiagram({
         </svg>
         <div className="model-readings">
           <span>
-            الماء الحقيقي <b>{level}%</b>
+            {language === "ar" ? "الماء الحقيقي" : language === "fr" ? "Niveau réel" : "Real water"} <b>{level}%</b>
           </span>
           <span>
-            الحساس <b>{s.scenario === "failure" ? 60 : level}%</b>
+            {language === "ar" ? "الحساس" : language === "fr" ? "Capteur" : "Sensor"} <b>{s.scenario === "failure" ? 60 : level}%</b>
           </span>
         </div>
-        <p>{trial ? trial.outcome : "اختر القاعدة ثم اختبر المضخة"}</p>
+        <p>{trial ? result : language === "ar" ? "اختر القاعدة ثم اختبر المضخة" : language === "fr" ? "Choisis une règle, puis teste la pompe" : "Choose a rule, then test the pump"}</p>
       </div>
     );
   }
@@ -181,7 +203,7 @@ export function LabDiagram({
         <svg
           viewBox="0 0 360 210"
           role="img"
-          aria-label="شبكة الطرق: المركز إلى A، ثم B أو C. طريق C إلى B متاح"
+          aria-label={language === "ar" ? "شبكة الطرق: المركز إلى A، ثم B أو C. طريق C إلى B متاح" : language === "fr" ? "Réseau routier : du centre à A, puis à B ou C. La route de C à B est disponible." : "Road network: hub to A, then B or C. The road from C to B is available."}
         >
           <path
             d="M70 105L180 42L290 105L180 173L70 105M180 42V173"
@@ -196,7 +218,7 @@ export function LabDiagram({
             strokeDasharray={s.blocked ? "8 8" : undefined}
           />
           {[
-            ["مركز", 70, 105],
+            [language === "ar" ? "مركز" : language === "fr" ? "Centre" : "Hub", 70, 105],
             ["A", 180, 42],
             ["B", 290, 105],
             ["C", 180, 173],
@@ -223,14 +245,14 @@ export function LabDiagram({
           ))}
         </svg>
         <div className="route-output">
-          <span>المركز</span>
+          <span>{language === "ar" ? "المركز" : language === "fr" ? "Centre" : "Hub"}</span>
           {s.order.map((v) => (
             <span key={v}>
-              ← <bdi>{v}</bdi>
+              {language === "ar" ? "←" : "→"} <bdi>{v}</bdi>
             </span>
           ))}
         </div>
-        <p>{s.blocked ? "طريق A–B مغلق؛ طريق C–B متاح" : "الطرق مفتوحة"}</p>
+        <p>{language === "ar" ? s.blocked ? "طريق A–B مغلق؛ طريق C–B متاح" : "الطرق مفتوحة" : language === "fr" ? s.blocked ? "Route A–B fermée ; route C–B disponible" : "Routes ouvertes" : s.blocked ? "Road A–B closed; road C–B available" : "Roads are open"}</p>
       </div>
     );
   if (id === "traffic") {
@@ -241,7 +263,7 @@ export function LabDiagram({
         <svg
           viewBox="0 0 360 230"
           role="img"
-          aria-label={trial ? trial.detail : "الإشارات في انتظار الاختبار"}
+          aria-label={detail || (language === "ar" ? "الإشارات في انتظار الاختبار" : language === "fr" ? "Les feux attendent le test" : "Signals are waiting to be tested")}
         >
           <path d="M155 0H215V230H155ZM0 85H360V145H0Z" fill="var(--ink)" />
           <path
@@ -290,10 +312,10 @@ export function LabDiagram({
                   : "var(--challenge)"
             }
           />
-          <text x="250" y="21" fontSize="11" textAnchor="middle">شمال / جنوب</text>
-          <text x="94" y="219" fontSize="11" textAnchor="middle">شرق / غرب</text>
+          <text x="250" y="21" fontSize="11" textAnchor="middle">{copy.directions[0]}</text>
+          <text x="94" y="219" fontSize="11" textAnchor="middle">{copy.directions[1]}</text>
         </svg>
-        <p>{trial ? trial.outcome : "طلبك لا يصبح مخرجًا حتى تختبره"}</p>
+        <p>{trial ? result : language === "ar" ? "طلبك لا يصبح مخرجًا حتى تختبره" : language === "fr" ? "Ta demande n’est pas un résultat avant le test" : "A request is not an outcome until you test it"}</p>
       </div>
     );
   }
@@ -301,27 +323,27 @@ export function LabDiagram({
     <div className="resource-model">
       <div className="resource-loop">
         <span>
-          رصيد
+          {language === "ar" ? "رصيد" : language === "fr" ? "Solde" : "Total"}
           <br />
           <b>10</b>
         </span>
         <i>←</i>
         <span>
-          تكلفة
+          {language === "ar" ? "تكلفة" : language === "fr" ? "Coût" : "Cost"}
           <br />
           <b>−3</b>
         </span>
         <i>←</i>
         <span>
-          مكافأة
+          {language === "ar" ? "مكافأة" : language === "fr" ? "Récompense" : "Reward"}
           <br />
           <b>+{s.reward}</b>
         </span>
       </div>
-      <div className="resource-return">↶ الجولة التالية</div>
-      <p>الرصيد التالي = الرصيد الحالي − 3 + المكافأة</p>
+      <div className="resource-return">↶ {language === "ar" ? "الجولة التالية" : language === "fr" ? "Tour suivant" : "Next turn"}</div>
+      <p>{language === "ar" ? "الرصيد التالي = الرصيد الحالي − 3 + المكافأة" : language === "fr" ? "Solde suivant = solde actuel − 3 + récompense" : "Next total = current total − 3 + reward"}</p>
       {trial?.values && (
-        <div className="resource-bars" aria-label="أرصدة الجولات الخمس">
+        <div className="resource-bars" aria-label={language === "ar" ? "أرصدة الجولات الخمس" : language === "fr" ? "Soldes des cinq tours" : "Totals for the five turns"}>
           {trial.values.map((v, i) => (
             <div key={i}>
               <b>{v}</b>
@@ -330,7 +352,7 @@ export function LabDiagram({
                   height: `${Math.max(6, (v / Math.max(1, ...trial.values!)) * 80)}px`,
                 }}
               />
-              <small>جولة {i + 1}</small>
+              <small>{language === "ar" ? "جولة" : language === "fr" ? "Tour" : "Turn"} {i + 1}</small>
             </div>
           ))}
         </div>
@@ -339,36 +361,35 @@ export function LabDiagram({
   );
 }
 
-export function TrialNotebook({ id, trials }: { id: LabId; trials: Trial[] }) {
+export function TrialNotebook({ id, trials, language = "ar" }: { id: LabId; trials: Trial[]; language?: BrandLanguage }) {
+  const c = sharedCopy[language];
   return (
     <div className="trial-notebook">
       {trials.map((t, i) => (
-        <article key={t.id} className="trial-entry">
+        <article key={t.id} className="trial-entry" lang={language} dir={direction(language)}>
           <header>
-            <b>تجربة {i + 1}</b>
+            <b>{c.attempt} {i + 1}</b>
             <span className={t.safe ? "trial-safe" : "trial-failure"}>
-              {t.safe ? "الهدف تحقق" : "الهدف لم يتحقق"}
+              {t.safe ? c.goalMet : c.goalNotMet}
             </span>
           </header>
-          <p className="trial-settings">{describeSettings(id, t.settings)}</p>
+          <p className="trial-settings">{settingsDescription(id, t.settings, language)}</p>
           <dl>
             <div>
-              <dt>توقعت</dt>
-              <dd>{t.prediction}</dd>
+              <dt>{c.predicted}</dt>
+              <dd lang={language} dir={direction(language)}>{outcomeLabel(id, t.prediction, language)}</dd>
             </div>
             <div>
-              <dt>السبب</dt>
-              <dd>{t.reason}</dd>
+              <dt>{c.reason}</dt>
+              <dd lang={t.language || "ar"} dir={direction(t.language || "ar")}>{t.reason}</dd>
             </div>
             <div>
-              <dt>حدث</dt>
-              <dd>{t.detail}</dd>
+              <dt>{c.happened}</dt>
+              <dd lang={language} dir={direction(language)}>{trialDetail(id, t, language)}</dd>
             </div>
           </dl>
           <p className="prediction-compare">
-            {t.prediction === t.outcome
-              ? "وافق الاختبار توقعك."
-              : "اختلف الاختبار عن توقعك. هذه فرصة لمراجعة السبب."}
+            {predictionMatches(id, t.prediction, t.outcome) ? c.resultMatches : c.resultDiffers}
           </p>
         </article>
       ))}
@@ -377,7 +398,11 @@ export function TrialNotebook({ id, trials }: { id: LabId; trials: Trial[] }) {
 }
 
 function MissionLab({ id }: { id: LabId }) {
-  const lab = labs[id];
+  const [params, setParams] = useSearchParams();
+  const requestedLanguage = params.get("lang");
+  const language: BrandLanguage = requestedLanguage === "en" || requestedLanguage === "fr" ? requestedLanguage : "ar";
+  const c = sharedCopy[language];
+  const lab = missionWords[language][id];
   const [draft, setDraft] = useState<LabDraft>(
     () => readDraft(id) || emptyDraft(),
   );
@@ -436,6 +461,7 @@ function MissionLab({ id }: { id: LabId }) {
       settings: structuredClone(s),
       prediction: draft.prediction,
       reason: draft.reason.trim(),
+      language,
       ...simulate(id, s),
     };
     focusOutcome.current = true;
@@ -445,112 +471,119 @@ function MissionLab({ id }: { id: LabId }) {
     if (!complete) return;
     const saved = addEvidence({
       labId: id,
-      mission: lab.title,
+      mission: c.missionNames[id],
       items: ["يفهم", "يمثّل", "يتوقّع", "يختبر", "يفسّر"],
-      note: `سجّل ${draft.trials.length} تجارب، لاحظ الفشل ثم اختبر التحسين.`,
+      note: language === "ar"
+        ? `سجّل ${draft.trials.length} تجارب، ولاحظ الفشل ثم اختبر التحسين.`
+        : language === "fr"
+          ? `${draft.trials.length} essais enregistrés : un échec observé, puis une amélioration testée.`
+          : `${draft.trials.length} trials recorded: a failure was noticed, then an improvement was tested.`,
       observation: draft.observation.trim(),
       explanation: draft.explanation.trim(),
+      observationLanguage: draft.observationLanguage || language,
+      explanationLanguage: draft.explanationLanguage || language,
       trials: draft.trials,
+      language,
+      transfer: lab.transfer,
     });
     if (!saved) {
       setSaveError(true);
       return;
     }
     removeDraft(id);
-    navigate("/result");
+    navigate(localizedPath("/result", language));
   }
   return (
-    <Shell>
-      <main className={`wrap notebook-page lab-${id}`}>
-        <Link className="lab-back" to="/kid">
-          → العودة إلى مساحتي
-        </Link>
+    <Shell language={language}>
+      <main className={`wrap notebook-page lab-${id}`} lang={language} dir={direction(language)}>
+        <div className="lab-language-bar">
+          <Link className="lab-back" to={localizedPath("/missions", language)}>{c.back}</Link>
+          <div className="language-tabs" role="group" aria-label={c.chooseLanguage}>
+            {(Object.keys(languageNames) as BrandLanguage[]).map((item) => (
+              <button
+                type="button"
+                key={item}
+                lang={item}
+                className={language === item ? "selected" : ""}
+                aria-pressed={language === item}
+                onClick={() => setParams({ lang: item }, { replace: true })}
+              >
+                {languageNames[item]}
+              </button>
+            ))}
+          </div>
+        </div>
         <header className="notebook-heading">
           <div>
-            <p className="eyebrow">مختبر {lab.number} / فكّر كنظام</p>
+            <p className="eyebrow">{c.eyebrow.replace("{number}", labsNumber[id])}</p>
             <h1>{lab.title}</h1>
             <p>{lab.goal}</p>
           </div>
           <span className="lab-number" aria-hidden="true">
-            {lab.number}
+            {labsNumber[id]}
           </span>
         </header>
         <ol className="notebook-cycle">
-          <li>
-            <b>01</b> افهم القيد
-          </li>
-          <li>
-            <b>02</b> صمّم وتوقّع
-          </li>
-          <li>
-            <b>03</b> اختبر وحسّن
-          </li>
-          <li>
-            <b>04</b> اشرح بالدليل
-          </li>
+          {c.phases.map((phase, i) => <li key={phase}><b>{String(i + 1).padStart(2, "0")}</b> {phase}</li>)}
         </ol>
-        <p className="privacy-hint">
-          اكتب أفكارك عن المهمة فقط. لا تضف اسمك الكامل أو المدرسة أو العنوان
-          أو معلومات تواصل.
-        </p>
+        <p className="privacy-hint">{c.privacy}</p>
         {storageError && (
           <p role="alert" className="storage-alert">
-            تعذّر حفظ العمل في هذا المتصفح. أبقِ الصفحة مفتوحة حتى تنتهي.
+            {c.storageError}
           </p>
         )}
         <div className="notebook-workbench">
           <aside className="notebook-system">
             <div className="system-title">
-              <span>نموذج النظام</span>
+                <span>{c.system}</span>
               <b>
                 {currentTrial
-                  ? "آخر نتيجة لهذه الإعدادات"
-                  : "إعداد ينتظر الاختبار"}
+                  ? c.lastResult
+                  : c.waiting}
               </b>
             </div>
-            <LabDiagram id={id} settings={s} trial={currentTrial} />
+            <LabDiagram id={id} settings={s} trial={currentTrial} language={language} />
             <div className="system-coach">
-              <b>المُرسِل ◉</b>
+              <b>{c.coach}</b>
               <p>{lab.hint}</p>
-              <small>غيّر عاملًا واحدًا، ثم قارن تجربتين.</small>
+              <small>{c.changeOne}</small>
             </div>
           </aside>
-          <section className="notebook-controls" aria-label="بناء التجربة">
-            <p className="eyebrow">01 / افهم</p>
+          <section className="notebook-controls" aria-label={c.understand}>
+            <p className="eyebrow">{c.coachHint}</p>
             <Field
               label={lab.question}
+              language={draft.observationLanguage || language}
               value={draft.observation}
-              onChange={(v) => update({ observation: v })}
-              placeholder="أحتاج أن أعرف... لأن..."
+              onChange={(v) => update({ observation: v, observationLanguage: language })}
+              placeholder={c.cluePlaceholder}
             />
-            <h2>ابنِ القاعدة</h2>
+            <h2>{c.build}</h2>
             {id === "water" && (
               <>
                 <Options
-                  label="ماذا تفعل المضخة عند 80%؟"
+                  label={c.pumpAtLimit}
                   value={s.stopAtLimit ? "stop" : "continue"}
                   values={[
-                    { value: "stop", label: "تتوقف" },
-                    { value: "continue", label: "تستمر" },
+                    { value: "stop", label: c.stop },
+                    { value: "continue", label: c.continue },
                   ]}
                   onChange={(v) => configure({ stopAtLimit: v === "stop" })}
                 />
                 <Options
-                  label="حالة الاختبار"
+                  label={c.testState}
                   value={s.scenario}
                   values={[
-                    { value: "normal", label: "ماء 45%" },
-                    { value: "limit", label: "الحد 80%" },
-                    { value: "failure", label: "حساس معطّل" },
+                    { value: "normal", label: c.normalWater },
+                    { value: "limit", label: c.limitWater },
+                    { value: "failure", label: c.faultySensor },
                   ]}
                   onChange={(v) => configure({ scenario: v })}
                 />
                 <Toggle
                   checked={s.safeguard}
                   onChange={(v) => configure({ safeguard: v })}
-                >
-                  حساس احتياطي: إذا اختلفت القراءتان، أوقف المضخة.
-                </Toggle>
+                >{c.backupSensor}: {c.backupHelp}</Toggle>
               </>
             )}
             {id === "routing" && (
@@ -561,17 +594,17 @@ function MissionLab({ id }: { id: LabId }) {
                       <span>
                         <bdi>{stop}</bdi> ·{" "}
                         {stop === "A"
-                          ? "صيدلية / الدواء أولًا"
+                          ? c.destination[0]
                           : stop === "B"
-                            ? "مكتبة"
-                            : "منزل"}
+                            ? c.destination[1]
+                            : c.destination[2]}
                       </span>
                       <div>
                         {([-1, 1] as const).map((dir) => (
                           <button
                             key={dir}
                             disabled={i + dir < 0 || i + dir > 2}
-                            aria-label={`${dir === -1 ? "تقديم" : "تأخير"} ${stop}`}
+                            aria-label={`${dir === -1 ? c.moveEarlier : c.moveLater} ${stop}`}
                             onClick={() => {
                               const order = [...s.order];
                               [order[i], order[i + dir]] = [
@@ -591,34 +624,30 @@ function MissionLab({ id }: { id: LabId }) {
                 <Toggle
                   checked={s.blocked}
                   onChange={(v) => configure({ blocked: v })}
-                >
-                  أغلق طريق A–B. الطريق البديل يمر عبر C.
-                </Toggle>
+                >{c.blockRoad}</Toggle>
               </>
             )}
             {id === "traffic" && (
               <>
                 <Options
-                  label="طلب المرور"
+                  label={c.trafficRequest}
                   value={s.mode}
                   values={[
-                    { value: "ns", label: "شمال / جنوب" },
-                    { value: "ew", label: "شرق / غرب" },
-                    { value: "both", label: "كلاهما" },
+                    { value: "ns", label: c.directions[0] },
+                    { value: "ew", label: c.directions[1] },
+                    { value: "both", label: c.directions[2] },
                   ]}
                   onChange={(v) => configure({ mode: v })}
                 />
                 <Toggle
                   checked={s.interlock}
                   onChange={(v) => configure({ interlock: v })}
-                >
-                  قاعدة أمان: ارفض طلب الاتجاهين واجعل الإشارتين حمراوين.
-                </Toggle>
+                >{c.safetyRule}</Toggle>
               </>
             )}
             {id === "economy" && (
               <label className="reward-control">
-                المكافأة لكل جولة{" "}
+                {c.reward}{" "}
                 <select
                   value={s.reward}
                   onChange={(e) =>
@@ -627,36 +656,37 @@ function MissionLab({ id }: { id: LabId }) {
                 >
                   {[2, 3, 4, 5, 6, 7].map((n) => (
                     <option key={n} value={n}>
-                      {n} موارد
+                      {n} {c.resources}
                     </option>
                   ))}
                 </select>
-                <small>التكلفة ثابتة: 3 موارد / البداية: 10 موارد</small>
+                <small>{c.economyCost}</small>
               </label>
             )}
             <div className="prediction-panel">
-              <p className="panel-step">02 / قبل الاختبار</p>
-              <h2>ماذا تتوقع؟</h2>
+              <p className="panel-step">{c.predictionStep}</p>
+              <h2>{c.predictionHeading}</h2>
               <Options
-                label="أتوقع أن…"
+                label={c.predict}
                 value={draft.prediction}
-                values={lab.outcomes.map((v) => ({ value: v, label: v }))}
+                values={missionWords.ar[id].outcomes.map((v, i) => ({ value: v, label: lab.outcomes[i] }))}
                 onChange={(v) => update({ prediction: v })}
               />
               <Field
-                label="لماذا تتوقع ذلك؟"
+                label={c.whyPredict}
+                language={language}
                 value={draft.reason}
                 onChange={(v) => update({ reason: v })}
-                placeholder="لأن القاعدة..."
+                placeholder={c.reasonPlaceholder}
               />
               <p className="run-hint" id="run-hint">
                 {draft.observation.trim().length < 8
-                  ? "ابدأ بتحديد المعلومة أو القيد أعلاه (8 أحرف على الأقل)."
+                  ? c.clueHint
                   : !draft.prediction
-                    ? "اختر توقعًا. يمكن أن يختلف عن النتيجة."
+                    ? c.choosePrediction
                     : draft.reason.trim().length < 8
-                      ? "اكتب سببًا قصيرًا لتوقعك (8 أحرف على الأقل)."
-                      : "توقعك جاهز. شغّل التجربة."}
+                      ? c.reasonHint
+                      : c.readyHint}
               </p>
               <button
                 className="button secondary full"
@@ -664,7 +694,7 @@ function MissionLab({ id }: { id: LabId }) {
                 aria-describedby="run-hint"
                 onClick={run}
               >
-                شغّل الاختبار ←
+                {c.run}
               </button>
             </div>
             {currentTrial && (
@@ -676,65 +706,60 @@ function MissionLab({ id }: { id: LabId }) {
                 role="status"
                 aria-atomic="true"
               >
-                <b>{currentTrial.outcome}</b>
-                <p>{currentTrial.detail}</p>
-                <span>
-                  {currentTrial.prediction === currentTrial.outcome
-                    ? "توقعك وافق النتيجة."
-                    : "نتيجة مختلفة عن توقعك. راجع القاعدة قبل التجربة التالية."}
-                </span>
+                <b>{outcomeLabel(id, currentTrial.outcome, language)}</b>
+                <p>{trialDetail(id, currentTrial, language)}</p>
+                <span>{predictionMatches(id, currentTrial.prediction, currentTrial.outcome) ? c.predictionCorrect : c.predictionReview}</span>
               </div>
             )}
           </section>
         </div>
         <section className="notebook-history">
-          <p className="local-note">يحتفظ هذا المتصفح بآخر 100 تجربة لكل مختبر.</p>
+          <p className="local-note">{c.localLimit}</p>
           <div className="notebook-section-head">
             <div>
-              <p className="eyebrow">03 / اختبر وحسّن</p>
-              <h2>دفتر التجارب</h2>
+              <p className="eyebrow">{c.explainStep}</p>
+              <h2>{c.notebook}</h2>
             </div>
-            <span>{draft.trials.length} تجارب مسجلة</span>
+            <span>{draft.trials.length} {c.trialsCount}</span>
           </div>
           {draft.trials.length ? (
-            <TrialNotebook id={id} trials={draft.trials} />
+            <TrialNotebook id={id} trials={draft.trials} language={language} />
           ) : (
             <p className="notebook-empty">
-              أول تجربة ستحتفظ بتوقعك وسببك والنتيجة. يمكنك العودة إليها عندما
-              تغيّر القاعدة.
+              {c.notebookEmpty}
             </p>
           )}
         </section>
         <section className="notebook-finish">
           <div>
-            <p className="eyebrow">04 / اشرح بالدليل</p>
-            <h2>ما الذي تغيّر؟</h2>
+            <p className="eyebrow">{c.beforeSave}</p>
+            <h2>{c.reflectionHeading}</h2>
             <Field
               label={lab.prompt}
+              language={draft.explanationLanguage || language}
               value={draft.explanation}
-              onChange={(v) => update({ explanation: v })}
-              placeholder="في تجربة... حدث... وبعد تغيير..."
+              onChange={(v) => update({ explanation: v, explanationLanguage: language })}
+              placeholder={c.explanationPlaceholder}
             />
             <p className="reflection-hint">
-              اكتب تفسيرًا من 15 حرفًا على الأقل. نحتفظ بكلماتك ليراجعها وليّ
-              الأمر.
+              {c.reflectionHint}
             </p>
           </div>
           <aside>
-            <h3>قبل تسجيل الدليل</h3>
+            <h3>{c.reviewEvidence}</h3>
             <ul className="milestone-list">
-              {checks.map((c) => (
-                <li key={c.label}>
-                  <span aria-hidden="true">{c.done ? "✓" : "○"}</span>
-                  {c.label}
-                  <small>{c.done ? "تم" : "مطلوب"}</small>
+              {checks.map((check, i) => (
+                <li key={i}>
+                  <span aria-hidden="true">{check.done ? "✓" : "○"}</span>
+                  {c.milestoneLabels[id][i]}
+                  <small>{check.done ? c.done : c.needed}</small>
                 </li>
               ))}
               <li>
                 <span aria-hidden="true">
                   {draft.explanation.trim().length >= 15 ? "✓" : "○"}
                 </span>
-                اشرح الفرق بكلماتك
+                {c.explainDifference}
               </li>
             </ul>
             <button
@@ -742,12 +767,11 @@ function MissionLab({ id }: { id: LabId }) {
               disabled={!complete}
               onClick={finish}
             >
-              سجّل دليل التعلّم ←
+              {c.saveEvidence}
             </button>
             {saveError && (
               <p role="alert" className="storage-alert">
-                تعذّر حفظ الدليل. عملك ما زال هنا؛ أعد المحاولة بعد إتاحة تخزين
-                المتصفح.
+                {c.saveError}
               </p>
             )}
           </aside>
@@ -771,40 +795,44 @@ export function EconomyMission() {
 }
 
 export function Result() {
+  const [params] = useSearchParams();
+  const requestedLanguage = params.get("lang");
+  const language: BrandLanguage = requestedLanguage === "en" || requestedLanguage === "fr" ? requestedLanguage : "ar";
+  const c = sharedCopy[language];
   const latest = getEvidence()[0];
   const profile = getProfile();
   return (
-    <Shell>
-      <main className="wrap narrow notebook-page">
-        <p className="eyebrow">{latest ? "دليل التعلّم" : "ابدأ بمختبر"}</p>
+    <Shell language={language}>
+      <main className="wrap narrow notebook-page" lang={language} dir={direction(language)}>
+        <p className="eyebrow">{latest ? c.resultEyebrow : c.startLab}</p>
         <h1>
           {latest
-            ? `سجّلت تفكيرك يا ${profile.child}`
-            : "لا يوجد دليل مسجل بعد"}
+            ? <>{c.resultTitle.split("{name}")[0]}<bdi dir="auto">{profile.child}</bdi>{c.resultTitle.split("{name}")[1]}</>
+            : c.noResult}
         </h1>
         {latest && (
           <>
-            <h2>{latest.mission}</h2>
-            <p>{latest.note}</p>
+            <h2 lang={latest.language || "ar"} dir={direction(latest.language || "ar")}>{latest.mission}</h2>
+            <p lang={latest.language || "ar"} dir={direction(latest.language || "ar")}>{latest.note}</p>
             {latest.explanation && (
-              <blockquote className="child-quote">
+              <blockquote className="child-quote" lang={latest.explanationLanguage || latest.language || "ar"} dir={direction(latest.explanationLanguage || latest.language || "ar")}>
                 {latest.explanation}
               </blockquote>
             )}
             {latest.labId && (
-              <div className="transfer-question">
-                <b>خذ الفكرة إلى نظام آخر</b>
-                <p>{labs[latest.labId].transfer}</p>
+              <div className="transfer-question" lang={latest.language || "ar"} dir={direction(latest.language || "ar")}>
+                <b>{c.transfer}</b>
+                <p>{latest.transfer || missionWords.ar[latest.labId].transfer}</p>
               </div>
             )}
           </>
         )}
         <div className="hero-actions">
-          <Link className="button" to="/kid">
-            تابع المسار ←
+          <Link className="button" to={localizedPath("/missions", language)}>
+            {c.continueTrack}
           </Link>
           <Link className="button button-ghost" to="/parent">
-            اعرض الدليل لوليّ الأمر
+            {c.parentEvidence}
           </Link>
         </div>
       </main>

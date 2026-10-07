@@ -7,7 +7,7 @@ Recording pack for the four actual Mission Labs. Drafts dated 5 October 2026; no
 - Vertical 9:16, roughly 30 seconds. Let each test result remain on screen long enough to read; use a quiet cut or gentle dissolve only.
 - Keep the model's actual controls and outputs visible. Do not add a result, number, dialogue or child profile that is not in the product. Keep labels away from platform buttons; inspect each export in the intended app before publishing.
 - Burn in captions for the spoken language and provide a reviewed caption file for the other languages if those variants are published. No machine-translated religious text. No child footage, recordings, names, school details or testimonials.
-- End with a visible pause and this factual availability line: “Interactive labs in Arabic · curriculum in Arabic, English and French.” The wider interface is Arabic currently.
+- End with a visible pause and this factual availability line: “Four interactive labs in Arabic, English and French · some pages remain Arabic.”
 - This is a finite learning demonstration, not a cognitive or attention claim. No swipe prompt, autoplay promise, countdown, sound cue, rapid cut or child-targeted advertising.
 
 ## 1. Water — can one sensor be trusted?
@@ -90,4 +90,4 @@ Use one approved version per export:
 - English: **A small question. Room to think.** Try one lab together, with an adult.
 - French: **Une petite question. Une réflexion qui grandit.** Essayez un atelier ensemble, avec un adulte.
 
-Show `https://barmoj-266b8.web.app/` and `Interactive labs in Arabic · curriculum in Arabic, English and French` (translate and review with the captions). Do not show `brkar.com` as an owned domain until ownership and configuration are confirmed. A moderator should recheck every displayed number against the demo before export. Scripts are ready for recording; the actual 9:16 video files remain to be produced and reviewed.
+Show `https://barmoj-266b8.web.app/` and `Four interactive labs in Arabic, English and French · some pages remain Arabic` (translate and review with the captions). Do not show `brkar.com` as an owned domain until ownership and configuration are confirmed. A moderator should recheck every displayed number against the demo before export. Scripts are ready for recording; the actual 9:16 video files remain to be produced and reviewed.

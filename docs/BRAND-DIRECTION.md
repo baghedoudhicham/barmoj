@@ -41,7 +41,7 @@ Use self-hosted Noto Kufi Arabic for Arabic and the system sans-serif for Latin 
 
 ## Language and product truth
 
-The introduction is available in Arabic, English and French through `?lang=ar`, `?lang=en`, and `?lang=fr`. The curriculum link carries the selected language. Interactive labs, onboarding and the parent dashboard remain Arabic in this release; the introduction makes that explicit before a family starts. No account, payment, cloud sync, child-facing AI, infinite feed or public ranking is offered.
+The introduction is available in Arabic, English and French through `?lang=ar`, `?lang=en`, and `?lang=fr`. The selected language follows the family into the four interactive labs, lab catalogue, results and curriculum. Kid Home, onboarding, privacy and the Parent Dashboard remain Arabic; the introduction makes that explicit before a family starts. No sign-in, payment, cloud sync, child-facing AI, infinite feed or public ranking is offered.
 
 ## Release materials
 

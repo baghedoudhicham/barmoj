@@ -77,7 +77,7 @@ export function Shell({ children, language = "ar" }: { children: ReactNode; lang
             )}
             <Link
               className="button button-small"
-              to={inKid ? "/missions" : "/onboarding"}
+              to={inKid ? `/missions?lang=${language}` : "/onboarding"}
             >
               {inKid ? c.track : c.start}
             </Link>

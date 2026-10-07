@@ -1,6 +1,22 @@
 .notebook-page {
   padding-block: 44px 80px;
 }
+
+.lab-language-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.lab-language-bar .lab-back { margin: 0; }
+.lab-language-bar .language-tabs { margin: 0; }
+@media (max-width: 520px) {
+  .lab-language-bar { align-items: flex-start; gap: 12px; }
+  .lab-language-bar .language-tabs { width: 100%; }
+  .lab-language-bar .language-tabs button { flex: 1; }
+}
 .notebook-heading {
   display: flex;
   align-items: start;

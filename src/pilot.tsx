@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft,
   Check,
@@ -13,6 +13,8 @@ import {
   TriangleAlert,
 } from "lucide-react";
 import { Shell } from "./components";
+import type { BrandLanguage } from "./brand";
+import { languageNames, missionWords, sharedCopy } from "./lab-copy";
 import {
   clearFamilyData,
   evidenceLabels,
@@ -66,48 +68,44 @@ const availableMissions = [
   },
 ] as const;
 
-const cycle = [
-  "راقب",
-  "اسأل",
-  "مثّل",
-  "توقّع",
-  "ابنِ",
-  "اكسر",
-  "صحّح",
-  "حسّن",
-  "اشرح",
-];
-
-function MissionSystemPreview({ tone }: { tone: string }) {
+function MissionSystemPreview({ tone, language }: { tone: string; language: BrandLanguage }) {
   const id: LabId = tone === "water" ? "water" : tone === "learn" ? "routing" : tone === "challenge" ? "traffic" : "economy";
-  return <LabDiagram id={id} settings={initialSettings()} />;
+  return <LabDiagram id={id} settings={initialSettings()} language={language} />;
 }
 export function MissionHub() {
+  const [params, setParams] = useSearchParams();
+  const requested = params.get("lang");
+  const language: BrandLanguage = requested === "en" || requested === "fr" ? requested : "ar";
+  const c = sharedCopy[language];
   return (
-    <Shell>
-      <main className="wrap pilot-page">
+    <Shell language={language}>
+      <main className="wrap pilot-page" lang={language} dir={language === "ar" ? "rtl" : "ltr"}>
         <header className="pilot-hero compact-hero">
           <div>
-            <p className="eyebrow">مختبرات بِرْكار</p>
+            <p className="eyebrow">{c.hubEyebrow}</p>
             <h1>
-              نفس طريقة التفكير.
+              {c.hubTitle[0]}
               <br />
-              أنظمة مختلفة.
+              {c.hubTitle[1]}
             </h1>
-            <p className="pilot-lead">
-              لا نريد أن يتعلم الطفل حل قالب واحد. نريد أن ينقل طريقة التفكير من
-              خزان ماء إلى طريق، وتقاطع، وقواعد لعبة.
-            </p>
+            <p className="pilot-lead">{c.hubBody}</p>
           </div>
-          <div className="cycle-strip" aria-label="دورة التفكير">
-            {cycle.map((item, index) => (
+          <div className="cycle-strip" aria-label={language === "ar" ? "دورة التفكير" : language === "fr" ? "Cycle de réflexion" : "Thinking cycle"}>
+            {c.hubCycle.map((item, index) => (
               <span key={item}>
                 <b>{String(index + 1).padStart(2, "0")}</b>
                 {item}
               </span>
             ))}
           </div>
+          <div className="language-tabs" role="group" aria-label={c.chooseLanguage}>
+            {(Object.keys(languageNames) as BrandLanguage[]).map((item) => (
+              <button type="button" key={item} lang={item} className={language === item ? "selected" : ""} aria-pressed={language === item} onClick={() => setParams({ lang: item }, { replace: true })}>{languageNames[item]}</button>
+            ))}
+          </div>
         </header>
+
+        <p className="privacy-hint">{c.supervisionNote}</p>
 
         <section className="mission-atlas">
           {availableMissions.map((mission) => {
@@ -115,7 +113,7 @@ export function MissionHub() {
             return (
               <Link
                 className={`atlas-card ${mission.tone}`}
-                to={mission.route}
+                to={`${mission.route}?lang=${language}`}
                 key={mission.route}
               >
                 <div className="atlas-meta">
@@ -123,14 +121,12 @@ export function MissionHub() {
                   <Icon size={20} />
                 </div>
                 <div className="atlas-visual">
-                  <MissionSystemPreview tone={mission.tone} />
+                  <MissionSystemPreview tone={mission.tone} language={language} />
                 </div>
                 <div className="atlas-copy">
-                  <p>{mission.subtitle}</p>
-                  <h2>{mission.title}</h2>
-                  <span>{mission.purpose}</span>
+                  {(() => { const id = mission.route.split("/").at(-1) as LabId; const copy = missionWords[language][id]; return <><p>{c.missionSummary[id]}</p><h2>{copy.title}</h2><span>{copy.goal}</span></>; })()}
                   <strong>
-                    افتح المختبر <ArrowLeft size={17} />
+                    {c.hubOpen} <ArrowLeft size={17} />
                   </strong>
                 </div>
               </Link>
@@ -272,17 +268,10 @@ export function KidHomeV2() {
                       : index === 7
                         ? "/mission/economy"
                         : null;
-              const knownTitle =
-                index === 1
-                  ? "رتّب التوصيلات"
-                  : index === 4
-                    ? "تقاطع آمن"
-                    : index === 5
-                      ? "خزان لا يفيض"
-                      : index === 7
-                        ? "لعبة لا تنكسر"
-                        : title;
-              const done = completedNames.has(knownTitle);
+              const labId = route?.split("/").at(-1) as LabId | undefined;
+              const done = labId
+                ? verified.some((entry) => entry.labId === labId)
+                : completedNames.has(title);
               const current = route === `/mission/${nextId}` && !done;
               return (
                 <div
@@ -396,12 +385,12 @@ export function ParentDashboardV2() {
         <section className="parent-story">
           <div className="story-main">
             <p className="story-label">آخر دليل محفوظ</p>
-            <h2>
+            <h2 lang={latest?.language || "ar"} dir={latest?.language === "en" || latest?.language === "fr" ? "ltr" : "rtl"}>
               {latest
                 ? `من مختبر «${latest.mission}»`
                 : `لم نكوّن ملخصًا بعد لـ ${profile.child}.`}
             </h2>
-            <p>
+            <p lang={latest?.language || "ar"} dir={latest?.language === "en" || latest?.language === "fr" ? "ltr" : "rtl"}>
               {latest
                 ? latest.note
                 : "بعد أول مختبر سنعرض هنا جملة واضحة تصف ما فعله الطفل فعلًا، بدل ملء اللوحة بأرقام لا تعني شيئًا."}
@@ -409,9 +398,9 @@ export function ParentDashboardV2() {
           </div>
           <div className="next-objective">
             <span>الهدف التالي</span>
-            <b>
+            <b lang={latest?.language || "ar"} dir={latest?.language === "en" || latest?.language === "fr" ? "ltr" : "rtl"}>
               {latest?.labId
-                ? labs[latest.labId].transfer
+                ? latest.transfer || labs[latest.labId].transfer
                 : "ابدأ بمختبر واحد، واسأل الطفل عن توقعه قبل التشغيل."}
             </b>
             <small>سؤال للحوار بعد التجربة</small>
@@ -472,7 +461,7 @@ export function ParentDashboardV2() {
                 >
                   <details>
                     <summary>
-                      {entry.mission} ·{" "}
+                      <span lang={entry.language || "ar"} dir={entry.language === "en" || entry.language === "fr" ? "ltr" : "rtl"}>{entry.mission}</span> ·{" "}
                       {entry.trials?.length
                         ? `${entry.trials.length} تجارب`
                         : "سجل سابق"}
@@ -486,12 +475,12 @@ export function ParentDashboardV2() {
                     {entry.labId && entry.trials?.length ? (
                       <>
                         <p className="legacy-note">القيد الذي حدده الطفل</p>
-                        <blockquote className="child-quote">
+                        <blockquote className="child-quote" lang={entry.observationLanguage || entry.language || "ar"} dir={entry.observationLanguage === "en" || entry.observationLanguage === "fr" || (!entry.observationLanguage && (entry.language === "en" || entry.language === "fr")) ? "ltr" : "rtl"}>
                           {entry.observation}
                         </blockquote>
                         <TrialNotebook id={entry.labId} trials={entry.trials} />
                         <p className="legacy-note">تفسير الطفل بعد التحسين</p>
-                        <blockquote className="child-quote">
+                        <blockquote className="child-quote" lang={entry.explanationLanguage || entry.language || "ar"} dir={entry.explanationLanguage === "en" || entry.explanationLanguage === "fr" || (!entry.explanationLanguage && (entry.language === "en" || entry.language === "fr")) ? "ltr" : "rtl"}>
                           {entry.explanation}
                         </blockquote>
                       </>

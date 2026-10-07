@@ -1,4 +1,5 @@
 import type { LabId, Trial } from "./lab-model";
+import type { BrandLanguage } from "./brand";
 import { labIds } from "./lab-model";
 import { boundedText, MAX_TRIALS, validTrial } from "./lab-storage";
 
@@ -36,6 +37,10 @@ export type LearningEvidence = {
   observation?: string;
   explanation?: string;
   trials?: Trial[];
+  language?: BrandLanguage;
+  transfer?: string;
+  observationLanguage?: BrandLanguage;
+  explanationLanguage?: BrandLanguage;
 };
 
 export type Profile = { child: string };
@@ -126,7 +131,11 @@ export function getEvidence(): LearningEvidence[] {
         (e.trials === undefined ||
           (Array.isArray(e.trials) && e.trials.length <= MAX_TRIALS && e.trials.every(validTrial))) &&
         (e.observation === undefined || boundedText(e.observation)) &&
-        (e.explanation === undefined || boundedText(e.explanation)),
+        (e.explanation === undefined || boundedText(e.explanation)) &&
+        (e.language === undefined || ["ar", "en", "fr"].includes(e.language)) &&
+        (e.observationLanguage === undefined || ["ar", "en", "fr"].includes(e.observationLanguage)) &&
+        (e.explanationLanguage === undefined || ["ar", "en", "fr"].includes(e.explanationLanguage)) &&
+        (e.transfer === undefined || boundedText(e.transfer)),
     ).slice(0, 8);
   } catch {
     return [];
@@ -137,7 +146,7 @@ export function addEvidence(entry: Omit<LearningEvidence, "date">) {
   const current = getEvidence();
   const next: LearningEvidence[] = [
     { ...entry, date: new Date().toISOString() },
-    ...current.filter((item) => item.mission !== entry.mission),
+    ...current.filter((item) => entry.labId ? item.labId !== entry.labId : item.mission !== entry.mission),
   ].slice(0, 8);
   try {
     localStorage.setItem(EVIDENCE_KEY, JSON.stringify(next));

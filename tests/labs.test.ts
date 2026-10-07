@@ -267,12 +267,18 @@ test("drafts survive reload, corrupt records are ignored, and completed evidence
   const draft = {
     ...emptyDraft(),
     observation,
+    observationLanguage: "ar" as const,
     explanation,
+    explanationLanguage: "ar" as const,
     trials: [trial("economy")],
   };
   assert.equal(saveDraft("economy", draft), true);
   assert.deepEqual(readDraft("economy"), draft);
   assert.equal(latestDraft()?.id, "economy");
+  const legacyDraft = { ...draft, observationLanguage: undefined, explanationLanguage: undefined };
+  storage.setItem("barmoj-lab-v1-water", JSON.stringify(legacyDraft));
+  assert.equal(readDraft("water")?.observationLanguage, "ar");
+  assert.equal(readDraft("water")?.explanationLanguage, "ar");
   storage.setItem("barmoj-lab-v1-water", '{"version":1,"settings":{}}');
   assert.equal(readDraft("water"), null);
   storage.setItem("barmoj-profile", '{"child":4}');

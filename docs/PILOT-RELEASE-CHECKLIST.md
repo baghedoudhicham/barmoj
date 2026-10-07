@@ -1,7 +1,7 @@
 # BRKAR family pilot release boundary
 
 **Release type:** moderated, parent-supervised product pilot  
-**Interface:** Arabic-first. The full first-track curriculum content is available in Arabic, English and French at /curriculum.  
+**Interface:** Arabic-first. The curriculum, four interactive labs, lab catalogue and child result page are available in Arabic, English and French. Kid Home, onboarding, privacy and Parent Dashboard remain Arabic.
 **Interactive learning:** four of twelve missions. The other eight are curriculum prompts and optional family activities, not completed interactive lessons.
 
 ## What this build does
@@ -22,6 +22,7 @@
 - Typed observations, predictions and explanations are saved locally. Families should not enter a child's full name, school, address, contact details, health information or other sensitive details.
 - Browser storage stays on the device until the family deletes it or the browser clears it. There is no cross-device recovery.
 - Firebase Console has Email/Password and Google providers enabled, but this build has no Firebase Auth integration; provider status is not a parent sign-in or child access gate.
+- The app does not store passwords, authentication tokens or third-party credentials. The current optional nickname and learning evidence are in browser local storage, without app-level encryption; anyone using the same browser profile can view them.
 - Firebase Hosting serves the web pages. The app code does not transmit profile or answer content to an application backend, but the hosting provider still processes technical requests under its own service terms.
 - This is not a claim of legal compliance, clinical benefit or proven improvement in attention or intelligence.
 
@@ -33,7 +34,7 @@
 4. Test keyboard access, screen readers, contrast, reading load and RTL/LTR behavior with families; verify children can stop and resume without pressure.
 5. Run the moderated family pilot, review de-identified observations with caregivers and educators, and build the remaining eight labs only from what the evidence supports.
 6. Complete market-specific name, domain and trademark clearance for BRKAR / بِرْكار before a wider launch. The public product now uses BRKAR; Firebase IDs, the hosting URL and legacy local-storage keys still use the earlier Barmoj name for continuity.
-7. Add accounts, payments, remote analytics, AI or social features only after their separate privacy, security, adult-control and deletion design is ready.
+7. After trial feedback, add accounts, avatars, payments, remote analytics, AI or community features only if there is a validated need and separate privacy, security, adult-control, moderation and deletion design is ready. Keep credentials out of source code, frontend storage, screenshots and public documents; use an approved secrets manager with least-privilege access, and rotate any credential that may have been exposed.
 8. Review the Muslim-family values reflection with parents and Muslim educators across the intended communities. Any later Qur'an or hadith quotation needs verified Arabic text, source and context, a reviewed translation, and must remain outside rewards, scores and streaks.
 
 ## Deployment

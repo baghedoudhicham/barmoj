@@ -1,3 +1,5 @@
+import type { BrandLanguage } from "./brand";
+
 export type LabId = "water" | "routing" | "traffic" | "economy";
 export type Settings = {
   scenario: "normal" | "limit" | "failure";
@@ -19,6 +21,7 @@ export type Trial = {
   detail: string;
   safe: boolean;
   values?: number[];
+  language?: BrandLanguage;
 };
 export const labIds: LabId[] = ["water", "routing", "traffic", "economy"];
 export const labs = {
