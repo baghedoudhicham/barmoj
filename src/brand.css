@@ -6,10 +6,10 @@
 .mobile-menu { width:44px; height:44px; border-radius:5px; }
 .onboarding-wrap .section-title h1 { font-size:clamp(1.8rem,4vw,3rem); line-height:1.5; }
 .brand-mark img { width:40px; height:40px; }
-.brand-lockup { display:grid; justify-items:center; gap:0; }
-.brand-arabic { font-size:1.34rem; line-height:1.4; }
-.brand-arabic::after { width:26px; height:4px; }
-.brand-latin { font:800 .6rem/1.2 system-ui,sans-serif; letter-spacing:.2em; text-align:center; padding-inline-start:.2em; }
+.brand-lockup { display:grid; justify-items:center; gap:1px; }
+.brand-arabic { font-size:1.44rem; line-height:1.38; }
+.brand-arabic::after { width:32px; height:5px; }
+.brand-latin { font:800 .56rem/1.2 system-ui,sans-serif; letter-spacing:.22em; text-align:center; padding-inline-start:.22em; }
 .brand-arrow { width:20px; height:20px; flex-shrink:0; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
 [dir="ltr"] .brand-arrow { transform:rotate(180deg); }
 .brand-menu-lines { display:grid; gap:5px; width:18px; }

@@ -33,10 +33,10 @@ h2 { font-size: clamp(1.6rem, 4vw, 3rem); line-height: 1.24; letter-spacing: -.0
 .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; }
 .brand-mark { width: 40px; height: 40px; display: grid; place-items: center; flex: 0 0 40px; border: var(--line); border-radius: 8px; background: var(--paper); box-shadow: none; }
 .brand-mark img { display: block; width: 36px; height: 36px; object-fit: contain; }
-.brand-lockup { display: grid; justify-items: center; gap: 0; line-height: 1; }
-.brand-arabic { position: relative; display: block; padding-bottom: 5px; color: var(--deep); font-family: "Noto Kufi Arabic", Tahoma, sans-serif; font-size: 1.26rem; font-weight: 900; line-height: 1.4; letter-spacing: 0; white-space: nowrap; }
-.brand-arabic::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 24px; height: 4px; border-bottom: 2px solid var(--explore); border-radius: 50%; transform: translateX(-50%); pointer-events: none; }
-.brand-latin { text-align: center; padding-inline-start: .19em; color: var(--deep); font: 800 .58rem/1.2 system-ui, sans-serif; letter-spacing: .19em; }
+.brand-lockup { display: grid; justify-items: center; gap: 1px; line-height: 1; }
+.brand-arabic { position: relative; display: block; padding-bottom: 6px; color: var(--deep); font-family: "Noto Kufi Arabic", Tahoma, sans-serif; font-size: 1.42rem; font-weight: 900; line-height: 1.38; letter-spacing: 0; white-space: nowrap; }
+.brand-arabic::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 30px; height: 5px; border-bottom: 2px solid var(--explore); border-radius: 50%; transform: translateX(-50%); pointer-events: none; }
+.brand-latin { text-align: center; padding-inline-start: .22em; color: var(--deep); font: 800 .56rem/1.2 system-ui, sans-serif; letter-spacing: .22em; }
 .desktop-nav { margin-right: auto; display: flex; align-items: center; gap: 22px; font-size: .88rem; font-weight: 800; }
 .desktop-nav a:not(.button):hover { text-decoration: underline; text-underline-offset: 5px; }
 .mobile-menu { display: none; margin-right: auto; }
