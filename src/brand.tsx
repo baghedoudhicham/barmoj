@@ -1,11 +1,8 @@
 export type BrandLanguage = "ar" | "en" | "fr";
 
-// A drawing compass: fixed center, two legs, and an arc made by the learner.
+// Shared flat compass mark. The wordmark stays live text in the app header.
 export function BrandMark() {
-  return <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false">
-    <circle cx="24" cy="11" r="4" />
-    <path d="m22 15-10 23m14-23 10 23M16 29h16M9 39c8-8 22-8 30 0" />
-  </svg>;
+  return <img className="brand-symbol" src="/brand/compass-mark.png" alt="" aria-hidden="true" />;
 }
 
 export function BrandArrow() {

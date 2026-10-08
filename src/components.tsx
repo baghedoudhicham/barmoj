@@ -56,7 +56,7 @@ export function Shell({ children, language = "ar" }: { children: ReactNode; lang
               <BrandMark />
             </span>
             <span className="brand-lockup">
-              <span className="brand-arabic" dir="rtl">بِركار</span>
+              <span className="brand-arabic" lang="ar" dir="rtl">بِركار</span>
               <span className="brand-latin" dir="ltr">BRKAR</span>
             </span>
           </Link>

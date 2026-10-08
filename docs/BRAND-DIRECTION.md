@@ -35,7 +35,7 @@ The first audience is Muslim families across MENA, with learning content in Arab
 
 Keep the existing palette: ink `#151515`, paper `#F7F7F2`, learn green `#39DD59`, explore yellow `#FFC107`, challenge red `#FF164D`, deep green `#173E2B`, and water blue `#72C7E8`. Use paper and ink for reading; green for the main invitation; yellow and red selectively where their meaning helps. Pale supporting surfaces derive from this palette rather than adding another brand colour family.
 
-The custom mark has a joint, two compass legs, a brace, and an arc. Its green tile has a modest rounded corner. Use a minimum 24 px mark size; the normal app mark is 44 px. Leave at least one joint diameter of clear space. Do not rotate, stretch, decorate, or animate the mark. Mono and reversed source assets live in `public/brand/`.
+The current mark is a compact drawing compass: a small joint, two distinct legs, a brace, and a fine plotted arc. It sits on a paper tile with an ink keyline and restrained rounded corner so both green legs stay visible. Use a minimum 24 px mark size; the normal app mark is 44 px. Leave clear space around it, and do not rotate, stretch, decorate, or animate it. Keep the Arabic wordmark as editable Noto Kufi Arabic text; the short gold arc under it echoes the plotted line without changing Arabic letter shapes.
 
 Use self-hosted Noto Kufi Arabic for Arabic and the system sans-serif for Latin reading. Keep Arabic line-height generous; use logical CSS properties for direction. The shared header/footer carries the identity into every lab, Kid Home, Parent Dashboard and the curriculum. Custom vector lab sketches explain the four real systems; do not add generic icon packs to marketing pages.
 
@@ -45,10 +45,9 @@ The introduction is available in Arabic, English and French through `?lang=ar`, 
 
 ## Release materials
 
-- `public/brand-mark.svg`: green app tile and favicon.
-- `public/brand/mark-ink.svg`: transparent one-colour mark.
-- `public/brand/mark-paper.svg`: transparent reversed mark for dark surfaces.
-- `src/brand.tsx`: shared editable React mark, arrow and navigation wording.
+- `public/brand/compass-mark.png`: current multicolour compass mark and favicon.
+- `public/brand-mark.svg`, `public/brand/mark-ink.svg`, and `public/brand/mark-paper.svg`: earlier exports retained for reference.
+- `src/brand.tsx`: shared mark image, arrow and navigation wording; the header wordmark stays editable text.
 - `src/brand-home.tsx`: reviewed three-language introduction and finite four-lab overview.
 - `src/brand.css`: responsive identity and homepage system.
 
