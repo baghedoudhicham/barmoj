@@ -1,0 +1,35 @@
+1
+00:00:00,000 --> 00:00:02,500
+Si le capteur indique 60 % alors que
+le niveau réel atteint 96 %,
+
+2
+00:00:02,500 --> 00:00:05,000
+la pompe s’arrête-t-elle ?
+
+3
+00:00:05,000 --> 00:00:08,500
+Au premier test, elle continue.
+
+4
+00:00:08,500 --> 00:00:11,500
+La règle se fie à un seul capteur.
+
+5
+00:00:11,500 --> 00:00:15,000
+Ajoutons un capteur de secours
+et testons à nouveau :
+
+6
+00:00:15,000 --> 00:00:19,000
+en cas de désaccord,
+la pompe s’arrête.
+
+7
+00:00:19,000 --> 00:00:23,500
+Quelle deuxième preuve faudrait-il ?
+
+8
+00:00:23,500 --> 00:00:32,000
+Essayez l’atelier ensemble,
+avec un adulte.

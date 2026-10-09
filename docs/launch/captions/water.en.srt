@@ -1,0 +1,27 @@
+1
+00:00:00,000 --> 00:00:05,000
+If the sensor reads 60% while the actual
+water is at 96%, does the pump stop?
+
+2
+00:00:05,000 --> 00:00:08,500
+In the first test, it keeps running.
+
+3
+00:00:08,500 --> 00:00:11,500
+The rule trusts one sensor.
+
+4
+00:00:11,500 --> 00:00:16,500
+Add a backup sensor and test again:
+a disagreement stops the pump.
+
+5
+00:00:16,500 --> 00:00:21,500
+What second piece of evidence
+would you want?
+
+6
+00:00:21,500 --> 00:00:30,000
+Try the water lab together,
+with an adult.

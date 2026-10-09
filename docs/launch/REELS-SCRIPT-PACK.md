@@ -9,6 +9,7 @@ Recording pack for the four actual Mission Labs. Drafts dated 5 October 2026; no
 - Burn in captions for the spoken language and provide a reviewed caption file for the other languages if those variants are published. No machine-translated religious text. No child footage, recordings, names, school details or testimonials.
 - End with a visible pause and this factual availability line: “Four interactive labs and the main family pages are available in Arabic, English and French.”
 - This is a finite learning demonstration, not a cognitive or attention claim. No swipe prompt, autoplay promise, countdown, sound cue, rapid cut or child-targeted advertising.
+- Draft timed subtitle tracks for Arabic, English and French are in [`captions/`](captions/README.md). They must be synced to the chosen adult recording and reviewed in the actual 9:16 export before posting.
 
 ## 1. Water — can one sensor be trusted?
 

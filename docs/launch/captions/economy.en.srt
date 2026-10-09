@@ -1,0 +1,33 @@
+1
+00:00:00,000 --> 00:00:04,500
+The game starts with 10 resources.
+
+2
+00:00:04,500 --> 00:00:09,000
+Each round costs 3
+and rewards 5.
+
+3
+00:00:09,000 --> 00:00:13,000
+After five rounds, the balance reaches 20.
+
+4
+00:00:13,000 --> 00:00:16,500
+Will it keep growing?
+
+5
+00:00:16,500 --> 00:00:22,000
+Try a reward equal to the cost: 3.
+
+6
+00:00:22,000 --> 00:00:27,500
+After five rounds, the balance
+stays at 10.
+
+7
+00:00:27,500 --> 00:00:31,500
+That rule is balanced in this model.
+
+8
+00:00:31,500 --> 00:00:35,000
+What evidence shows you?

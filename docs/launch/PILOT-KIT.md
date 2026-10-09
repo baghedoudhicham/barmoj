@@ -93,7 +93,7 @@ Final slate in each language:
 - English: **Try one lab together. A free, adult-supervised pilot.**
 - French: **Essayez un atelier ensemble. Un pilote gratuit, accompagné par un adulte.**
 
-Include the current Firebase URL and the true availability: **المنهج وواجهة الأسرة وأربعة مختبرات تفاعلية بالعربية والإنجليزية والفرنسية** / **The curriculum, family pages and four interactive labs are available in Arabic, English and French** / **Le parcours, les pages familiales et quatre ateliers interactifs sont disponibles en arabe, anglais et français**. Do not use brkar.com until ownership and configuration are confirmed. Fluent review and device QA remain before publication.
+Include the current Firebase URL and the true availability: **المنهج وواجهة الأسرة وأربعة مختبرات تفاعلية بالعربية والإنجليزية والفرنسية** / **The curriculum, family pages and four interactive labs are available in Arabic, English and French** / **Le parcours, les pages familiales et quatre ateliers interactifs sont disponibles en arabe, anglais et français**. Do not use brkar.com until ownership and configuration are confirmed. Fluent review and device QA remain before publication. Arabic, English and French SRT timing drafts are in [`captions/`](captions/README.md); sync them against the chosen adult recordings and review the rendered exports before use.
 
 ## Optional parent evidence carousel
 

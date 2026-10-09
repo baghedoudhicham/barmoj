@@ -1,0 +1,36 @@
+1
+00:00:00,000 --> 00:00:04,500
+Both directions request green.
+
+2
+00:00:04,500 --> 00:00:08,500
+Should a system grant both requests?
+
+3
+00:00:08,500 --> 00:00:14,500
+In this simplified model, both pass
+if the conflict rule is off.
+
+4
+00:00:14,500 --> 00:00:17,500
+Turn on the safety interlock
+and retest:
+
+5
+00:00:17,500 --> 00:00:21,500
+it rejects the conflict
+and both lights turn red.
+
+6
+00:00:21,500 --> 00:00:24,500
+With one direction requesting
+passage,
+
+7
+00:00:24,500 --> 00:00:28,000
+the model lets just that direction
+through.
+
+8
+00:00:28,000 --> 00:00:32,000
+Which request should a system refuse?

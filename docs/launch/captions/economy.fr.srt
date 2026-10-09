@@ -1,0 +1,33 @@
+1
+00:00:00,000 --> 00:00:04,500
+Le jeu commence avec 10 ressources.
+
+2
+00:00:04,500 --> 00:00:09,000
+Chaque tour coûte 3
+et rapporte 5.
+
+3
+00:00:09,000 --> 00:00:13,000
+Après cinq tours, le total atteint 20.
+
+4
+00:00:13,000 --> 00:00:16,500
+Continuera-t-il à augmenter ?
+
+5
+00:00:16,500 --> 00:00:22,000
+Essayons une récompense égale au coût : 3.
+
+6
+00:00:22,000 --> 00:00:27,500
+Après cinq tours, le total reste à 10.
+
+7
+00:00:27,500 --> 00:00:31,500
+Cette règle est équilibrée
+dans notre modèle.
+
+8
+00:00:31,500 --> 00:00:35,000
+Quelle preuve le montre ?
