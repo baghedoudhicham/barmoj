@@ -63,6 +63,7 @@ test("profiles default to a non-identifying nickname and bound saved nicknames",
   const state = installStorage();
   try {
     assert.deepEqual(getProfile(), { child: "المستكشف" });
+    assert.deepEqual(getProfile("Explorer"), { child: "Explorer" });
     assert.equal(saveProfile({ child: "  باحث فضولي  " }), true);
     assert.deepEqual(getProfile(), { child: "باحث فضولي" });
     assert.equal(saveProfile({ child: "أ".repeat(40) }), true);

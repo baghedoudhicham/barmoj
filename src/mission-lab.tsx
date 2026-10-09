@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Shell } from "./components";
 import type { BrandLanguage } from "./brand";
+import { defaultNicknames } from "./languages";
 import { addEvidence, getEvidence, getProfile } from "./data";
 import {
   canComplete,
@@ -800,7 +801,7 @@ export function Result() {
   const language: BrandLanguage = requestedLanguage === "en" || requestedLanguage === "fr" ? requestedLanguage : "ar";
   const c = sharedCopy[language];
   const latest = getEvidence()[0];
-  const profile = getProfile();
+  const profile = getProfile(defaultNicknames[language]);
   return (
     <Shell language={language}>
       <main className="wrap narrow notebook-page" lang={language} dir={direction(language)}>
@@ -822,7 +823,7 @@ export function Result() {
             {latest.labId && (
               <div className="transfer-question" lang={latest.language || "ar"} dir={direction(latest.language || "ar")}>
                 <b>{c.transfer}</b>
-                <p>{latest.transfer || missionWords.ar[latest.labId].transfer}</p>
+                <p>{latest.transfer || missionWords[language][latest.labId].transfer}</p>
               </div>
             )}
           </>
@@ -831,7 +832,7 @@ export function Result() {
           <Link className="button" to={localizedPath("/missions", language)}>
             {c.continueTrack}
           </Link>
-          <Link className="button button-ghost" to="/parent">
+          <Link className="button button-ghost" to={localizedPath("/parent", language)}>
             {c.parentEvidence}
           </Link>
         </div>

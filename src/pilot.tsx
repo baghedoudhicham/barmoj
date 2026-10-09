@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft,
+  ArrowRight,
   Check,
   CircleDot,
   Gauge,
@@ -15,6 +16,8 @@ import {
 import { Shell } from "./components";
 import type { BrandLanguage } from "./brand";
 import { languageNames, missionWords, sharedCopy } from "./lab-copy";
+import { pilotUiCopy } from "./pilot-ui-copy";
+import { LanguagePicker } from "./language-picker";
 import {
   clearFamilyData,
   evidenceLabels,
@@ -77,6 +80,7 @@ export function MissionHub() {
   const requested = params.get("lang");
   const language: BrandLanguage = requested === "en" || requested === "fr" ? requested : "ar";
   const c = sharedCopy[language];
+  const RouteArrow = language === "ar" ? ArrowLeft : ArrowRight;
   return (
     <Shell language={language}>
       <main className="wrap pilot-page" lang={language} dir={language === "ar" ? "rtl" : "ltr"}>
@@ -126,7 +130,7 @@ export function MissionHub() {
                 <div className="atlas-copy">
                   {(() => { const id = mission.route.split("/").at(-1) as LabId; const copy = missionWords[language][id]; return <><p>{c.missionSummary[id]}</p><h2>{copy.title}</h2><span>{copy.goal}</span></>; })()}
                   <strong>
-                    {c.hubOpen} <ArrowLeft size={17} />
+                    {c.hubOpen} <RouteArrow size={17} />
                   </strong>
                 </div>
               </Link>
@@ -139,7 +143,12 @@ export function MissionHub() {
 }
 
 export function KidHomeV2() {
-  const profile = getProfile();
+  const [params] = useSearchParams();
+  const requested = params.get("lang");
+  const language: BrandLanguage = requested === "en" || requested === "fr" ? requested : "ar";
+  const c = pilotUiCopy[language].kid;
+  const RouteArrow = language === "ar" ? ArrowLeft : ArrowRight;
+  const profile = getProfile(c.defaultNickname);
   const evidence = getEvidence();
   const completedNames = new Set(evidence.map((item) => item.mission));
   const verified = evidence.filter(
@@ -156,21 +165,20 @@ export function KidHomeV2() {
   const focusTrial = unfinished && [...unfinished.draft.trials].reverse().find(t =>
     settingsKey(nextId, unfinished.draft.settings) === settingsKey(nextId, t.settings),
   );
+  const focusCopy = missionWords[language][nextId];
 
   return (
-    <Shell>
-      <main className="wrap pilot-page">
+    <Shell language={language}>
+      <main className="wrap pilot-page" lang={language} dir={language === "ar" ? "rtl" : "ltr"}>
+        <LanguagePicker language={language} label={pilotUiCopy[language].languageLabel} />
         <header className="workspace-v2-head">
           <div>
-            <p className="eyebrow">مساحة التعلّم</p>
-            <h1>السلام {profile.child}</h1>
-            <p>
-              اليوم لا نبحث عن أسرع إجابة. نريد نظامًا تستطيع شرحه عندما يعمل
-              وعندما يفشل.
-            </p>
+            <p className="eyebrow">{c.space}</p>
+            <h1>{c.greeting}<bdi>{profile.child}</bdi></h1>
+            <p>{c.intro}</p>
           </div>
-          <Link className="workspace-switch" to="/parent">
-            عرض الأهل <ArrowLeft size={17} />
+          <Link className="workspace-switch" to={`/parent?lang=${language}`}>
+            {c.parent} <RouteArrow size={17} />
           </Link>
         </header>
 
@@ -179,34 +187,28 @@ export function KidHomeV2() {
             <div className="focus-label">
               <span>
                 {unfinished
-                  ? "أكمل من حيث توقفت"
+                  ? c.continue
                   : verified.length === 4
-                    ? "جرّب تفسيرًا جديدًا"
-                    : "المختبر التالي"}
+                    ? c.tryAgain
+                    : c.nextLab}
               </span>
-              <b>{focus.number} / فكّر كنظام</b>
+              <b>{focus.number} / {c.curriculumTrack}</b>
             </div>
-            <h2>{focus.title}</h2>
-            <p>{focus.goal}</p>
+            <h2>{focusCopy.title}</h2>
+            <p>{focusCopy.goal}</p>
             <div className="reasoning-contract">
-              <span>
-                <b>قبل التجربة</b> أتوقع
-              </span>
-              <span>
-                <b>أثناءها</b> ألاحظ
-              </span>
-              <span>
-                <b>بعدها</b> أفسّر
-              </span>
+              <span><b>{c.contractBefore}</b>{language === "ar" ? " أتوقع" : language === "fr" ? " : je prédis" : "I predict"}</span>
+              <span><b>{c.contractDuring}</b>{language === "ar" ? " ألاحظ" : language === "fr" ? " : j’observe" : "I notice"}</span>
+              <span><b>{c.contractAfter}</b>{language === "ar" ? " أفسّر" : language === "fr" ? " : j’explique" : "I explain"}</span>
             </div>
-            <Link className="button secondary" to={`/mission/${nextId}`}>
-              {unfinished ? "واصل المختبر" : "افتح المختبر"}{" "}
-              <ArrowLeft size={18} />
+            <Link className="button secondary" to={`/mission/${nextId}?lang=${language}`}>
+              {unfinished ? c.continueLab : c.openLab}{" "}
+              <RouteArrow size={18} />
             </Link>
             <p className="focus-proof-status">
               {unfinished
-                ? `${unfinished.draft.trials.length} تجارب محفوظة في هذا المتصفح`
-                : `${verified.length} من 4 مختبرات لها دفتر تجارب مكتمل`}
+                ? c.draftsSaved(unfinished.draft.trials.length)
+                : c.booksComplete(verified.length)}
             </p>
           </div>
           <div className="focus-system">
@@ -214,24 +216,23 @@ export function KidHomeV2() {
               id={nextId}
               settings={unfinished?.draft.settings || initialSettings()}
               trial={focusTrial}
+              language={language}
             />
-            <div className="focus-annotation">المدخل ← القاعدة ← المخرج</div>
+            <div className="focus-annotation">{c.inputRuleOutput}</div>
           </div>
         </section>
 
         <section className="evidence-rail-section">
           <div className="evidence-intro">
-            <p className="eyebrow">ما الذي يتطور؟</p>
-            <h2>دليل على التفكير، لا نقاط فقط.</h2>
-            <p>
-              كل مختبر يترك أثرًا واضحًا: ماذا فهمت، مثّلت، توقعت، اختبرت
-              وفسّرت.
-            </p>
+            <p className="eyebrow">{c.evidenceEyebrow}</p>
+            <h2>{c.evidenceTitle}</h2>
+            <p>{c.evidenceBody}</p>
           </div>
           <div className="evidence-rail-v2">
-            {evidenceLabels.map(([name, label]) => {
+            {c.evidence.map(([name, label], index) => {
+              const sourceName = evidenceLabels[index][0];
               const active = verified.some((entry) =>
-                entry.items.includes(name),
+                entry.items.includes(sourceName),
               );
               return (
                 <div className={active ? "active" : ""} key={name}>
@@ -247,17 +248,18 @@ export function KidHomeV2() {
         </section>
 
         <section className="track-board" id="missions">
-          <div className="track-board-head">
-            <div>
-              <p className="eyebrow">المسار الأول</p>
-              <h2>فكّر كنظام</h2>
+            <div className="track-board-head">
+              <div>
+              <p className="eyebrow">{c.trackEyebrow}</p>
+              <h2>{c.trackTitle}</h2>
             </div>
-            <Link to="/missions">
-              شاهد المختبرات المفتوحة <ArrowLeft size={17} />
+            <Link to={`/missions?lang=${language}`}>
+              {c.openLabs} <RouteArrow size={17} />
             </Link>
           </div>
           <div className="track-path">
-            {missions.map(([title, desc], index) => {
+            {missions.map(([sourceTitle], index) => {
+              const [title, desc] = c.missions[index];
               const route =
                 index === 1
                   ? "/mission/routing"
@@ -271,7 +273,7 @@ export function KidHomeV2() {
               const labId = route?.split("/").at(-1) as LabId | undefined;
               const done = labId
                 ? verified.some((entry) => entry.labId === labId)
-                : completedNames.has(title);
+                : completedNames.has(sourceTitle);
               const current = route === `/mission/${nextId}` && !done;
               return (
                 <div
@@ -291,41 +293,42 @@ export function KidHomeV2() {
                   </div>
                   {route ? (
                     <Link to={route}>
-                      {done ? "راجع" : "افتح"} <ArrowLeft size={15} />
+                      {done ? c.review : c.open} <RouteArrow size={15} />
                     </Link>
                   ) : (
-                    <span className="path-lock">
-                      <LockKeyhole size={14} /> لاحقًا
+                    <span className="path-lock" title={c.later}>
+                      <LockKeyhole size={14} /> {c.later}
                     </span>
                   )}
                 </div>
               );
             })}
           </div>
+          <p className="local-note">{c.trackStatus}</p>
         </section>
 
         <section className="recent-proof">
           <div>
-            <p className="eyebrow">آخر ما أثبته تفكيرك</p>
+            <p className="eyebrow">{c.recentEyebrow}</p>
             <h2>
               {evidence.length
-                ? "هذه نتائج حقيقية من مختبراتك."
-                : "ابدأ بمختبر واحد."}
+                ? c.recentHasEvidence
+                : c.recentEmpty}
             </h2>
           </div>
           {evidence.length ? (
             <div className="proof-list">
               {evidence.slice(0, 3).map((entry) => (
                 <article key={entry.mission}>
-                  <b>{entry.mission}</b>
-                  <p>{entry.explanation || entry.note}</p>
+                  <b lang={entry.language || "ar"} dir={entry.language === "en" || entry.language === "fr" ? "ltr" : "rtl"}>{entry.mission}</b>
+                  <p lang={entry.explanationLanguage || entry.language || "ar"} dir={entry.explanationLanguage === "en" || entry.explanationLanguage === "fr" || (!entry.explanationLanguage && (entry.language === "en" || entry.language === "fr")) ? "ltr" : "rtl"}>{entry.explanation || entry.note}</p>
                   <small>
                     {entry.trials?.length
-                      ? `${entry.trials.length} تجارب · بكلماتك`
-                      : "سجل من النسخة السابقة"}
+                      ? c.trialSummary(entry.trials.length)
+                      : c.previousRecord}
                   </small>
-                  <Link className="text-link" to="/parent">
-                    راجع دفتر التجارب ←
+                  <Link className="text-link" to={`/parent?lang=${language}`}>
+                    {c.reviewNotebook}
                   </Link>
                 </article>
               ))}
@@ -334,15 +337,13 @@ export function KidHomeV2() {
             <div className="proof-empty">
               <TriangleAlert size={22} />
               <p>
-                لن نملأ هذه المساحة بمؤشرات وهمية. عندما تكمل تجربة، سيظهر هنا
-                ما قمت به فعلًا.
+                {c.emptyEvidence}
               </p>
             </div>
           )}
         </section>
         <p className="local-note">
-          العمل محفوظ في هذا المتصفح فقط. استخدم الجهاز والمتصفح نفسيهما للعودة
-          إلى تجربتك.
+          {c.localNote}
         </p>
       </main>
     </Shell>
@@ -350,7 +351,12 @@ export function KidHomeV2() {
 }
 
 export function ParentDashboardV2() {
-  const profile = getProfile();
+  const [params] = useSearchParams();
+  const requested = params.get("lang");
+  const language: BrandLanguage = requested === "en" || requested === "fr" ? requested : "ar";
+  const c = pilotUiCopy[language].parent;
+  const RouteArrow = language === "ar" ? ArrowLeft : ArrowRight;
+  const profile = getProfile(pilotUiCopy[language].kid.defaultNickname);
   const evidence = getEvidence();
   const navigate = useNavigate();
   const [deleteError, setDeleteError] = useState(false);
@@ -359,68 +365,65 @@ export function ParentDashboardV2() {
     (entry) => entry.labId && entry.trials?.length,
   );
   const observed = new Set(verified.flatMap((entry) => entry.items));
+  const objectiveLanguage: BrandLanguage = latest?.transfer ? latest.language || "ar" : language;
 
   return (
-    <Shell>
-      <main className="wrap pilot-page">
+    <Shell language={language}>
+      <main className="wrap pilot-page" lang={language} dir={language === "ar" ? "rtl" : "ltr"}>
+        <LanguagePicker language={language} label={pilotUiCopy[language].languageLabel} />
         <header className="parent-v2-head">
           <div>
-            <p className="eyebrow">لوحة الأهل</p>
-            <h1>كيف يفكّر {profile.child}؟</h1>
-            <p>
-              لا نعرض ترتيبًا أو درجة ذكاء. نعرض فقط ما ظهر داخل المهمات وما
-              سنتمرن عليه بعد ذلك.
-            </p>
+            <p className="eyebrow">{c.eyebrow}</p>
+            <h1>{c.titleLead}<bdi>{profile.child}</bdi>{c.titleTrail}</h1>
+            <p>{c.intro}</p>
           </div>
           <div className="parent-actions">
-            <Link className="workspace-switch" to="/curriculum">
-              المنهج الكامل <ArrowLeft size={17} />
+            <Link className="workspace-switch" to={`/curriculum?lang=${language}`}>
+              {c.curriculum} <RouteArrow size={17} />
             </Link>
-            <Link className="workspace-switch" to="/kid">
-              مساحة {profile.child} <ArrowLeft size={17} />
+            <Link className="workspace-switch" to={`/kid?lang=${language}`}>
+              {c.childSpace}: <bdi>{profile.child}</bdi> <RouteArrow size={17} />
             </Link>
           </div>
         </header>
 
         <section className="parent-story">
           <div className="story-main">
-            <p className="story-label">آخر دليل محفوظ</p>
-            <h2 lang={latest?.language || "ar"} dir={latest?.language === "en" || latest?.language === "fr" ? "ltr" : "rtl"}>
+            <p className="story-label">{c.latest}</p>
+            <h2 lang={language} dir={language === "ar" ? "rtl" : "ltr"}>
               {latest
-                ? `من مختبر «${latest.mission}»`
-                : `لم نكوّن ملخصًا بعد لـ ${profile.child}.`}
+                ? c.fromLab(latest.mission)
+                : c.noSummary}
             </h2>
-            <p lang={latest?.language || "ar"} dir={latest?.language === "en" || latest?.language === "fr" ? "ltr" : "rtl"}>
+            <p lang={latest?.language || language} dir={latest?.language === "en" || latest?.language === "fr" ? "ltr" : "rtl"}>
               {latest
                 ? latest.note
-                : "بعد أول مختبر سنعرض هنا جملة واضحة تصف ما فعله الطفل فعلًا، بدل ملء اللوحة بأرقام لا تعني شيئًا."}
+                : c.emptySummary}
             </p>
           </div>
           <div className="next-objective">
-            <span>الهدف التالي</span>
-            <b lang={latest?.language || "ar"} dir={latest?.language === "en" || latest?.language === "fr" ? "ltr" : "rtl"}>
+            <span>{c.nextObjective}</span>
+            <b lang={objectiveLanguage} dir={objectiveLanguage === "ar" ? "rtl" : "ltr"}>
               {latest?.labId
-                ? latest.transfer || labs[latest.labId].transfer
-                : "ابدأ بمختبر واحد، واسأل الطفل عن توقعه قبل التشغيل."}
+                ? latest.transfer || missionWords[language][latest.labId].transfer
+                : c.emptyObjective}
             </b>
-            <small>سؤال للحوار بعد التجربة</small>
+            <small>{c.afterTest}</small>
           </div>
         </section>
 
         <section className="evidence-matrix-section">
           <div className="matrix-copy">
-            <p className="eyebrow">أدلة التعلّم</p>
-            <h2>خمسة أشياء يمكن مراجعتها.</h2>
-            <p>
-              العلامة تعني وجود سجل للفعل، وليست حكمًا على إتقان الطفل. الإجابات
-              محفوظة لمراجعتكم؛ لا يصحّحها النظام تلقائيًا.
-            </p>
+            <p className="eyebrow">{c.evidenceEyebrow}</p>
+            <h2>{c.evidenceTitle}</h2>
+            <p>{c.evidenceBody}</p>
           </div>
           <div className="evidence-matrix">
-            {evidenceLabels.map(([name, label]) => {
-              const seen = observed.has(name);
+            {c.evidence.map(([name, label], index) => {
+              const sourceName = evidenceLabels[index][0];
+              const seen = observed.has(sourceName);
               const count = verified.filter((entry) =>
-                entry.items.includes(name),
+                entry.items.includes(sourceName),
               ).length;
               return (
                 <div className={seen ? "seen" : ""} key={name}>
@@ -430,11 +433,7 @@ export function ParentDashboardV2() {
                   <b>{name}</b>
                   <p>{label}</p>
                   <small>
-                    {seen
-                      ? count === 1
-                        ? "مسجل في مختبر واحد"
-                        : `مسجل في ${count} مختبرات`
-                      : "لا يوجد سجل مفصل بعد"}
+                    {seen ? c.recordedCount(count) : c.notRecorded}
                   </small>
                 </div>
               );
@@ -445,11 +444,11 @@ export function ParentDashboardV2() {
         <section className="parent-lab-history">
           <div className="history-head">
             <div>
-              <p className="eyebrow">من داخل المختبر</p>
-              <h2>ما الذي حدث فعلًا؟</h2>
+              <p className="eyebrow">{c.historyEyebrow}</p>
+              <h2>{c.historyTitle}</h2>
             </div>
-            <Link to="/missions">
-              استعرض المهمات <ArrowLeft size={17} />
+            <Link to={`/missions?lang=${language}`}>
+              {c.browse} <RouteArrow size={17} />
             </Link>
           </div>
           {evidence.length ? (
@@ -461,36 +460,34 @@ export function ParentDashboardV2() {
                 >
                   <details>
                     <summary>
-                      <span lang={entry.language || "ar"} dir={entry.language === "en" || entry.language === "fr" ? "ltr" : "rtl"}>{entry.mission}</span> ·{" "}
+                      <span lang={entry.language || language} dir={entry.language === "en" || entry.language === "fr" || (!entry.language && language !== "ar") ? "ltr" : "rtl"}>{entry.mission}</span> ·{" "}
                       {entry.trials?.length
-                        ? `${entry.trials.length} تجارب`
-                        : "سجل سابق"}
+                        ? c.trialCount(entry.trials.length)
+                        : c.olderRecord}
                     </summary>
                     <time dateTime={entry.date}>
-                      {new Intl.DateTimeFormat("ar-MA", {
+                      {new Intl.DateTimeFormat(c.dateLocale, {
                         dateStyle: "medium",
                         timeStyle: "short",
                       }).format(new Date(entry.date))}
                     </time>
                     {entry.labId && entry.trials?.length ? (
                       <>
-                        <p className="legacy-note">القيد الذي حدده الطفل</p>
+                        <p className="legacy-note">{c.constraintLabel}</p>
                         <blockquote className="child-quote" lang={entry.observationLanguage || entry.language || "ar"} dir={entry.observationLanguage === "en" || entry.observationLanguage === "fr" || (!entry.observationLanguage && (entry.language === "en" || entry.language === "fr")) ? "ltr" : "rtl"}>
                           {entry.observation}
                         </blockquote>
                         <TrialNotebook id={entry.labId} trials={entry.trials} />
-                        <p className="legacy-note">تفسير الطفل بعد التحسين</p>
+                        <p className="legacy-note">{c.explanationLabel}</p>
                         <blockquote className="child-quote" lang={entry.explanationLanguage || entry.language || "ar"} dir={entry.explanationLanguage === "en" || entry.explanationLanguage === "fr" || (!entry.explanationLanguage && (entry.language === "en" || entry.language === "fr")) ? "ltr" : "rtl"}>
                           {entry.explanation}
                         </blockquote>
                       </>
                     ) : (
-                      <p className="legacy-note">
-                        {entry.note}
-                        <br />
-                        هذا سجل من النسخة السابقة؛ لا يحتوي على التوقعات
-                        والنتائج التفصيلية. أعد المختبر لإضافة دفتر تجارب.
-                      </p>
+                      <>
+                      <p className="legacy-note" lang={entry.language || "ar"} dir={entry.language === "en" || entry.language === "fr" ? "ltr" : "rtl"}>{entry.note}</p>
+                      <p className="legacy-note">{c.olderRecordDetail}</p>
+                      </>
                     )}
                   </details>
                 </article>
@@ -500,46 +497,37 @@ export function ParentDashboardV2() {
             <div className="parent-empty">
               <MapPinned size={24} />
               <div>
-                <b>لا توجد أدلة بعد.</b>
-                <p>
-                  ابدأ من مساحة الطفل. بعد إتمام المختبر ستتغير هذه اللوحة
-                  تلقائيًا.
-                </p>
+                <b>{c.emptyTitle}</b>
+                <p>{c.emptyBody}</p>
               </div>
             </div>
           )}
         </section>
         <p className="local-note">
-          هذه الأدلة محفوظة محليًا في هذا المتصفح. لا يوجد حساب سحابي أو تقييم
-          آلي للإجابات في هذه النسخة. لوحة الأهل لا تتطلب رمزًا؛ استخدمها على
-          جهاز الأسرة مع وجود وليّ الأمر.
+          {c.localNote}
         </p>
         <section className="family-controls" aria-labelledby="family-data-title">
           <div>
-            <p className="eyebrow">تحكم الأسرة</p>
-            <h2 id="family-data-title">أنت تتحكم في سجل هذا المتصفح.</h2>
-            <p>
-              احذف اللقب وكل المسودات والتجارب والأدلة المحفوظة على هذا الموقع
-              في هذا المتصفح. لا يؤثر ذلك على ملفات أو مواقع أخرى.
-            </p>
+            <p className="eyebrow">{c.familyEyebrow}</p>
+            <h2 id="family-data-title">{c.familyTitle}</h2>
+            <p>{c.familyBody}</p>
           </div>
           <button
             className="button button-ghost family-delete"
             onClick={() => {
               const confirmed = window.confirm(
-                "سيُحذف اللقب وكل مسودات المختبرات والأدلة المحفوظة لهذا الموقع في هذا المتصفح. لا يمكن التراجع عن الحذف. هل تريد المتابعة؟",
+                c.deleteConfirm,
               );
               if (!confirmed) return;
-              if (clearFamilyData()) navigate("/");
+              if (clearFamilyData()) navigate(`/?lang=${language}`);
               else setDeleteError(true);
             }}
           >
-            حذف سجل التجربة من هذا المتصفح
+            {c.deleteButton}
           </button>
           {deleteError && (
             <p className="storage-alert" role="alert">
-              تعذّر حذف كل البيانات. امسح بيانات هذا الموقع من إعدادات
-              المتصفح.
+              {c.deleteError}
             </p>
           )}
         </section>

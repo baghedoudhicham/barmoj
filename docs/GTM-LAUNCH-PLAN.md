@@ -6,7 +6,7 @@ Execution has started with the [task handoff](EXECUTION-HANDOFF.md), [trilingual
 
 ## What we can offer today
 
-An adult-supervised, free family pilot with four interactive labs and a twelve-mission curriculum in Arabic, English and French. The lab catalogue and child result page also support those three languages; Kid Home, onboarding, privacy and Parent Dashboard remain Arabic. Answers stay in the same browser. There is no sign-in, email capture, cloud sync, billing or automated assessment. The remaining eight interactive labs and full-surface localization are future work.
+An adult-supervised, free family pilot uses four interactive labs and a twelve-mission curriculum in Arabic, English and French. The landing page, family setup, Kid Home, privacy page, Parent Dashboard, lab catalogue and child result page also support all three languages. Answers stay in the same browser. There is no sign-in, email capture, cloud sync, billing or automated assessment. The remaining eight interactive labs and fluent-language/device review remain before a broader trial.
 
 Positioning: **بِركار — مساحة لينمو التفكير.** A family space for asking, predicting, testing and explaining. Show an actual before/after experiment and the child's reasoning, using invented demonstration answers. Do not promise improved IQ, an attention cure, protection from all online harms, or measurable learning benefits before evaluation. Avoid shaming children, parents or conventional schools.
 

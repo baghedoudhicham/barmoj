@@ -49,17 +49,17 @@ const PROFILE_KEY = "barmoj-profile";
 const EVIDENCE_KEY = "barmoj-evidence";
 const DEFAULT_PROFILE: Profile = { child: "المستكشف" };
 
-function safeNickname(value: unknown) {
-  if (typeof value !== "string") return DEFAULT_PROFILE.child;
-  return Array.from(value.trim()).slice(0, 24).join("") || DEFAULT_PROFILE.child;
+function safeNickname(value: unknown, fallback = DEFAULT_PROFILE.child) {
+  if (typeof value !== "string") return fallback;
+  return Array.from(value.trim()).slice(0, 24).join("") || fallback;
 }
 
-export function getProfile(): Profile {
+export function getProfile(defaultNickname = DEFAULT_PROFILE.child): Profile {
   try {
     const value = localStorage.getItem(PROFILE_KEY);
-    if (!value) return DEFAULT_PROFILE;
+    if (!value) return { child: safeNickname(defaultNickname) };
     const stored = JSON.parse(value);
-    const profile = { child: safeNickname(stored?.child) };
+    const profile = { child: safeNickname(stored?.child, defaultNickname) };
     // Migrate older profiles by dropping parent names and exact ages.
     if (JSON.stringify(stored) !== JSON.stringify(profile)) {
       localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
@@ -71,7 +71,7 @@ export function getProfile(): Profile {
     } catch {
       // The app can still be used without a saved profile.
     }
-    return DEFAULT_PROFILE;
+    return { child: safeNickname(defaultNickname) };
   }
 }
 

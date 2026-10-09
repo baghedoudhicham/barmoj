@@ -25,6 +25,7 @@ export function Shell({ children, language = "ar" }: { children: ReactNode; lang
     document.title = `BRKAR | بِركار — ${heading || c.tagline}`;
   }, [language, c.tagline]);
   const { pathname, hash } = useLocation();
+  const localizedPath = (path: string) => `${path}?lang=${language}`;
   useEffect(() => {
     setOpen(false);
     const heading = content.current?.querySelector("h1");
@@ -63,9 +64,9 @@ export function Shell({ children, language = "ar" }: { children: ReactNode; lang
           <nav className="desktop-nav" aria-label={c.nav}>
             {inKid ? (
               <>
-                <Link to="/kid" aria-current={pathname === "/kid" ? "page" : undefined}>{c.space}</Link>
+                <Link to={localizedPath("/kid")} aria-current={pathname === "/kid" ? "page" : undefined}>{c.space}</Link>
                 <Link to={`/curriculum?lang=${language}`} aria-current={pathname === "/curriculum" ? "page" : undefined}>{c.curriculum}</Link>
-                <Link to="/parent" aria-current={pathname === "/parent" ? "page" : undefined}>{c.parents}</Link>
+                <Link to={localizedPath("/parent")} aria-current={pathname === "/parent" ? "page" : undefined}>{c.parents}</Link>
               </>
             ) : (
               <>
@@ -77,7 +78,7 @@ export function Shell({ children, language = "ar" }: { children: ReactNode; lang
             )}
             <Link
               className="button button-small"
-              to={inKid ? `/missions?lang=${language}` : "/onboarding"}
+              to={inKid ? `/missions?lang=${language}` : localizedPath("/onboarding")}
             >
               {inKid ? c.track : c.start}
             </Link>
@@ -100,19 +101,19 @@ export function Shell({ children, language = "ar" }: { children: ReactNode; lang
             id="mobile-navigation"
             aria-label={c.nav}
           >
-            <Link to="/kid" onClick={() => setOpen(false)}>
+            <Link to={localizedPath("/kid")} onClick={() => setOpen(false)}>
               {c.space}
             </Link>
-            <Link to="/parent" onClick={() => setOpen(false)}>
+            <Link to={localizedPath("/parent")} onClick={() => setOpen(false)}>
               {c.parents}
             </Link>
             <Link to={`/curriculum?lang=${language}`} onClick={() => setOpen(false)}>
               {c.curriculum}
             </Link>
-            <Link to="/privacy" onClick={() => setOpen(false)}>
+            <Link to={localizedPath("/privacy")} onClick={() => setOpen(false)}>
               {c.privacy}
             </Link>
-            <Link to="/onboarding" onClick={() => setOpen(false)}>
+            <Link to={localizedPath("/onboarding")} onClick={() => setOpen(false)}>
               {c.start}
             </Link>
           </nav>
@@ -129,8 +130,8 @@ export function Shell({ children, language = "ar" }: { children: ReactNode; lang
         </div>
         <nav aria-label={c.nav}>
           <Link to={`/curriculum?lang=${language}`}>{c.curriculum}</Link>
-          <Link to="/privacy">{c.privacy}</Link>
-          <Link to="/parent">{c.parents}</Link>
+          <Link to={localizedPath("/privacy")}>{c.privacy}</Link>
+          <Link to={localizedPath("/parent")}>{c.parents}</Link>
         </nav>
       </footer>
     </div>

@@ -1,75 +1,38 @@
-import { ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Link, useSearchParams } from "react-router-dom";
 import { Shell } from "./components";
+import type { BrandLanguage } from "./brand";
+import { pilotUiCopy } from "./pilot-ui-copy";
+import { LanguagePicker } from "./language-picker";
 
 export function PrivacyPage() {
+  const [params] = useSearchParams();
+  const requested = params.get("lang");
+  const language: BrandLanguage = requested === "en" || requested === "fr" ? requested : "ar";
+  const c = pilotUiCopy[language].privacy;
+  const RouteArrow = language === "ar" ? ArrowLeft : ArrowRight;
   return (
-    <Shell>
-      <main className="wrap narrow privacy-page">
-        <p className="eyebrow">للأهل · نسخة تجربة</p>
-        <h1>الخصوصية في تجربة بِرْكار</h1>
-        <p className="privacy-intro">
-          صُمّمت هذه النسخة كتجربة عائلية محلية، وليست حسابًا سحابيًا أو خدمة
-          تعليمية تجارية مكتملة.
-        </p>
-        <section>
-          <h2>ما الذي يحفظه التطبيق؟</h2>
-          <p>
-            يحفظ لقب الطفل الاختياري ومسودات المختبرات والتوقعات والتجارب
-            والتفسيرات على هذا الجهاز، داخل تخزين المتصفح لهذا الموقع. لا نطلب
-            اسم وليّ الأمر أو البريد أو العمر الدقيق. يمكنك تغيير اللقب أو حذف
-            السجل من لوحة الأهل. لا يشفّر التطبيق هذه البيانات كخزنة خاصة؛ فقد
-            يتمكن من يستخدم ملف المتصفح نفسه من رؤيتها.
-          </p>
-        </section>
-        <section>
-          <h2>من يستطيع رؤية السجل؟</h2>
-          <p>
-            لا يوجد حساب أو رمز دخول في هذه النسخة. كل من يستخدم ملف المتصفح
-            نفسه قد يفتح مساحة الطفل ولوحة الأهل. استخدموا جهاز الأسرة مع إشراف
-            وليّ الأمر، ولا تكتبوا الاسم الكامل أو المدرسة أو العنوان أو أي
-            معلومة خاصة في حقول الإجابة.
-          </p>
-        </section>
-        <section>
-          <h2>هل ترسل إجابات الطفل إلى خدمة أخرى؟</h2>
-          <p>
-            لا يرسل التطبيق الملف الشخصي أو الإجابات إلى واجهة برمجية أو حساب
-            سحابي، ولا يستخدم إعلانات أو تحليلات أو دردشة ذكاء اصطناعي. الموقع
-            نفسه مستضاف على Firebase Hosting؛ مزود الاستضافة يعالج الطلبات
-            التقنية اللازمة لتقديم صفحات الموقع وفق شروطه وسياساته.
-          </p>
-        </section>
-        <section>
-          <h2>كيف نمسح البيانات؟</h2>
-          <p>
-            من لوحة الأهل استخدموا «حذف سجل التجربة من هذا المتصفح» لمسح اللقب
-            والمسودات والأدلة لهذا الموقع. حذف بيانات الموقع من إعدادات المتصفح
-            يمسحها أيضًا. لا يوجد نسخ احتياطي أو استرجاع بعد الحذف.
-          </p>
-        </section>
-        <section>
-          <h2>حدود النسخة التجريبية</h2>
-          <p>
-            المنهج والمقدمة والمختبرات التفاعلية الأربعة ونتائجها متاحة بالعربية
-            والإنجليزية والفرنسية. مساحة الطفل والبداية والخصوصية ولوحة الأهل
-            بالعربية. لا يوجد دفع أو تسجيل دخول أو مزامنة أو علاج أو تشخيص. هذه
-            المعلومات وصف للنسخة التقنية وليست سياسة قانونية نهائية.
-          </p>
-        </section>
+    <Shell language={language}>
+      <main className="wrap narrow privacy-page" lang={language} dir={language === "ar" ? "rtl" : "ltr"}>
+        <LanguagePicker language={language} label={pilotUiCopy[language].languageLabel} />
+        <p className="eyebrow">{c.eyebrow}</p>
+        <h1>{c.title}</h1>
+        <p className="privacy-intro">{c.intro}</p>
+        {c.sections.map((section) => (
+          <section key={section.title}>
+            <h2>{section.title}</h2>
+            <p>{section.body}</p>
+          </section>
+        ))}
         <section className="privacy-launch-note">
-          <h2>قبل فتح التسجيل العام</h2>
-          <p>
-            على مشغّل الخدمة تحديد الجهة المسؤولة ووسيلة تواصل الأسرة، ومراجعة
-            متطلبات حماية البيانات وموافقة أولياء الأمور والاستضافة لدى مزودي
-            الخدمة قبل توسيع التجربة.
-          </p>
+          <h2>{c.launchTitle}</h2>
+          <p>{c.launchBody}</p>
           <a href="https://www.cndp.ma/images/lois/Loi-09-08-Fr.pdf" target="_blank" rel="noreferrer">
-            قانون حماية المعطيات الشخصية المغربي 09-08
+            {c.law}
           </a>
         </section>
-        <Link className="button button-ghost" to="/parent">
-          العودة إلى لوحة الأهل <ArrowLeft size={17} />
+        <Link className="button button-ghost" to={`/parent?lang=${language}`}>
+          {c.back} <RouteArrow size={17} />
         </Link>
       </main>
     </Shell>

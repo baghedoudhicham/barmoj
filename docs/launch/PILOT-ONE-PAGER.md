@@ -56,7 +56,7 @@ It does not measure intelligence or attention, compare children, or claim educat
 
 ### Data and languages
 
-There are no accounts, cloud backups or payments. Answers stay in the same browser profile and may be seen by anyone using that profile. Please do not enter a child's full name, school or address. The four interactive labs, curriculum and introduction are available in Arabic, English and French; Kid Home, onboarding, privacy and the parent dashboard remain Arabic.
+There are no accounts, cloud backups or payments. Answers stay in the same browser profile and may be seen by anyone using that profile. Please do not enter a child's full name, school or address. The landing page, setup, Kid Home, privacy page, parent dashboard, curriculum, four interactive labs, catalogue and result page are available in Arabic, English and French.
 
 ### What we ask of an organization
 
@@ -89,7 +89,7 @@ Il ne mesure ni l’intelligence ni l’attention, ne compare pas les enfants et
 
 ### Données et langues
 
-Il n’y a ni compte, ni sauvegarde dans le cloud, ni paiement. Les réponses restent dans le même profil de navigateur et peuvent être consultées par toute personne qui l’utilise. N’indiquez pas le nom complet, l’école ou l’adresse de l’enfant. Les quatre ateliers interactifs, le programme et la présentation sont disponibles en arabe, anglais et français ; l’espace enfant, l’accueil, la confidentialité et le tableau des parents restent en arabe.
+Il n’y a ni compte, ni sauvegarde dans le cloud, ni paiement. Les réponses restent dans le même profil de navigateur et peuvent être consultées par toute personne qui l’utilise. N’indiquez pas le nom complet, l’école ou l’adresse de l’enfant. La présentation, la configuration familiale, l’espace enfant, la confidentialité, le tableau des parents, le programme et les quatre ateliers interactifs sont disponibles en arabe, anglais et français.
 
 ### Ce que nous demandons à une organisation
 

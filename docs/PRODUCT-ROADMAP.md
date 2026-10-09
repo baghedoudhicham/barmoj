@@ -7,7 +7,7 @@ For the next bounded tasks, use [Execution handoff](EXECUTION-HANDOFF.md) and th
 
 ## What to build first
 
-The current app is an Arabic-first, local-storage pilot with four interactive labs in Arabic, English and French. Kid Home, onboarding, privacy and Parent Dashboard remain Arabic. Use the existing optional local nickname and learning flow for supervised trials; add no new profile fields, avatar uploads or community features until family feedback shows a clear need and their privacy and safety design is ready.
+The current app is an Arabic-first, local-storage pilot with four interactive labs and family-facing routes in Arabic, English and French. Language selection travels through page links; Arabic uses RTL and English/French use LTR. Use the existing optional local nickname and learning flow for supervised trials; add no new profile fields, avatar uploads or community features until family feedback shows a clear need and their privacy and safety design is ready.
 
 ### Stage 0 — small, observed usability round
 
@@ -69,8 +69,8 @@ Keep AI support optional, explain when it is being used, and evaluate whether it
 ## Language sequence
 
 1. Keep Modern Standard Arabic as the default written experience and preserve full RTL behavior.
-2. The landing page, curriculum, four interactive labs, lab catalogue and child result page now support Arabic, English and French. Kid Home, onboarding, privacy and Parent Dashboard remain Arabic; translate these surfaces when research shows the need and after review by fluent speakers.
-3. Verify saved-answer language, accessible names, number/date handling and full-screen RTL/LTR behavior on supported devices before claiming the entire journey is localized.
+2. The landing page, onboarding, Kid Home, curriculum, four interactive labs, lab catalogue, child result, privacy page and Parent Dashboard support Arabic, English and French. Page links carry the selected language; no extra child profile field is stored for language.
+3. Have fluent reviewers check the language, then verify saved-answer labels, accessible names, number/date handling and full-screen RTL/LTR behavior on supported devices before the public cohort.
 4. Test whether Moroccan families want Darija explanations or audio alongside MSA. Treat that as a separate, opt-in voice layer rather than mixing dialect inconsistently into written lesson text.
 
 Do not infer a preferred language from a child’s name or location. Let the parent set the default and let the child ask to switch.
@@ -97,6 +97,6 @@ Avoid ads, sale of child data, pay-to-win rewards, artificial urgency and lockin
 
 The selected product brand is **BRKAR | بِرْكار**, spoken **Birkar**. بِرْكار is a geometry compass/divider used to draw circles and arcs; the product uses it as a metaphor for giving each child tools to explore from their own starting point and at their own pace. Keep this meaning as a brand story, not a claim that every family already knows the technical word.
 
-The interface remains Arabic-first and RTL, with Arabic, English and French curriculum content. BRKAR should feel calm, curious and capable without relying on religious labeling, child rankings or social-feed mechanics. Family values live in reviewed learning experiences and adult guidance.
+Arabic remains the default interface and uses RTL; English and French use LTR across the family-facing experience. BRKAR should feel calm, curious and capable without relying on religious labeling, child rankings or social-feed mechanics. Family values live in reviewed learning experiences and adult guidance.
 
 Before a wider launch, complete market-specific checks for the BRKAR and بِرْكار spellings, domain, social handles and trademarks. The current Firebase host/project, GitHub repository name and local-storage keys retain Barmoj as infrastructure/history; the public product identity is BRKAR. This brand decision is not legal clearance.

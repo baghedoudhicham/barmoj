@@ -1,11 +1,19 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
-import { SectionTitle, Shell } from "./components";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Shell } from "./components";
 import { getProfile, saveProfile } from "./data";
+import type { BrandLanguage } from "./brand";
+import { pilotUiCopy } from "./pilot-ui-copy";
+import { LanguagePicker } from "./language-picker";
 export default function Onboarding() {
-  const initial = getProfile();
+  const [params] = useSearchParams();
+  const requested = params.get("lang");
+  const language: BrandLanguage = requested === "en" || requested === "fr" ? requested : "ar";
+  const c = pilotUiCopy[language].onboarding;
+  const RouteArrow = language === "ar" ? ArrowLeft : ArrowRight;
+  const initial = getProfile(pilotUiCopy[language].kid.defaultNickname);
   const [child, setChild] = useState(initial.child);
   const [supervised, setSupervised] = useState(false);
   const [storageError, setStorageError] = useState(false);
@@ -13,24 +21,25 @@ export default function Onboarding() {
   function submit(event: FormEvent) {
     event.preventDefault();
     if (!supervised) return;
-    if (!saveProfile({ child })) {
+    if (!saveProfile({ child: child.trim() || pilotUiCopy[language].kid.defaultNickname })) {
       setStorageError(true);
       return;
     }
-    navigate("/kid");
+    navigate(`/kid?lang=${language}`);
   }
   return (
-    <Shell>
-      <main className="wrap narrow section onboarding-wrap">
-        <div className="onboarding-index"><span>01</span><b>وليّ الأمر</b><span>02</span><b>لقب اختياري</b><span>03</span><b>ابدأ</b></div>
-        <SectionTitle level={1} eyebrow="إعداد الأسرة" title="بداية بسيطة، وبيانات أقل" body="هذه تجربة عائلية بإشراف بالغ. لا نطلب اسم وليّ الأمر أو العمر الدقيق أو البريد الإلكتروني." />
+    <Shell language={language}>
+      <main className="wrap narrow section onboarding-wrap" lang={language} dir={language === "ar" ? "rtl" : "ltr"}>
+        <LanguagePicker language={language} label={pilotUiCopy[language].languageLabel} />
+        <div className="onboarding-index"><span>01</span><b>{c.adultStep}</b><span>02</span><b>{c.nicknameStep}</b><span>03</span><b>{c.beginStep}</b></div>
+        <div className="section-title"><p className="eyebrow">{c.eyebrow}</p><h1>{c.title}</h1><p>{c.body}</p></div>
         <form className="form-panel" onSubmit={submit}>
-          <label>لقب للطفل (اختياري)<input value={child} onChange={(event) => setChild(event.target.value)} placeholder="مثال: المستكشف" maxLength={24} autoComplete="off" /></label>
-          <p className="privacy-hint">استخدم لقبًا بدل الاسم الكامل. لا تكتب معلومات عن المدرسة أو العنوان أو وسيلة التواصل.</p>
-          <label className="supervision-check"><input type="checkbox" checked={supervised} onChange={(event) => setSupervised(event.target.checked)} required /> أنا وليّ الأمر أو المرافق البالغ، وسأبقى حاضرًا أثناء تجربة الطفل.</label>
-          <p className="pilot-disclosure">التقدم والإجابات محفوظة في هذا المتصفح فقط، ولا تُرسل إلى حساب أو خدمة تحليلات داخل التطبيق. من يستخدم ملف المتصفح نفسه قد يتمكن من رؤية لوحة الأهل. <Link to="/privacy">اقرأ تفاصيل تجربة الأسرة.</Link></p>
-          {storageError && <p role="alert" className="storage-alert">تعذّر حفظ اللقب في هذا المتصفح. تحقق من إعدادات التخزين ثم أعد المحاولة.</p>}
-          <button className="button" type="submit" disabled={!supervised}>ادخل مساحة التعلّم <ArrowLeft size={18} /></button>
+          <label>{c.nicknameLabel}<input value={child} onChange={(event) => setChild(event.target.value)} placeholder={c.nicknamePlaceholder} maxLength={24} autoComplete="off" /></label>
+          <p className="privacy-hint">{c.privacyHint}</p>
+          <label className="supervision-check"><input type="checkbox" checked={supervised} onChange={(event) => setSupervised(event.target.checked)} required /> {c.supervision}</label>
+          <p className="pilot-disclosure">{c.disclosureBefore}<Link to={`/privacy?lang=${language}`}>{c.privacyLink}</Link></p>
+          {storageError && <p role="alert" className="storage-alert">{c.storageError}</p>}
+          <button className="button" type="submit" disabled={!supervised}>{c.enter} <RouteArrow size={18} /></button>
         </form>
       </main>
     </Shell>

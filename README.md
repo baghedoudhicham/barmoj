@@ -29,7 +29,7 @@ The learning cycle is:
 
 The first track remains `فكّر كنظام` with 12 missions. Code and AI are execution tools, not the learning objective.
 
-The site includes the complete 12-mission curriculum in Arabic, English and French at /curriculum. The four Mission Labs, lab catalogue and child result screen also support Arabic, English and French with RTL/LTR direction. Kid Home, onboarding, privacy and the Parent Dashboard remain Arabic; this narrower scope is stated before families start.
+The site includes a twelve-mission curriculum and family-facing pages in Arabic, English and French. Kid Home, onboarding, privacy and Parent Dashboard share the selected language with the curriculum and four interactive labs. Arabic is the default and uses RTL; English and French use LTR. Four of the twelve activities are interactive labs; the rest are curriculum prompts and family activities.
 
 The family guide also offers an optional, non-scored values reflection in all three curriculum languages, connecting careful reasoning with truthfulness, responsibility, patience, consultation and care. The pilot contains no scripture quotations; direct Qur'an or hadith text requires source, translation and context review before it is added.
 

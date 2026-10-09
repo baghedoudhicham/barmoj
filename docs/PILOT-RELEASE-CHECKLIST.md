@@ -1,7 +1,7 @@
 # BRKAR family pilot release boundary
 
 **Release type:** moderated, parent-supervised product pilot  
-**Interface:** Arabic-first. The curriculum, four interactive labs, lab catalogue and child result page are available in Arabic, English and French. Kid Home, onboarding, privacy and Parent Dashboard remain Arabic.
+**Interface:** Arabic-first with Arabic, English and French across the landing page, onboarding, Kid Home, the twelve-activity curriculum, four interactive labs, lab catalogue, child result, privacy page and Parent Dashboard. Language selection travels in page links; Arabic uses RTL and English/French use LTR.
 **Interactive learning:** four of twelve missions. The other eight are curriculum prompts and optional family activities, not completed interactive lessons.
 
 ## What this build does

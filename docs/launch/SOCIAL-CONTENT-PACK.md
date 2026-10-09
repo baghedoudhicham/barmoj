@@ -6,7 +6,7 @@ Prepared 7 October 2026. These are adult-facing drafts for organic review, not p
 
 Show one question, one test and one reason to talk together. Speak to the parent, not to a child as a consumer. Let each result remain readable. A clip or card should not promise improved attention, intelligence or school performance. The product is a finite set of four interactive labs, not an endless feed or an adaptive AI tutor.
 
-All drafts below point to the current live site. The four labs and their catalogue/results are available in Arabic, English and French; Kid Home, onboarding, privacy and Parent Dashboard remain Arabic. Keep that availability statement in campaign materials until every surface is localized.
+All drafts below point to the current live site. The landing page, family setup, Kid Home, privacy page, Parent Dashboard, curriculum, lab catalogue and four interactive labs are available in Arabic, English and French. Fluent review and real-device QA remain before publication.
 
 ## Four-week organic sequence
 
@@ -37,13 +37,13 @@ Publish at most one substantial post a week during the first review. Reuse the s
 
 If a sensor reads 60% while the true water level is 96%, should the pump stop? In our model, one sensor is not enough. We add a backup reading and test the decision again. Try the lab together and ask: what second piece of evidence would help?
 
-Four interactive labs in Arabic, English and French; some pages remain Arabic. Free family exploration with an adult.
+Four interactive labs and the main family pages are available in Arabic, English and French. Free family exploration with an adult.
 
 **French caption**
 
 Si un capteur indique 60 % alors que le niveau réel de l’eau est à 96 %, la pompe doit-elle s’arrêter ? Dans notre modèle, un seul capteur ne suffit pas. Ajoutons une mesure de secours et testons à nouveau. Essayez l’atelier ensemble : quelle deuxième preuve nous aiderait ?
 
-Quatre ateliers interactifs en arabe, anglais et français ; certaines pages restent en arabe. Découverte gratuite en famille, avec un adulte.
+Quatre ateliers interactifs et les principales pages familiales sont disponibles en arabe, anglais et français. Découverte gratuite en famille, avec un adulte. Une relecture linguistique et un contrôle sur appareils réels restent nécessaires avant publication.
 
 **Accuracy check:** show the actual 80% stopping rule, true level 96%, sensor reading 60%, the pump continuing with one sensor, then stopping after the backup-sensor disagreement rule is enabled. The clip is a demonstration, not the full lab completion sequence.
 

@@ -1,13 +1,8 @@
 import type { BrandLanguage } from "./brand";
+export { languageNames } from "./languages";
 import { labs, type LabId, type Settings, type Trial } from "./lab-model";
 
 export type LabLanguage = BrandLanguage;
-
-export const languageNames: Record<LabLanguage, string> = {
-  ar: "العربية",
-  en: "English",
-  fr: "Français",
-};
 
 type MissionWords = {
   title: string;
