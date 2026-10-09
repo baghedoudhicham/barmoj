@@ -1,6 +1,6 @@
 # BRKAR execution handoff
 
-Updated 5 October 2026. Start here when continuing with a lower-token model. Execute one bounded task at a time; do not reopen settled brand or audience decisions.
+Updated 9 October 2026. Start here when continuing with a lower-token model. Execute one bounded task at a time; do not reopen settled brand or audience decisions.
 
 ## Release and decisions
 
