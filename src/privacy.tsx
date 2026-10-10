@@ -31,6 +31,10 @@ export function PrivacyPage() {
             {c.law}
           </a>
         </section>
+        <section><h2>{language === "ar" ? "المساعدة والملاحظات" : language === "fr" ? "Aide et remarques" : "Help and concerns"}</h2>
+          <p>{language === "ar" ? "بِركار مشروع مستقل يديره مؤسسه. للملاحظات المتعلقة بالتجربة أو الخصوصية أو سلامة الطفل، اطلعوا على صفحة المساعدة والتواصل." : language === "fr" ? "BRKAR est un projet indépendant porté par son fondateur. Pour toute remarque sur l’aperçu, la confidentialité ou la sécurité d’un enfant, consultez la page d’aide et de contact." : "BRKAR is an independent, founder-led project. For preview, privacy or child-safety concerns, see our help and contact page."}</p>
+          <Link to={`/support?lang=${language}`}>{language === "ar" ? "المساعدة والتواصل" : language === "fr" ? "Aide et contact" : "Help and contact"}</Link>
+        </section>
         <Link className="button button-ghost" to={`/parent?lang=${language}`}>
           {c.back} <RouteArrow size={17} />
         </Link>

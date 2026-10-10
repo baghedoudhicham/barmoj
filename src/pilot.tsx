@@ -378,6 +378,9 @@ export function ParentDashboardV2() {
             <p>{c.intro}</p>
           </div>
           <div className="parent-actions">
+            <Link className="workspace-switch" to={`/support?lang=${language}`}>
+              {language === "ar" ? "المساعدة والتواصل" : language === "fr" ? "Aide et contact" : "Help and contact"} <RouteArrow size={17} />
+            </Link>
             <Link className="workspace-switch" to={`/curriculum?lang=${language}`}>
               {c.curriculum} <RouteArrow size={17} />
             </Link>

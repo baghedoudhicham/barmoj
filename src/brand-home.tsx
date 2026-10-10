@@ -100,7 +100,7 @@ export function BrandHome() {
           <p className="brand-eyebrow">{c.eyebrow}</p>
           <h1>{c.title[0]}<br/> <span>{c.title[1]}</span></h1>
           <p className="brand-intro">{c.intro}</p>
-          <div className="brand-actions"><a className="button secondary" href="#interest">{c.interestCta}<BrandArrow/></a><Link className="brand-text-link" to={`/onboarding?lang=${language}`}>{c.tryLab}<BrandArrow/></Link></div>
+          <div className="brand-actions"><Link className="button secondary" to={`/onboarding?lang=${language}`}>{c.tryLab}<BrandArrow/></Link><a className="brand-text-link" href="#interest">{c.interestCta}<BrandArrow/></a></div>
           <p className="brand-scope">{c.scope}</p>
         </div>
         <ReasoningCompass language={language} c={c}/>

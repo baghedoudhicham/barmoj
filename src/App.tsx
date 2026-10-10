@@ -15,6 +15,7 @@ const EconomyMission = lazy(() => import("./mission-lab").then(m => ({ default: 
 const Result = lazy(() => import("./mission-lab").then(m => ({ default: m.Result })));
 const CurriculumPage = lazy(() => import("./curriculum").then(m => ({ default: m.CurriculumPage })));
 const PrivacyPage = lazy(() => import("./privacy").then(m => ({ default: m.PrivacyPage })));
+const SupportPage = lazy(() => import("./support").then(m => ({ default: m.SupportPage })));
 
 const routeStatusCopy: Record<BrandLanguage, { loading: string; title: string; body: string; retry: string; home: string }> = {
   ar: { loading: "نفتح المساحة…", title: "تعذّر فتح هذه المساحة", body: "تحقق من الاتصال ثم أعد تحميل الصفحة. العمل المحفوظ في هذا المتصفح يبقى متاحًا.", retry: "أعد المحاولة", home: "العودة إلى البداية" },
@@ -58,6 +59,7 @@ export default function App() {
       <Route path="/parent" element={<ParentDashboardV2 />} />
       <Route path="/curriculum" element={<CurriculumPage />} />
       <Route path="/privacy" element={<PrivacyPage />} />
+      <Route path="/support" element={<SupportPage />} />
       <Route path="*" element={<BrandHome />} />
     </Routes>
     </Suspense>

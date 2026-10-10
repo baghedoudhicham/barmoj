@@ -113,6 +113,9 @@ export function Shell({ children, language = "ar" }: { children: ReactNode; lang
             <Link to={localizedPath("/privacy")} onClick={() => setOpen(false)}>
               {c.privacy}
             </Link>
+            <Link to={localizedPath("/support")} onClick={() => setOpen(false)}>
+              {c.support}
+            </Link>
             <Link to={localizedPath("/onboarding")} onClick={() => setOpen(false)}>
               {c.start}
             </Link>
@@ -131,6 +134,7 @@ export function Shell({ children, language = "ar" }: { children: ReactNode; lang
         <nav aria-label={c.nav}>
           <Link to={`/curriculum?lang=${language}`}>{c.curriculum}</Link>
           <Link to={localizedPath("/privacy")}>{c.privacy}</Link>
+          <Link to={localizedPath("/support")}>{c.support}</Link>
           <Link to={localizedPath("/parent")}>{c.parents}</Link>
         </nav>
       </footer>
