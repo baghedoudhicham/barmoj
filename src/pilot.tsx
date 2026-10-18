@@ -30,6 +30,7 @@ import type { LabId } from "./lab-model";
 import { initialSettings } from "./lab-model";
 import { latestDraft } from "./lab-storage";
 import { LabDiagram, TrialNotebook } from "./mission-lab";
+import { ActionLink, LearningSteps } from "./ui-kit";
 
 const availableMissions = [
   {
@@ -196,15 +197,18 @@ export function KidHomeV2() {
             </div>
             <h2>{focusCopy.title}</h2>
             <p>{focusCopy.goal}</p>
-            <div className="reasoning-contract">
-              <span><b>{c.contractBefore}</b>{language === "ar" ? " أتوقع" : language === "fr" ? " : je prédis" : "I predict"}</span>
-              <span><b>{c.contractDuring}</b>{language === "ar" ? " ألاحظ" : language === "fr" ? " : j’observe" : "I notice"}</span>
-              <span><b>{c.contractAfter}</b>{language === "ar" ? " أفسّر" : language === "fr" ? " : j’explique" : "I explain"}</span>
-            </div>
-            <Link className="button secondary" to={`/mission/${nextId}?lang=${language}`}>
+            <LearningSteps
+              label={language === "ar" ? "خطوات التفكير" : language === "fr" ? "Étapes de réflexion" : "Thinking steps"}
+              steps={[
+                { title: language === "ar" ? "أتوقّع" : language === "fr" ? "Je prévois" : "I predict", state: "current" },
+                { title: language === "ar" ? "أجرّب" : language === "fr" ? "Je teste" : "I test", state: "upcoming" },
+                { title: language === "ar" ? "أشرح" : language === "fr" ? "J’explique" : "I explain", state: "upcoming" },
+              ]}
+            />
+            <ActionLink className="button secondary" variant="secondary" to={`/mission/${nextId}?lang=${language}`}>
               {unfinished ? c.continueLab : c.openLab}{" "}
               <RouteArrow size={18} />
-            </Link>
+            </ActionLink>
             <p className="focus-proof-status">
               {unfinished
                 ? c.draftsSaved(unfinished.draft.trials.length)
