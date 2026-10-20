@@ -5,12 +5,8 @@ import {
   ArrowRight,
   Check,
   CircleDot,
-  Gauge,
   LockKeyhole,
   MapPinned,
-  Route as RouteIcon,
-  Sparkles,
-  TrafficCone,
   TriangleAlert,
 } from "lucide-react";
 import { Shell } from "./components";
@@ -36,37 +32,29 @@ const availableMissions = [
   {
     number: "02",
     title: "رتّب التوصيلات",
-    subtitle: "قيود · أولوية · إعادة تخطيط",
     route: "/mission/routing",
     tone: "learn",
-    icon: RouteIcon,
     purpose: "فكّك المشكلة إلى قيود، ثم غيّر المسار عندما يغلق الطريق.",
   },
   {
     number: "05",
     title: "تقاطع آمن",
-    subtitle: "حالات · شروط · تعارض",
     route: "/mission/traffic",
     tone: "challenge",
-    icon: TrafficCone,
     purpose: "عرّف حالات واضحة ثم اختبر ما إذا كان نظامك يسمح بتعارض خطير.",
   },
   {
     number: "06",
     title: "خزان لا يفيض",
-    subtitle: "حساس · قاعدة · فشل · حماية",
     route: "/mission/water",
     tone: "water",
-    icon: Gauge,
     purpose: "ابنِ قاعدة، اكسرها بحساس معطّل، ثم حسّن النظام وأعد الاختبار.",
   },
   {
     number: "08",
     title: "لعبة لا تنكسر",
-    subtitle: "حلقة تغذية · استغلال · موازنة",
     route: "/mission/economy",
     tone: "explore",
-    icon: Sparkles,
     purpose:
       "توقّع أثر القواعد على عدة أدوار، ثم اكتشف الحلقة التي يمكن استغلالها.",
   },
@@ -114,7 +102,6 @@ export function MissionHub() {
 
         <section className="mission-atlas">
           {availableMissions.map((mission) => {
-            const Icon = mission.icon;
             return (
               <Link
                 className={`atlas-card ${mission.tone}`}
@@ -122,8 +109,8 @@ export function MissionHub() {
                 key={mission.route}
               >
                 <div className="atlas-meta">
-                  <span>{mission.number}</span>
-                  <Icon size={20} />
+                  <span className="atlas-number">{mission.number}</span>
+                  <span className="atlas-label">{language === "ar" ? "مختبر" : language === "fr" ? "Atelier" : "Lab"}</span>
                 </div>
                 <div className="atlas-visual">
                   <MissionSystemPreview tone={mission.tone} language={language} />

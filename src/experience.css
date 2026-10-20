@@ -18,6 +18,8 @@
 .atlas-card { min-height: 0; border-width: 1px; border-radius: 9px; box-shadow: 3px 3px 0 #dfe8dd; }
 .atlas-card.learn, .atlas-card.challenge, .atlas-card.water, .atlas-card.explore { background: #fff; color: var(--ink); }
 .atlas-meta, .atlas-visual { border-bottom-width: 1px; }
+.atlas-number { font-variant-numeric: tabular-nums; }
+.atlas-label { color: #51554e; font-size: .68rem; font-weight: 800; }
 .atlas-visual { min-height: 240px; background: #e3f3db; }
 .atlas-card.challenge .atlas-visual { background: #f7dde3; }
 .atlas-card.water .atlas-visual { background: #e0f1ec; }

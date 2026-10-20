@@ -35,21 +35,25 @@ The first audience is Muslim families across MENA, with learning content in Arab
 
 Keep the existing palette: ink `#151515`, paper `#F7F7F2`, learn green `#39DD59`, explore yellow `#FFC107`, challenge red `#FF164D`, deep green `#173E2B`, and water blue `#72C7E8`. Use paper and ink for reading; green for the main invitation; yellow and red selectively where their meaning helps. Pale supporting surfaces derive from this palette rather than adding another brand colour family.
 
-The current mark is a compact drawing compass: a small joint, two distinct legs, a brace, and a fine plotted arc. It sits on a paper tile with an ink keyline and restrained rounded corner so both green legs stay visible. Use a minimum 24 px mark size; the normal app mark is 44 px. Leave clear space around it, and do not rotate, stretch, decorate, or animate it. Keep the Arabic wordmark as editable Noto Kufi Arabic text; the short gold arc under it echoes the plotted line without changing Arabic letter shapes.
+The current mark is a compact drawing compass: a small joint, two distinct legs, a brace, and a fine plotted arc. It sits on a paper tile with an ink keyline and restrained rounded corner so both green legs stay visible. Use a minimum 24 px mark size; the normal app mark is 44 px. Leave clear space around it, and do not rotate, stretch, decorate, or animate it. Keep the Arabic wordmark as editable Noto Kufi Arabic text; the short gold arc under it echoes the plotted line without changing Arabic letter shapes. Use restrained, hand-authored SVG illustrations for the four real adventures; avoid generic icon packs and generated text in images.
 
 Use self-hosted Noto Kufi Arabic for Arabic and the system sans-serif for Latin reading. Keep Arabic line-height generous; use logical CSS properties for direction. The shared header/footer carries the identity into every lab, Kid Home, Parent Dashboard and the curriculum. Custom vector lab sketches explain the four real systems; do not add generic icon packs to marketing pages.
 
 ## Language and product truth
 
-The introduction is available in Arabic, English and French through `?lang=ar`, `?lang=en`, and `?lang=fr`. The selected language follows the family into the four interactive labs, lab catalogue, results and curriculum. Kid Home, onboarding, privacy and the Parent Dashboard remain Arabic; the introduction makes that explicit before a family starts. No sign-in, payment, cloud sync, child-facing AI, infinite feed or public ranking is offered.
+The introduction, onboarding, Kid Home, Parent Dashboard, privacy page, curriculum, support page and four interactive labs are available in Arabic, English and French through `?lang=ar`, `?lang=en`, and `?lang=fr`. Keep the selected language as families move between routes. No sign-in, payment, cloud sync, child-facing AI, infinite feed or public ranking is offered.
 
 ## Release materials
 
 - `public/brand/compass-mark.png`: current multicolour compass mark and favicon.
-- `public/brand-mark.svg`, `public/brand/mark-ink.svg`, and `public/brand/mark-paper.svg`: earlier exports retained for reference.
+- `docs/brand/archive/`: previous mark-only SVG exports retained for internal reference; these are not public app assets.
+- `public/adventures/`: four small, text-free SVG illustrations for water safety, route planning, traffic safety and game rules.
+- `src/assets/brkar-paper-workshop.png`: original workshop concept image used only by the development design gallery.
 - `src/brand.tsx`: shared mark image, arrow and navigation wording; the header wordmark stays editable text.
 - `src/brand-home.tsx`: reviewed three-language introduction and finite four-lab overview.
 - `src/brand.css`: responsive identity and homepage system.
+
+The design gallery is available only in local development. Its source artwork is imported from `src/assets/` and does not ship as a public static file.
 
 ## Launch checks
 

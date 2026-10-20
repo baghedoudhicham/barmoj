@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+const workshopArt = new URL("./assets/brkar-paper-workshop.png", import.meta.url).href;
 import { Shell } from "./components";
 import type { BrandLanguage } from "./brand";
 import { ActionButton, ActionLink, ChoiceCard, LearningSteps, StatusTag } from "./ui-kit";
@@ -59,7 +60,7 @@ export default function DesignSystemGallery() {
             <ol aria-hidden="true"><li className="current"/><li/><li/><li/></ol>
           </header>
           <div className="ds-activity-main">
-            <div className="ds-activity-art"><img src="/assets/brkar-paper-workshop.png" alt={language === "ar" ? "تجربة جسرين من الورق فوق مجرى ماء" : language === "fr" ? "Deux ponts en papier au-dessus d’un cours d’eau" : "Two paper bridges over a paper stream"} /></div>
+            <div className="ds-activity-art"><img src={workshopArt} alt={language === "ar" ? "تجربة جسرين من الورق فوق مجرى ماء" : language === "fr" ? "Deux ponts en papier au-dessus d’un cours d’eau" : "Two paper bridges over a paper stream"} /></div>
             <div className="ds-activity-copy">
               <p className="ds-activity-kicker">{language === "ar" ? "تحدّي هندسي" : language === "fr" ? "Défi d’ingénierie" : "Engineering prompt"}</p>
               <h2 id="ds-activity-title">{language === "ar" ? "أي جسر يحمل أكثر؟" : language === "fr" ? "Quel pont porte le plus ?" : "Which bridge holds more?"}</h2>
@@ -103,7 +104,7 @@ export default function DesignSystemGallery() {
             <div className="ds-type-sample"><span>Body / 16</span><p>{text(copy.intro)}</p></div>
           </div>
           <div className="ds-paper-asset">
-            <img src="/assets/brkar-paper-workshop.png" alt="" />
+            <img src={workshopArt} alt="" />
             <div><b>{text(copy.visual)}</b><small>{language === "ar" ? "ورق ملموس، هندسة واضحة، بلا كتابة داخل الصورة." : language === "fr" ? "Papier tactile, géométrie claire, sans texte intégré." : "Tactile paper, clear geometry, no baked-in text."}</small></div>
           </div>
         </section>

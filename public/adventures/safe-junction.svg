@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Safe junction</title>
+  <desc id="desc">A four-way junction with separated directions and a clear stop signal.</desc>
+  <path d="M94 10h52v55h55v50h-55v55H94v-55H39V65h55z" fill="#F7F7F2" stroke="#151515" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M120 10v160M39 90h162" stroke="#173E2B" stroke-width="3" stroke-dasharray="7 8"/>
+  <rect x="20" y="43" width="37" height="54" rx="8" fill="#151515"/>
+  <circle cx="38.5" cy="58" r="7" fill="#FF164D"/>
+  <circle cx="38.5" cy="81" r="7" fill="#F7F7F2"/>
+  <rect x="183" y="83" width="37" height="54" rx="8" fill="#151515"/>
+  <circle cx="201.5" cy="98" r="7" fill="#FF164D"/>
+  <circle cx="201.5" cy="121" r="7" fill="#39DD59"/>
+  <circle cx="120" cy="90" r="9" fill="#FFC107" stroke="#151515" stroke-width="3"/>
+</svg>

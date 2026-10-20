@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Route planning</title>
+  <desc id="desc">A delivery route connecting three stops, with a closed road to work around.</desc>
+  <path d="m45 135 65-91 91 77-81 22z" stroke="#173E2B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 9"/>
+  <path d="m47 134 62-87" stroke="#39DD59" stroke-width="7" stroke-linecap="round"/>
+  <path d="m104 48 12 9-14 3" stroke="#151515" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="24" y="119" width="43" height="43" rx="8" fill="#F7F7F2" stroke="#151515" stroke-width="4"/>
+  <path d="M35 140h21m-11-11v22" stroke="#151515" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="110" cy="44" r="18" fill="#FFC107" stroke="#151515" stroke-width="4"/>
+  <circle cx="199" cy="121" r="18" fill="#F7F7F2" stroke="#151515" stroke-width="4"/>
+  <circle cx="120" cy="144" r="18" fill="#F7F7F2" stroke="#151515" stroke-width="4"/>
+  <path d="m166 64 23 24m0-24-23 24" stroke="#FF164D" stroke-width="5" stroke-linecap="round"/>
+</svg>

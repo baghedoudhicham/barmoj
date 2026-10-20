@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Game rules</title>
+  <desc id="desc">Two linked rounds show how a small reward rule can change a game.</desc>
+  <path d="M75 48h91l19 19m0-19v20h-20M165 132H74l-19-19m0 19v-20h20" stroke="#151515" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="55" cy="75" r="29" fill="#FFC107" stroke="#151515" stroke-width="4"/>
+  <path d="M43 75h24m-12-12v24" stroke="#151515" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="185" cy="105" r="29" fill="#39DD59" stroke="#151515" stroke-width="4"/>
+  <path d="M173 105h24" stroke="#151515" stroke-width="4" stroke-linecap="round"/>
+  <path d="M97 90h42" stroke="#72C7E8" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="118" cy="90" r="8" fill="#F7F7F2" stroke="#151515" stroke-width="3"/>
+</svg>

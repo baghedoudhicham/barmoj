@@ -15,7 +15,7 @@ const copy = {
     familyLabel: "للأهل", familyTitle: "افتحوا حوارًا، وشاهدوا أثره.", familyBody: "تحتفظ لوحة الأهل بتوقع الطفل، وتجربته، وتفسيره بكلماته. هي بداية لحوار عن طريقة التفكير، وليست حكمًا على ذكائه أو مقارنة بطفل آخر.", parent: "شاهد لوحة الأهل", familyPrompt: "سؤال بعد التجربة", prompt: "ما الذي غيّر رأيك؟ وكيف عرفت؟",
     valuesLabel: "تعلم له معنى", valuesTitle: "تفكير واعٍ، وقيم نعيشها.", valuesBody: "مصمّم لعائلات مسلمة في المنطقة: الأمانة في وصف ما حدث، العدل في القرارات، والإحسان في تحسين ما نبنيه. نناقشها من خلال مواقف وأسئلة، مع احترام دور الأسرة في التوجيه.", values: ["أمانة", "عدل", "إحسان"],
     pilotTitle: "ابدؤوا بمختبر واحد.", pilotBody: "تجربة بإشراف بالغ، بلا حساب أو دفع. تُحفظ الإجابات والتقدم في هذا المتصفح فقط. المختبرات التفاعلية وواجهة الطفل والبداية والخصوصية ولوحة الأهل متاحة بالعربية والإنجليزية والفرنسية.", privacy: "تفاصيل الخصوصية", pronunciation: "بِركار · تُنطق بيركار · أداة ترسم بها دوائر، وتفتح بها احتمالات.", language: "لغة التعريف بالمنصة",
-    interestEyebrow: "للأهل · تجربة بِركار الأولى", interestTitle: "هل ترغبون في تجربة المساحة معنا؟", interestBody: "نحضّر لإطلاق محدود مع أسر عربية في المنطقة. عندما تفتح قائمة الاهتمام، سنطلب بريد وليّ الأمر فقط لإرسال تحديث عن التجربة. لا نحتاج اسم الطفل أو مدرسته أو إجاباته.", interestStatus: "قائمة الاهتمام قيد الإعداد", interestEmail: "بريد وليّ الأمر", interestPlaceholder: "name@example.com", interestConsent: "أوافق على تلقي تحديث عن تجربة بِركار", interestButton: "أبلغوني عند فتح التسجيل", interestClosed: "التسجيل لم يُفتح بعد. لن تُرسل أي بيانات من هذه الصفحة؛ سنفعّله بعد تجهيز وجهة خاصة للحفظ وخيارات واضحة للموافقة والحذف.", interestCta: "تابعوا فتح التسجيل", tryLab: "جرّبوا مختبرًا الآن",
+    interestEyebrow: "للأهل · تجربة بِركار الأولى", interestTitle: "هل ترغبون في تجربة المساحة معنا؟", interestBody: "نستعد لتجربة عائلية محدودة بإشراف وليّ الأمر. يمكنكم استكشاف المختبرات الآن، وسنعلن عن فتح باب المشاركة عندما تجهز تفاصيل التجربة.", interestStatus: "التسجيل غير مفتوح حاليًا", interestClosed: "لا تجمع هذه الصفحة عناوين البريد ولا ترسلها. للاستفسار عن تجربة العائلات، تواصلوا مع فريق بِركار.", interestSupport: "تواصلوا معنا", interestCta: "تفاصيل تجربة العائلات", tryLab: "جرّبوا مختبرًا الآن",
   },
   en: {
     eyebrow: "For children aged 7–14 · with family",
@@ -29,7 +29,7 @@ const copy = {
     familyLabel: "For parents", familyTitle: "Start a conversation. See what it reveals.", familyBody: "The parent dashboard keeps your child's prediction, experiment, and explanation in their own words. It starts a conversation about thinking, without ranking children or judging intelligence.", parent: "View the parent dashboard", familyPrompt: "A question after the experiment", prompt: "What changed your mind? How did you know?",
     valuesLabel: "Learning with meaning", valuesTitle: "Thoughtful choices. Values we practise.", valuesBody: "Designed for Muslim families across MENA: honesty in reporting what happened, fairness in decisions, and care in improving what we build. We explore these through situations and questions, with families guiding the conversation.", values: ["Honesty", "Fairness", "Care"],
     pilotTitle: "Begin with one lab.", pilotBody: "An adult-supervised pilot, with no account or payment. Answers and progress stay in this browser. The interactive labs, child space, setup, privacy page and parent dashboard are available in Arabic, English and French.", privacy: "Privacy details", pronunciation: "BRKAR · pronounced bir-kār · a drawing compass, with room to explore.", language: "Introduction language",
-    interestEyebrow: "For parents · First BRKAR pilot", interestTitle: "Would you like to try this space with us?", interestBody: "We’re preparing a small pilot with Arabic-speaking families across the region. When the interest list opens, we’ll ask only for a parent or guardian’s email to send a pilot update. No child name, school, or answers are needed.", interestStatus: "Interest list in preparation", interestEmail: "Parent or guardian email", interestPlaceholder: "name@example.com", interestConsent: "I agree to receive an update about the BRKAR pilot", interestButton: "Notify me when it opens", interestClosed: "Sign-up is not open yet. This page sends no details; we’ll enable it after a private destination and clear consent and deletion choices are in place.", interestCta: "Follow the pilot opening", tryLab: "Try a lab now",
+    interestEyebrow: "For parents · BRKAR family pilot", interestTitle: "Would you like to explore this space with us?", interestBody: "We’re preparing a small, adult-supervised family trial. You can explore the labs now; we’ll share participation details when the trial is ready.", interestStatus: "Pilot registration is not open", interestClosed: "This page does not collect or send email addresses. For a family-pilot enquiry, contact the BRKAR team.", interestSupport: "Contact the team", interestCta: "Family trial details", tryLab: "Try a lab now",
   },
   fr: {
     eyebrow: "Pour les enfants de 7 à 14 ans · en famille",
@@ -43,19 +43,21 @@ const copy = {
     familyLabel: "Pour les parents", familyTitle: "Ouvrir le dialogue. Observer la démarche.", familyBody: "Le tableau des parents conserve la prévision, l’expérience et l’explication de l’enfant avec ses propres mots. Il invite à parler de sa démarche, sans classement ni jugement sur son intelligence.", parent: "Voir le tableau des parents", familyPrompt: "Une question après l’expérience", prompt: "Qu’est-ce qui t’a fait changer d’avis ? Comment l’as-tu su ?",
     valuesLabel: "Apprendre avec du sens", valuesTitle: "Réfléchir avec des valeurs vécues.", valuesBody: "Pensé pour les familles musulmanes de la région MENA : décrire les faits avec honnêteté, décider avec justice et améliorer avec soin. Ces valeurs prennent vie à travers des situations et des questions, guidées par la famille.", values: ["Honnêteté", "Justice", "Soin"],
     pilotTitle: "Commencer par un atelier.", pilotBody: "Un pilote accompagné par un adulte, sans compte ni paiement. Les réponses et la progression restent dans ce navigateur. Les laboratoires interactifs, l’espace enfant, la configuration, la confidentialité et le tableau des parents sont disponibles en arabe, anglais et français.", privacy: "Détails de confidentialité", pronunciation: "BRKAR · se prononce bir-kār · un compas pour tracer, et un espace pour explorer.", language: "Langue de présentation",
-    interestEyebrow: "Pour les parents · Premier pilote BRKAR", interestTitle: "Envie d’explorer cet espace avec nous ?", interestBody: "Nous préparons un petit pilote avec des familles arabophones de la région. À l’ouverture de la liste, seul le courriel d’un parent ou tuteur sera demandé pour envoyer des nouvelles du pilote. Aucun nom d’enfant, école ou réponse n’est nécessaire.", interestStatus: "Liste d’intérêt en préparation", interestEmail: "Courriel du parent ou tuteur", interestPlaceholder: "name@example.com", interestConsent: "J’accepte de recevoir une nouvelle au sujet du pilote BRKAR", interestButton: "Me prévenir à l’ouverture", interestClosed: "Les inscriptions ne sont pas encore ouvertes. Cette page n’envoie aucune donnée ; nous activerons la liste après avoir défini un espace privé et des choix clairs de consentement et de suppression.", interestCta: "Suivre l’ouverture du pilote", tryLab: "Essayer un atelier",
+    interestEyebrow: "Pour les parents · Pilote familial BRKAR", interestTitle: "Envie d’explorer cet espace avec nous ?", interestBody: "Nous préparons un petit essai familial accompagné par un adulte. Vous pouvez explorer les ateliers ; nous communiquerons les modalités lorsque l’essai sera prêt.", interestStatus: "Les inscriptions au pilote ne sont pas ouvertes", interestClosed: "Cette page ne collecte ni n’envoie d’adresses e-mail. Pour une question sur l’essai familial, contactez l’équipe BRKAR.", interestSupport: "Contacter l’équipe", interestCta: "Détails de l’essai familial", tryLab: "Essayer un atelier",
   },
 };
 
 const labIds = ["water", "routing", "traffic", "economy"];
 
+const adventureArt = [
+  "/adventures/water-system.svg",
+  "/adventures/route-planning.svg",
+  "/adventures/safe-junction.svg",
+  "/adventures/game-rules.svg",
+] as const;
+
 function LabSketch({ index }: { index: number }) {
-  return <svg viewBox="0 0 120 90" fill="none" aria-hidden="true" focusable="false">
-    {index === 0 && <><path d="M27 18v53h48V18M20 18h62M75 59h16V39h13" /><path className="sketch-fill" d="M28 44h46v26H28z" /><path strokeDasharray="4 4" d="M28 30h47" /><circle cx="99" cy="31" r="8" /></>}
-    {index === 1 && <><path strokeDasharray="4 4" d="m21 64 35-41 43 37-43 10z" /><rect x="12" y="55" width="18" height="18" /><circle className="sketch-fill" cx="56" cy="23" r="10" /><circle cx="99" cy="60" r="10" /><circle cx="56" cy="70" r="10" /></>}
-    {index === 2 && <><path d="M45 8v23H18v25h27v26h25V56h29V31H70V8" /><circle className="sketch-fill" cx="35" cy="23" r="7" /><circle cx="79" cy="64" r="7" /><path strokeDasharray="4 4" d="M57 8v75M16 43h84" /></>}
-    {index === 3 && <><path d="M35 20h47l12 13m0-13v13H81M88 64H41L28 51m0 13V51h13" /><circle className="sketch-fill" cx="25" cy="33" r="14" /><circle cx="96" cy="53" r="14" /><path d="M19 33h12m-6-6v12M90 53h12" /></>}
-  </svg>;
+  return <img src={adventureArt[index]} alt="" aria-hidden="true" />;
 }
 
 function ReasoningCompass({ language, c }: { language: BrandLanguage; c: typeof copy.ar }) {
@@ -75,7 +77,7 @@ function ReasoningCompass({ language, c }: { language: BrandLanguage; c: typeof 
       <div className="orbit-step orbit-step-2"><span>03</span><b>{c.mapSteps[2]}</b></div>
       <div className="orbit-step orbit-step-3"><span>04</span><b>{c.mapSteps[3]}</b></div>
       <div className="orbit-center">
-        <div className="orbit-tank"><LabSketch index={0}/><span dir="ltr">80%</span></div>
+          <div className="orbit-tank"><LabSketch index={0}/><span dir="ltr">80%</span></div>
         <strong>{c.mapPrompt}</strong>
       </div>
     </div>
@@ -121,14 +123,10 @@ export function BrandHome() {
       <section className="brand-pilot wrap"><div><h2>{c.pilotTitle}</h2><p>{c.pilotBody}</p><Link className="brand-text-link" to={`/privacy?lang=${language}`}>{c.privacy}<BrandArrow/></Link></div><Link className="button secondary" to={`/onboarding?lang=${language}`}>{c.tryLab}<BrandArrow/></Link></section>
       <section className="brand-interest wrap" id="interest" aria-labelledby="interest-title">
         <div className="brand-interest-copy"><p className="brand-eyebrow">{c.interestEyebrow}</p><h2 id="interest-title">{c.interestTitle}</h2><p>{c.interestBody}</p><Link className="brand-text-link" to={`/privacy?lang=${language}`}>{c.privacy}<BrandArrow/></Link></div>
-        <div className="interest-preview" aria-describedby="interest-closed">
+        <div className="interest-preview">
           <div className="interest-preview-head"><span className="interest-status-dot" aria-hidden="true"/><span>{c.interestStatus}</span></div>
-          <fieldset disabled>
-            <label>{c.interestEmail}<input type="email" autoComplete="email" placeholder={c.interestPlaceholder} /></label>
-            <label className="interest-consent"><input type="checkbox" />{c.interestConsent}</label>
-            <button type="button" className="button secondary">{c.interestButton}<BrandArrow/></button>
-          </fieldset>
           <p className="interest-closed" id="interest-closed">{c.interestClosed}</p>
+          <Link className="button secondary" to={`/support?lang=${language}`}>{c.interestSupport}<BrandArrow/></Link>
         </div>
       </section>
       <p className="brand-pronunciation wrap">{c.pronunciation}</p>

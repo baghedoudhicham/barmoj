@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Water system</title>
+  <desc id="desc">A tank, rising water, a level sensor, and a secondary shutoff.</desc>
+  <path d="M54 32v108h98V32M42 32h122" stroke="#151515" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M58 91h90v45H58z" fill="#72C7E8"/>
+  <path d="M59 72h88" stroke="#173E2B" stroke-width="3" stroke-dasharray="7 8"/>
+  <path d="M152 117h34V83h20" stroke="#151515" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="207" cy="65" r="15" fill="#39DD59" stroke="#151515" stroke-width="4"/>
+  <path d="M201 65h12m-6-6v12" stroke="#151515" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="59" cy="72" r="6" fill="#FFC107" stroke="#151515" stroke-width="3"/>
+</svg>

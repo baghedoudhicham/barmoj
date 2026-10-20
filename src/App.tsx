@@ -16,7 +16,9 @@ const Result = lazy(() => import("./mission-lab").then(m => ({ default: m.Result
 const CurriculumPage = lazy(() => import("./curriculum").then(m => ({ default: m.CurriculumPage })));
 const PrivacyPage = lazy(() => import("./privacy").then(m => ({ default: m.PrivacyPage })));
 const SupportPage = lazy(() => import("./support").then(m => ({ default: m.SupportPage })));
-const DesignSystemGallery = lazy(() => import("./design-system-gallery"));
+const DesignSystemGallery = import.meta.env.DEV
+  ? lazy(() => import("./design-system-gallery"))
+  : null;
 
 const routeStatusCopy: Record<BrandLanguage, { loading: string; title: string; body: string; retry: string; home: string }> = {
   ar: { loading: "نفتح المساحة…", title: "تعذّر فتح هذه المساحة", body: "تحقق من الاتصال ثم أعد تحميل الصفحة. العمل المحفوظ في هذا المتصفح يبقى متاحًا.", retry: "أعد المحاولة", home: "العودة إلى البداية" },
@@ -48,7 +50,7 @@ export default function App() {
     <PageErrorBoundary key={pathname} language={language}>
     <Suspense fallback={<div className="route-loading" role="status" lang={language} dir={language === "ar" ? "rtl" : "ltr"}>{copy.loading}</div>}>
     <Routes>
-      {import.meta.env.DEV && <Route path="/_design-system" element={<DesignSystemGallery />} />}
+      {DesignSystemGallery && <Route path="/_design-system" element={<DesignSystemGallery />} />}
       <Route path="/" element={<BrandHome />} />
       <Route path="/onboarding" element={<Onboarding />} />
       <Route path="/kid" element={<KidHomeV2 />} />

@@ -141,7 +141,7 @@ The system applies shared surface and action styling to public marketing pages, 
 
 - Product mark and brand lockup: use the existing supplied asset through the shared brand component. Preserve proportions, clear space, and Arabic wordmark details.
 - Mission diagrams: prefer authored, accessible SVGs or simple CSS diagrams tied to real lab state. Use stable coordinates, clear labels, sufficient line weight, and no misleading decorative values. Hide decorative SVGs from assistive technology; give informative diagrams a caption or accessible description.
-- `public/assets/brkar-paper-workshop.png` is an original transparent generated concept asset for the development gallery. It illustrates paper models without embedded text. The gallery labels it as a design specimen. It has not been tested as a real lesson prop and is not evidence of an experiment result.
+- `src/assets/brkar-paper-workshop.png` is an original transparent concept asset for the local development gallery. It illustrates paper models without embedded text. The gallery labels it as a design specimen. It has not been tested as a real lesson prop and is not evidence of an experiment result. The asset and gallery are excluded from production output.
 - Keep text out of generated images so each language can render sharp, translated UI copy. Use original, rights-cleared visuals; record origin and intended use. Optimize raster assets, preserve transparency where required, and provide meaningful alt text for informative images and empty alt text for decorative ones.
 - Avoid generic stock-photo hero art, synthetic UI screenshots, fabricated product screens, and visual motifs that imply a feature or outcome the app does not support.
 
