@@ -4,7 +4,7 @@ import type { BrandLanguage } from "./brand";
 import { LanguagePicker } from "./language-picker";
 import { pilotUiCopy } from "./pilot-ui-copy";
 
-const contact = "contact@wiwedo.com";
+const contact = "hi@bwilt.com";
 
 const copy: Record<BrandLanguage, {
   eyebrow: string; title: string; intro: string; operator: string; operatorBody: string;
