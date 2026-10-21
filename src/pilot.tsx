@@ -386,10 +386,10 @@ export function ParentDashboardV2() {
             <p className="story-label">{c.latest}</p>
             <h2 lang={language} dir={language === "ar" ? "rtl" : "ltr"}>
               {latest
-                ? c.fromLab(latest.mission)
+                ? c.fromLab(latest.labId ? sharedCopy[language].missionNames[latest.labId] : latest.mission)
                 : c.noSummary}
             </h2>
-            <p lang={latest?.language || language} dir={latest?.language === "en" || latest?.language === "fr" ? "ltr" : "rtl"}>
+            <p lang={latest?.language || language} dir={(latest?.language || language) === "ar" ? "rtl" : "ltr"}>
               {latest
                 ? latest.note
                 : c.emptySummary}
@@ -471,7 +471,7 @@ export function ParentDashboardV2() {
                         <blockquote className="child-quote" lang={entry.observationLanguage || entry.language || "ar"} dir={entry.observationLanguage === "en" || entry.observationLanguage === "fr" || (!entry.observationLanguage && (entry.language === "en" || entry.language === "fr")) ? "ltr" : "rtl"}>
                           {entry.observation}
                         </blockquote>
-                        <TrialNotebook id={entry.labId} trials={entry.trials} />
+                        <TrialNotebook id={entry.labId} trials={entry.trials} language={language} />
                         <p className="legacy-note">{c.explanationLabel}</p>
                         <blockquote className="child-quote" lang={entry.explanationLanguage || entry.language || "ar"} dir={entry.explanationLanguage === "en" || entry.explanationLanguage === "fr" || (!entry.explanationLanguage && (entry.language === "en" || entry.language === "fr")) ? "ltr" : "rtl"}>
                           {entry.explanation}
