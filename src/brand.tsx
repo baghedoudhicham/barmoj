@@ -2,7 +2,7 @@ export type BrandLanguage = "ar" | "en" | "fr";
 
 // Shared flat compass mark. The wordmark stays live text in the app header.
 export function BrandMark() {
-  return <img className="brand-symbol" src="/brand/compass-mark.png" alt="" aria-hidden="true" fetchPriority="high" decoding="async" />;
+  return <img className="brand-symbol" src="/brand/compass-mark.webp" width={256} height={256} alt="" aria-hidden="true" fetchPriority="high" decoding="async" />;
 }
 
 export function BrandArrow() {
