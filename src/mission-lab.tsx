@@ -408,10 +408,19 @@ function MissionLab({ id }: { id: LabId }) {
   const [draft, setDraft] = useState<LabDraft>(
     () => readDraft(id) || emptyDraft(),
   );
+  const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3>(() => {
+    const saved = readDraft(id) || emptyDraft();
+    if (saved.explanation.trim()) return 3;
+    if (saved.trials.length) return 2;
+    if (saved.observation.trim().length >= 8) return 1;
+    return 0;
+  });
   const [storageError, setStorageError] = useState(false);
   const [saveError, setSaveError] = useState(false);
   const outcome = useRef<HTMLDivElement>(null);
+  const stepHeading = useRef<HTMLHeadingElement>(null);
   const focusOutcome = useRef(false);
+  const focusStep = useRef(false);
   const navigate = useNavigate();
   const s = draft.settings;
   useEffect(() => {
@@ -444,12 +453,21 @@ function MissionLab({ id }: { id: LabId }) {
     focusOutcome.current = false;
     outcome.current?.focus();
   }, [latest?.id]);
+  useEffect(() => {
+    if (!focusStep.current) return;
+    focusStep.current = false;
+    stepHeading.current?.focus();
+  }, [activeStep]);
   const currentTrial = [...draft.trials].reverse().find(t => settingsKey(id, t.settings) === settingsKey(id, s));
   const readyToRun =
     draft.observation.trim().length >= 8 &&
     draft.prediction &&
     draft.reason.trim().length >= 8;
   const checks = milestones(id, draft.trials, s);
+  const checksDone = checks.filter((check) => check.done).length;
+  const allChecksDone = checks.length > 0 && checksDone === checks.length;
+  const recentTrials = draft.trials.slice(-3);
+  const earlierTrials = draft.trials.slice(0, -3);
   const complete = canComplete(
     id,
     draft.trials,
@@ -470,6 +488,13 @@ function MissionLab({ id }: { id: LabId }) {
     };
     focusOutcome.current = true;
     update({ trials: [...draft.trials, trial].slice(-MAX_TRIALS), prediction: "", reason: "" });
+    setActiveStep(2);
+  }
+  function goToStep(step: 0 | 1 | 2 | 3) {
+    const canOpen = step === 0 || (step === 1 && draft.observation.trim().length >= 8) || ((step === 2 || step === 3) && draft.trials.length > 0);
+    if (!canOpen || step === activeStep) return;
+    focusStep.current = true;
+    setActiveStep(step);
   }
   function finish() {
     if (!complete) return;
@@ -525,26 +550,51 @@ function MissionLab({ id }: { id: LabId }) {
           <div>
             <p className="eyebrow">{c.eyebrow.replace("{number}", labsNumber[id])}</p>
             <h1>{lab.title}</h1>
-            <p>{lab.goal}</p>
+            <p className="lab-heading-goal">{lab.goal}</p>
           </div>
           <span className="lab-number" aria-hidden="true">
-            {labsNumber[id]}
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="17" stroke="currentColor" strokeWidth="1.5" />
+              <path d="m28.5 16-3.8 9.1-9.2 3.8 3.9-9.1 9.1-3.8Z" fill="var(--explore)" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+              <circle cx="23.9" cy="24.1" r="2" fill="var(--learn)" stroke="currentColor" strokeWidth="1.25" />
+            </svg>
+            <b>{labsNumber[id]}</b>
           </span>
         </header>
-        <ol className="notebook-cycle">
-          {c.phases.map((phase, i) => <li key={phase}><b>{String(i + 1).padStart(2, "0")}</b> {phase}</li>)}
-        </ol>
-        <p className="privacy-hint">{c.privacy}</p>
+        <p className="privacy-hint">{c.privacyShort}</p>
+        <nav className="lab-stepper" aria-label={c.progressLabel}>
+          <ol>
+            {c.phases.map((phase, i) => {
+              const step = i as 0 | 1 | 2 | 3;
+              const done = step === 0 ? draft.observation.trim().length >= 8 : step === 1 ? draft.trials.length > 0 : step === 2 ? allChecksDone : complete;
+              const unlocked = step === 0 || (step === 1 && draft.observation.trim().length >= 8) || ((step === 2 || step === 3) && draft.trials.length > 0);
+              return (
+                <li key={phase}>
+                  <button
+                    type="button"
+                    className={activeStep === step ? "is-current" : ""}
+                    aria-current={activeStep === step ? "step" : undefined}
+                    aria-label={done ? `${phase} · ${c.done}` : phase}
+                    disabled={!unlocked}
+                    onClick={() => goToStep(step)}
+                  >
+                    <span className="lab-step-index" aria-hidden="true">{done ? "✓" : String(i + 1).padStart(2, "0")}</span>
+                    <span>{phase}</span>
+                  </button>
+                </li>
+              );
+            })}
+          </ol>
+        </nav>
         {storageError && (
           <p role="alert" className="storage-alert">
             {c.storageError}
           </p>
         )}
-        <LearningVoice kind="question" language={language} answerLanguage={draft.questionLanguage} value={draft.question || ""} onChange={question => update({ question, questionLanguage: language })} />
-        <div className="notebook-workbench">
-          <aside className="notebook-system">
+        <section className="lab-stage-grid" aria-labelledby="lab-stage-heading">
+          <aside className="notebook-system lab-stage-model" dir={direction(language)}>
             <div className="system-title">
-                <span>{c.system}</span>
+              <span>{c.system}</span>
               <b>
                 {currentTrial
                   ? c.lastResult
@@ -553,21 +603,48 @@ function MissionLab({ id }: { id: LabId }) {
             </div>
             <LabDiagram id={id} settings={s} trial={currentTrial} language={language} />
             <div className="system-coach">
-              <b>{c.coach}</b>
+              <b><span className="lab-guide-mark" aria-hidden="true">✳</span>{c.coach}</b>
               <p>{lab.hint}</p>
               <small>{c.changeOne}</small>
             </div>
           </aside>
-          <section className="notebook-controls" aria-label={c.understand}>
-            <p className="eyebrow">{c.coachHint}</p>
-            <Field
-              label={lab.question}
-              language={draft.observationLanguage || language}
-              value={draft.observation}
-              onChange={(v) => update({ observation: v, observationLanguage: language })}
-              placeholder={c.cluePlaceholder}
-            />
-            <h2>{c.build}</h2>
+          <div className="lab-stage-content" dir={direction(language)}>
+            <header className="lab-stage-heading">
+              <span className="lab-stage-spark" aria-hidden="true">{["↗", "✳", "↻", "◇"][activeStep]}</span>
+              <div>
+                <p className="eyebrow">{c.stepLabel.replace("{step}", String(activeStep + 1))}</p>
+                <h2 id="lab-stage-heading" ref={stepHeading} tabIndex={-1}>{c.phases[activeStep]}</h2>
+                <p>{c.stepPrompts[activeStep]}</p>
+              </div>
+            </header>
+
+            {activeStep === 0 && (
+              <section className="notebook-controls lab-stage-card">
+                <p className="lab-focus-label">{c.coachHint}</p>
+                <Field
+                  label={lab.question}
+                  language={draft.observationLanguage || language}
+                  value={draft.observation}
+                  onChange={(v) => update({ observation: v, observationLanguage: language })}
+                  placeholder={c.cluePlaceholder}
+                />
+                <details className="lab-optional">
+                  <summary>{c.optionalQuestion}</summary>
+                  <LearningVoice kind="question" language={language} answerLanguage={draft.questionLanguage} value={draft.question || ""} onChange={question => update({ question, questionLanguage: language })} />
+                </details>
+                <p className="run-hint">{draft.observation.trim().length < 8 ? c.clueHint : c.readyHint}</p>
+                <button className="button full lab-primary-action" type="button" disabled={draft.observation.trim().length < 8} onClick={() => goToStep(1)}>
+                  {c.nextPredict}
+                </button>
+              </section>
+            )}
+
+            {activeStep === 1 && (
+              <section className="notebook-controls lab-stage-card" aria-label={c.understand}>
+                <div className="lab-build-heading">
+                  <span aria-hidden="true">01</span>
+                  <h3>{c.build}</h3>
+                </div>
             {id === "water" && (
               <>
                 <Options
@@ -698,6 +775,7 @@ function MissionLab({ id }: { id: LabId }) {
                       : c.readyHint}
               </p>
               <button
+                type="button"
                 className="button secondary full"
                 disabled={!readyToRun}
                 aria-describedby="run-hint"
@@ -706,85 +784,81 @@ function MissionLab({ id }: { id: LabId }) {
                 {c.run}
               </button>
             </div>
-            {currentTrial && (
-              <div
-                className={`current-outcome ${currentTrial.safe ? "safe" : "failed"}`}
-                ref={outcome}
-                tabIndex={-1}
-                key={currentTrial.id}
-                role="status"
-                aria-atomic="true"
-              >
-                <b>{outcomeLabel(id, currentTrial.outcome, language)}</b>
-                <p>{trialDetail(id, currentTrial, language)}</p>
-                <span>{predictionMatches(id, currentTrial.prediction, currentTrial.outcome) ? c.predictionCorrect : c.predictionReview}</span>
-              </div>
+              </section>
             )}
-          </section>
-        </div>
-        <section className="notebook-history">
-          <p className="local-note">{c.localLimit}</p>
-          <div className="notebook-section-head">
-            <div>
-              <p className="eyebrow">{c.explainStep}</p>
-              <h2>{c.notebook}</h2>
-            </div>
-            <span>{draft.trials.length} {c.trialsCount}</span>
-          </div>
-          {draft.trials.length ? (
-            <TrialNotebook id={id} trials={draft.trials} language={language} />
-          ) : (
-            <p className="notebook-empty">
-              {c.notebookEmpty}
-            </p>
-          )}
-        </section>
-        <section className="notebook-finish">
-          <div>
-            <p className="eyebrow">{c.beforeSave}</p>
-            <h2>{c.reflectionHeading}</h2>
-            <Field
-              label={lab.prompt}
-              language={draft.explanationLanguage || language}
-              value={draft.explanation}
-              onChange={(v) => update({ explanation: v, explanationLanguage: language })}
-              placeholder={c.explanationPlaceholder}
-            />
-            <p className="reflection-hint">
-              {c.reflectionHint}
-            </p>
-            <LearningVoice kind="application" language={language} answerLanguage={draft.applicationLanguage} value={draft.application || ""} onChange={application => update({ application, applicationLanguage: language })} />
-          </div>
-          <aside>
-            <h3>{c.reviewEvidence}</h3>
-            <ul className="milestone-list">
-              {checks.map((check, i) => (
-                <li key={i}>
-                  <span aria-hidden="true">{check.done ? "✓" : "○"}</span>
-                  {c.milestoneLabels[id][i]}
-                  <small>{check.done ? c.done : c.needed}</small>
-                </li>
-              ))}
-              <li>
-                <span aria-hidden="true">
-                  {draft.explanation.trim().length >= 15 ? "✓" : "○"}
-                </span>
-                {c.explainDifference}
-              </li>
-            </ul>
-            <button
-              className="button full"
-              disabled={!complete}
-              onClick={finish}
-            >
-              {c.saveEvidence}
-            </button>
-            {saveError && (
-              <p role="alert" className="storage-alert">
-                {c.saveError}
-              </p>
+
+            {activeStep === 2 && (
+              <section className="notebook-controls lab-stage-card lab-review-stage">
+                {latest && (
+                  <div className={`current-outcome ${latest.safe ? "safe" : "failed"}`} ref={outcome} tabIndex={-1} key={latest.id} role="status" aria-atomic="true">
+                    <b>{outcomeLabel(id, latest.outcome, language)}</b>
+                    <p>{trialDetail(id, latest, language)}</p>
+                    <span>{predictionMatches(id, latest.prediction, latest.outcome) ? c.predictionCorrect : c.predictionReview}</span>
+                  </div>
+                )}
+                <div className="notebook-section-head lab-review-title">
+                  <div>
+                    <p className="eyebrow">{c.explainStep}</p>
+                    <h3>{c.notebook}</h3>
+                  </div>
+                  <span>{draft.trials.length} {c.trialsCount}</span>
+                </div>
+                <p className="lab-count-note">{c.progressCount.replace("{done}", String(checksDone)).replace("{total}", String(checks.length))}</p>
+                {recentTrials.length ? <TrialNotebook id={id} trials={recentTrials} language={language} /> : <p className="notebook-empty">{c.notebookEmpty}</p>}
+                {earlierTrials.length > 0 && (
+                  <details className="lab-optional lab-older-trials">
+                    <summary>{c.olderTrials.replace("{count}", String(earlierTrials.length))}</summary>
+                    <TrialNotebook id={id} trials={earlierTrials} language={language} />
+                  </details>
+                )}
+                <p className="local-note">{c.localLimit}</p>
+                <div className="lab-stage-actions">
+                  <button className="button secondary" type="button" onClick={() => goToStep(1)}>{c.tryAnother}</button>
+                  <button className="button" type="button" onClick={() => goToStep(3)}>{c.explainNext}</button>
+                </div>
+              </section>
             )}
-          </aside>
+
+            {activeStep === 3 && (
+              <section className="notebook-controls lab-stage-card lab-explain-stage">
+                <Field
+                  label={lab.prompt}
+                  language={draft.explanationLanguage || language}
+                  value={draft.explanation}
+                  onChange={(v) => update({ explanation: v, explanationLanguage: language })}
+                  placeholder={c.explanationPlaceholder}
+                />
+                <p className="reflection-hint">{c.reflectionHint}</p>
+                <details className="lab-optional">
+                  <summary>{c.optionalApplication}</summary>
+                  <LearningVoice kind="application" language={language} answerLanguage={draft.applicationLanguage} value={draft.application || ""} onChange={application => update({ application, applicationLanguage: language })} />
+                </details>
+                <aside className="lab-evidence-checks">
+                  <div className="lab-evidence-heading">
+                    <h3>{c.reviewEvidence}</h3>
+                    <span>{checksDone}/{checks.length}</span>
+                  </div>
+                  <ul className="milestone-list">
+                    {checks.map((check, i) => (
+                      <li key={i}>
+                        <span aria-hidden="true">{check.done ? "✓" : "○"}</span>
+                        {c.milestoneLabels[id][i]}
+                        <small>{check.done ? c.done : c.needed}</small>
+                      </li>
+                    ))}
+                    <li>
+                      <span aria-hidden="true">{draft.explanation.trim().length >= 15 ? "✓" : "○"}</span>
+                      {c.explainDifference}
+                      <small>{draft.explanation.trim().length >= 15 ? c.done : c.needed}</small>
+                    </li>
+                  </ul>
+                  {!allChecksDone && <button className="button secondary full" type="button" onClick={() => goToStep(1)}>{c.completeChecks}</button>}
+                  <button className="button full lab-primary-action" type="button" disabled={!complete} onClick={finish}>{c.saveEvidence}</button>
+                  {saveError && <p role="alert" className="storage-alert">{c.saveError}</p>}
+                </aside>
+              </section>
+            )}
+          </div>
         </section>
       </main>
     </Shell>

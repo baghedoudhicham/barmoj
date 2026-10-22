@@ -136,7 +136,19 @@ type SharedCopy = {
   back: string;
   eyebrow: string;
   phases: [string, string, string, string];
+  progressLabel: string;
+  stepLabel: string;
+  stepPrompts: [string, string, string, string];
   privacy: string;
+  privacyShort: string;
+  nextPredict: string;
+  optionalQuestion: string;
+  optionalApplication: string;
+  progressCount: string;
+  olderTrials: string;
+  tryAnother: string;
+  explainNext: string;
+  completeChecks: string;
   supervisionNote: string;
   storageError: string;
   system: string;
@@ -225,7 +237,19 @@ export const sharedCopy: Record<LabLanguage, SharedCopy> = {
     back: "→ العودة إلى المختبرات",
     eyebrow: "مختبر {number} / فكّر كنظام",
     phases: ["افهم القيد", "صمّم وتوقّع", "اختبر وحسّن", "اشرح بالدليل"],
+    progressLabel: "خطوات التجربة",
+    stepLabel: "الخطوة {step} من 4",
+    stepPrompts: ["ابدأ بالمعلومة التي تحتاجها قبل بناء القاعدة.", "اختر الإعداد، ثم دوّن توقعك وسببه قبل تشغيل الاختبار.", "قارن النتيجة بتوقعك. غيّر عاملًا واحدًا إذا احتجت.", "استخدم تجربة من دفترك لتشرح ما تعلّمته."],
     privacy: "جرّب مع وليّ أمرك أو شخص بالغ موثوق. تحفظ الإجابات في هذا المتصفح وقد يراها من يستخدم ملفه؛ اكتب عن المهمة فقط، ولا تضف اسمك الكامل أو المدرسة أو العنوان أو معلومات تواصل.",
+    privacyShort: "تُحفظ الإجابات هنا وقد يراها مستخدمو هذا المتصفح. لا تكتب معلومات شخصية؛ جرّب مع بالغ تثق به.",
+    nextPredict: "الخطوة التالية: توقّع ←",
+    optionalQuestion: "سؤالي أنا · اختياري",
+    optionalApplication: "كيف أستخدم ما تعلّمت؟ · اختياري",
+    progressCount: "استكملت {done} من {total} أهداف التجربة",
+    olderTrials: "اعرض {count} تجارب أقدم",
+    tryAnother: "صمّم تجربة أخرى",
+    explainNext: "اشرح ما تعلّمت ←",
+    completeChecks: "أكمل التجارب المطلوبة ←",
     supervisionNote: "جرّب مع وليّ أمرك أو شخص بالغ موثوق. تحفظ الإجابات في هذا المتصفح وقد يراها من يستخدم ملفه؛ لا تكتبوا معلومات شخصية.",
     storageError: "تعذّر حفظ العمل في هذا المتصفح. أبقِ الصفحة مفتوحة حتى تنتهي.",
     system: "نموذج النظام",
@@ -317,7 +341,19 @@ export const sharedCopy: Record<LabLanguage, SharedCopy> = {
     back: "← Back to all labs",
     eyebrow: "Lab {number} / Think in systems",
     phases: ["Understand the constraint", "Design and predict", "Test and improve", "Explain with evidence"],
+    progressLabel: "Experiment steps",
+    stepLabel: "Step {step} of 4",
+    stepPrompts: ["Start with the information you need before building a rule.", "Choose your settings, then record a prediction and reason before testing.", "Compare the result with your prediction. Change one factor if needed.", "Use a trial from your notebook to explain what you learned."],
     privacy: "Try this with a parent or trusted adult. Answers stay in this browser and may be visible to others who use its profile. Write only about the activity; do not include your full name, school, address or contact details.",
+    privacyShort: "Saved here and visible to others using this browser. Don’t add personal details; try with an adult you trust.",
+    nextPredict: "Next: make a prediction →",
+    optionalQuestion: "My own question · optional",
+    optionalApplication: "How could I use what I learned? · optional",
+    progressCount: "{done} of {total} experiment goals complete",
+    olderTrials: "Show {count} earlier trials",
+    tryAnother: "Design another test",
+    explainNext: "Explain what you learned →",
+    completeChecks: "Finish the required tests →",
     supervisionNote: "Please try these labs with a parent or trusted adult. Answers are saved in this browser and may be visible to others who use its profile; do not enter personal details.",
     storageError: "This browser could not save your work. Keep this page open until you finish.",
     system: "System model",
@@ -409,7 +445,19 @@ export const sharedCopy: Record<LabLanguage, SharedCopy> = {
     back: "← Retour aux ateliers",
     eyebrow: "Atelier {number} / Penser en systèmes",
     phases: ["Comprendre la contrainte", "Concevoir et prévoir", "Tester et améliorer", "Expliquer avec des preuves"],
+    progressLabel: "Étapes de l’expérience",
+    stepLabel: "Étape {step} sur 4",
+    stepPrompts: ["Commence par l’information dont tu as besoin avant de construire une règle.", "Choisis les réglages, puis note ta prévision et sa raison avant le test.", "Compare le résultat à ta prévision. Change un seul facteur si nécessaire.", "Appuie-toi sur un essai du carnet pour expliquer ce que tu as appris."],
     privacy: "Essaie avec un parent ou un adulte de confiance. Les réponses restent dans ce navigateur et peuvent être vues par d’autres personnes qui utilisent ce profil. Parle seulement de l’activité ; n’indique ni ton nom complet, ni ton école, ton adresse ou tes coordonnées.",
+    privacyShort: "Enregistré ici et visible par les autres personnes utilisant ce navigateur. N’ajoute pas de données personnelles ; essaie avec un adulte de confiance.",
+    nextPredict: "Étape suivante : prévoir →",
+    optionalQuestion: "Ma question · facultatif",
+    optionalApplication: "Comment utiliser ce que j’ai appris ? · facultatif",
+    progressCount: "Progression des essais : {done}/{total} objectifs",
+    olderTrials: "Afficher {count} essais précédents",
+    tryAnother: "Préparer un autre test",
+    explainNext: "Expliquer ce que tu as appris →",
+    completeChecks: "Terminer les essais demandés →",
     supervisionNote: "Essaie ces ateliers avec un parent ou un adulte de confiance. Les réponses sont enregistrées dans ce navigateur et peuvent être vues par d’autres personnes qui utilisent ce profil ; n’ajoute aucune information personnelle.",
     storageError: "Ce navigateur n’a pas pu enregistrer ton travail. Garde cette page ouverte jusqu’à la fin.",
     system: "Modèle du système",
