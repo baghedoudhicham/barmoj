@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Shell } from "./components";
+import { LearningVoice, VoiceEvidence } from "./learning-voice";
 import type { BrandLanguage } from "./brand";
 import { defaultNicknames } from "./languages";
 import { addEvidence, getEvidence, getProfile } from "./data";
@@ -420,6 +421,8 @@ function MissionLab({ id }: { id: LabId }) {
       draft.prediction ||
       draft.reason ||
       draft.explanation ||
+      draft.question ||
+      draft.application ||
       settingsKey(id, s) !== settingsKey(id, emptyDraft().settings);
     if (changed) setStorageError(!saveDraft(id, draft));
   }, [id, draft, s]);
@@ -483,6 +486,10 @@ function MissionLab({ id }: { id: LabId }) {
       explanation: draft.explanation.trim(),
       observationLanguage: draft.observationLanguage || language,
       explanationLanguage: draft.explanationLanguage || language,
+      question: draft.question?.trim(),
+      application: draft.application?.trim(),
+      questionLanguage: draft.questionLanguage,
+      applicationLanguage: draft.applicationLanguage,
       trials: draft.trials,
       language,
       transfer: lab.transfer,
@@ -533,6 +540,7 @@ function MissionLab({ id }: { id: LabId }) {
             {c.storageError}
           </p>
         )}
+        <LearningVoice kind="question" language={language} answerLanguage={draft.questionLanguage} value={draft.question || ""} onChange={question => update({ question, questionLanguage: language })} />
         <div className="notebook-workbench">
           <aside className="notebook-system">
             <div className="system-title">
@@ -745,6 +753,7 @@ function MissionLab({ id }: { id: LabId }) {
             <p className="reflection-hint">
               {c.reflectionHint}
             </p>
+            <LearningVoice kind="application" language={language} answerLanguage={draft.applicationLanguage} value={draft.application || ""} onChange={application => update({ application, applicationLanguage: language })} />
           </div>
           <aside>
             <h3>{c.reviewEvidence}</h3>
@@ -826,6 +835,7 @@ export function Result() {
                 <p>{latest.transfer || missionWords[language][latest.labId].transfer}</p>
               </div>
             )}
+            <VoiceEvidence {...latest} language={language} audience="child" />
           </>
         )}
         <div className="hero-actions">

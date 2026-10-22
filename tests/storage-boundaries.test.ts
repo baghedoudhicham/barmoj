@@ -26,9 +26,17 @@ test("bounded storage reads fail safely while keeping valid neighboring evidence
     assert.equal(readDraft("water"), null);
     records.set("barmoj-lab-v1-water", JSON.stringify({ ...emptyDraft(), trials: Array(MAX_TRIALS + 1).fill(trial) }));
     assert.equal(readDraft("water"), null);
+    for (const extra of [{ question: "x".repeat(501) }, { application: 12 }, { questionLanguage: "invalid" }, { applicationLanguage: "invalid" }]) {
+      records.set("barmoj-lab-v1-water", JSON.stringify({ ...emptyDraft(), ...extra }));
+      assert.equal(readDraft("water"), null);
+    }
     const evidence = { mission: "لعبة لا تنكسر", date: trial.at, note: "دليل محفوظ", items: ["يختبر"], trials: [trial] };
     records.set("barmoj-evidence", JSON.stringify([{ ...evidence, trials: [{ ...trial, at: "invalid" }] }, evidence]));
     assert.deepEqual(getEvidence(), [evidence]);
+    for (const extra of [{ question: "x".repeat(501) }, { application: 12 }, { questionLanguage: "invalid" }, { applicationLanguage: "invalid" }]) {
+      records.set("barmoj-evidence", JSON.stringify([{ ...evidence, ...extra }, evidence]));
+      assert.deepEqual(getEvidence(), [evidence]);
+    }
   } finally {
     if (previous) Object.defineProperty(globalThis, "localStorage", previous);
     else Reflect.deleteProperty(globalThis, "localStorage");

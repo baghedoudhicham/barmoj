@@ -10,6 +10,7 @@ import {
   TriangleAlert,
 } from "lucide-react";
 import { Shell } from "./components";
+import { VoiceEvidence } from "./learning-voice";
 import type { BrandLanguage } from "./brand";
 import { languageNames, missionWords, sharedCopy } from "./lab-copy";
 import { pilotUiCopy } from "./pilot-ui-copy";
@@ -386,7 +387,7 @@ export function ParentDashboardV2() {
             <p className="story-label">{c.latest}</p>
             <h2 lang={language} dir={language === "ar" ? "rtl" : "ltr"}>
               {latest
-                ? c.fromLab(latest.labId ? sharedCopy[language].missionNames[latest.labId] : latest.mission)
+                ? c.fromLab(latest.labId ? missionWords[language][latest.labId].title : latest.mission)
                 : c.noSummary}
             </h2>
             <p lang={latest?.language || language} dir={(latest?.language || language) === "ar" ? "rtl" : "ltr"}>
@@ -472,6 +473,7 @@ export function ParentDashboardV2() {
                           {entry.observation}
                         </blockquote>
                         <TrialNotebook id={entry.labId} trials={entry.trials} language={language} />
+                        <VoiceEvidence {...entry} language={language} />
                         <p className="legacy-note">{c.explanationLabel}</p>
                         <blockquote className="child-quote" lang={entry.explanationLanguage || entry.language || "ar"} dir={entry.explanationLanguage === "en" || entry.explanationLanguage === "fr" || (!entry.explanationLanguage && (entry.language === "en" || entry.language === "fr")) ? "ltr" : "rtl"}>
                           {entry.explanation}

@@ -15,6 +15,10 @@ export type LabDraft = {
   prediction: string;
   reason: string;
   explanation: string;
+  question?: string;
+  application?: string;
+  questionLanguage?: "ar" | "en" | "fr";
+  applicationLanguage?: "ar" | "en" | "fr";
   observationLanguage?: "ar" | "en" | "fr";
   explanationLanguage?: "ar" | "en" | "fr";
   trials: Trial[];
@@ -82,7 +86,8 @@ export function readDraft(id: LabId): LabDraft | null {
         "reason",
         "explanation",
       ].every((k) => boundedText(d[k])) ||
-      !["observationLanguage", "explanationLanguage"].every(
+      !["question", "application"].every(k => d[k] === undefined || boundedText(d[k])) ||
+      !["observationLanguage", "explanationLanguage", "questionLanguage", "applicationLanguage"].every(
         (k) => d[k] === undefined || ["ar", "en", "fr"].includes(d[k]),
       ) ||
       !Number.isFinite(Date.parse(d.updatedAt)) ||

@@ -36,6 +36,10 @@ export type LearningEvidence = {
   labId?: LabId;
   observation?: string;
   explanation?: string;
+  question?: string;
+  application?: string;
+  questionLanguage?: BrandLanguage;
+  applicationLanguage?: BrandLanguage;
   trials?: Trial[];
   language?: BrandLanguage;
   transfer?: string;
@@ -132,6 +136,10 @@ export function getEvidence(): LearningEvidence[] {
           (Array.isArray(e.trials) && e.trials.length <= MAX_TRIALS && e.trials.every(validTrial))) &&
         (e.observation === undefined || boundedText(e.observation)) &&
         (e.explanation === undefined || boundedText(e.explanation)) &&
+        (e.question === undefined || boundedText(e.question)) &&
+        (e.application === undefined || boundedText(e.application)) &&
+        (e.questionLanguage === undefined || ["ar", "en", "fr"].includes(e.questionLanguage)) &&
+        (e.applicationLanguage === undefined || ["ar", "en", "fr"].includes(e.applicationLanguage)) &&
         (e.language === undefined || ["ar", "en", "fr"].includes(e.language)) &&
         (e.observationLanguage === undefined || ["ar", "en", "fr"].includes(e.observationLanguage)) &&
         (e.explanationLanguage === undefined || ["ar", "en", "fr"].includes(e.explanationLanguage)) &&

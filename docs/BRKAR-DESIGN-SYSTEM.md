@@ -147,6 +147,10 @@ The system applies shared surface and action styling to public marketing pages, 
 
 ## 12. Accessibility and child-centered interaction
 
+### Child-owned inquiry and useful application
+
+`LearningVoice` in `src/learning-voice.tsx` adds optional question and application fields to each lab. The question sits before the workbench; the useful-application field follows the required explanation. Both use live Arabic/English/French labels, 500-character text bounds, direction-aware child text and the existing tokens. The original SVG path connects a starting point to a small discovery diamond; it is decorative and carries no assessment meaning. The journal has no compulsory answer, score, timer, reward animation or personality inference. `VoiceEvidence` displays only supplied answers, with the original writing language, in results and the parent notebook. Empty optional fields remain absent from the evidence view. The source schema remains compatible with older drafts.
+
 - Use semantic headings, landmarks, lists, labels, buttons, and links. Keep focus visible and keyboard operation complete.
 - Minimum action target: 44×44px. Ensure focus is not hidden under the sticky header and maintain contrast for text, controls, borders, and focus rings.
 - Do not convey selected, disabled, success, warning, or failure through color alone. Pair visual state with label, shape, icon, and/or accessible state.

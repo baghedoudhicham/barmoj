@@ -10,6 +10,8 @@ import { missionWords, sharedCopy } from "../src/lab-copy";
 import type { BrandLanguage } from "../src/brand";
 import { ParentDashboardV2 } from "../src/pilot";
 import { pilotUiCopy } from "../src/pilot-ui-copy";
+import { Result } from "../src/mission-lab";
+import { voiceCopy } from "../src/learning-voice";
 
 const languages: BrandLanguage[] = ["ar", "en", "fr"];
 const escapeHtml = (value: string) => value.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#x27;" }[c]!));
@@ -60,7 +62,9 @@ for (const viewer of languages) for (const id of labIds) {
         ...simulate(id, settings),
       }));
       assert.equal(canComplete(id, trials.slice(0, 1), trials[0].settings, observation, explanation), false);
-      draft = { ...draft, settings: trials.at(-1)!.settings, trials, explanation, explanationLanguage: "en" as const };
+      const question = "كيف أتحقق من فكرتي؟ <b>سؤالي</b>";
+      const application = "I could compare two sources before helping someone decide.";
+      draft = { ...draft, settings: trials.at(-1)!.settings, trials, explanation, explanationLanguage: "en", question, application, questionLanguage: "ar", applicationLanguage: "en" };
       assert.equal(saveDraft(id, draft), true);
       const resumed = readDraft(id)!;
       assert.deepEqual(resumed, draft);
@@ -70,6 +74,8 @@ for (const viewer of languages) for (const id of labIds) {
         items: ["يفهم", "يمثّل", "يتوقّع", "يختبر", "يفسّر"], note: "Preview evidence.",
         observation: resumed.observation, observationLanguage: resumed.observationLanguage,
         explanation: resumed.explanation, explanationLanguage: resumed.explanationLanguage,
+        question: resumed.question, application: resumed.application,
+        questionLanguage: resumed.questionLanguage, applicationLanguage: resumed.applicationLanguage,
         trials: resumed.trials, transfer: missionWords[written][id].transfer,
       }), true);
       removeDraft(id);
@@ -81,12 +87,18 @@ for (const viewer of languages) for (const id of labIds) {
       const dir = viewer === "ar" ? "rtl" : "ltr";
       assert.ok(html.includes(`<article class="trial-entry" lang="${viewer}" dir="${dir}">`), "trial notebook follows the selected parent language");
       assert.ok(html.includes(escapeHtml(sharedCopy[viewer].predicted)), "prediction label is localized");
-      assert.ok(html.includes(escapeHtml(pilotUiCopy[viewer].parent.fromLab(sharedCopy[viewer].missionNames[id]))), "latest lab heading follows parent language");
+      assert.ok(html.includes(escapeHtml(pilotUiCopy[viewer].parent.fromLab(missionWords[viewer][id].title))), "latest lab heading follows parent language");
       assert.ok(html.includes(`<blockquote class="child-quote" lang="ar" dir="rtl">${escapeHtml(observation)}</blockquote>`));
       assert.ok(html.includes(`<blockquote class="child-quote" lang="en" dir="ltr">${escapeHtml(explanation)}</blockquote>`));
+      assert.ok(html.includes(`<blockquote class="child-quote" lang="ar" dir="auto">${escapeHtml(question)}</blockquote>`));
+      assert.ok(html.includes(`<blockquote class="child-quote" lang="en" dir="auto">${escapeHtml(application)}</blockquote>`));
       assert.ok(html.includes(`lang="${written}" dir="${written === "ar" ? "rtl" : "ltr"}">${escapeHtml(trials[0].reason)}</dd>`));
       assert.equal(html.includes("<script>sample</script>"), false);
       assert.equal(records.get("barmoj-evidence"), before, "viewing another language never rewrites saved answers");
+      const result = renderToStaticMarkup(createElement(MemoryRouter, { initialEntries: [`/result?lang=${viewer}`] }, createElement(Result)));
+      assert.ok(result.includes(`<p class="legacy-note">${escapeHtml(voiceCopy[viewer].question)}</p>`));
+      assert.ok(result.includes(escapeHtml(application)));
+      assert.equal(result.includes(escapeHtml(voiceCopy[viewer].questionSaved)), false, "child result speaks directly to the child");
 
       assert.equal(clearFamilyData(), true);
       assert.deepEqual(getEvidence(), []);
