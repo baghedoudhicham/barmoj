@@ -50,14 +50,16 @@ export function ActionButton({
 export function LearningSteps({
   steps,
   label,
+  className = "",
 }: {
   steps: { title: string; detail?: string; state?: "done" | "current" | "upcoming" }[];
   label: string;
+  className?: string;
 }) {
   return (
-    <ol className="brkar-learning-steps" aria-label={label}>
+    <ol className={`brkar-learning-steps ${className}`.trim()} aria-label={label}>
       {steps.map((step, index) => (
-        <li className={`brkar-learning-step is-${step.state || "upcoming"}`} key={`${index}-${step.title}`}>
+        <li className={`brkar-learning-step is-${step.state || "upcoming"}`} aria-current={step.state === "current" ? "step" : undefined} key={`${index}-${step.title}`}>
           <span className="brkar-learning-step__index" aria-hidden="true">{index + 1}</span>
           <span className="brkar-learning-step__copy">
             <b>{step.title}</b>

@@ -11,6 +11,9 @@ import {
 } from "lucide-react";
 import { Shell } from "./components";
 import { VoiceEvidence } from "./learning-voice";
+import { continuityCopy } from "./continuity-copy";
+import { PaperFollowUp } from "./learning-continuity";
+import { learningStage } from "./learning-stage";
 import type { BrandLanguage } from "./brand";
 import { languageNames, missionWords, sharedCopy } from "./lab-copy";
 import { pilotUiCopy } from "./pilot-ui-copy";
@@ -155,6 +158,13 @@ export function KidHomeV2() {
     settingsKey(nextId, unfinished.draft.settings) === settingsKey(nextId, t.settings),
   );
   const focusCopy = missionWords[language][nextId];
+  const stage = learningStage(nextId, unfinished?.draft);
+  const continuity = continuityCopy[language];
+  const thinkingSteps = continuity.steps.map((title, index) => ({
+    title,
+    state: stage.ready ? "done" as const : index < stage.index ? "done" as const : index === stage.index ? "current" as const : "upcoming" as const,
+  }));
+  const latestCompleted = verified.find((entry) => entry.labId);
 
   return (
     <Shell language={language}>
@@ -185,13 +195,20 @@ export function KidHomeV2() {
             </div>
             <h2>{focusCopy.title}</h2>
             <p>{focusCopy.goal}</p>
+            {unfinished?.draft.question?.trim() && (
+              <div className="focus-question">
+                <VoiceEvidence
+                  language={language}
+                  audience="child"
+                  question={unfinished.draft.question}
+                  questionLanguage={unfinished.draft.questionLanguage}
+                />
+              </div>
+            )}
             <LearningSteps
-              label={language === "ar" ? "خطوات التفكير" : language === "fr" ? "Étapes de réflexion" : "Thinking steps"}
-              steps={[
-                { title: language === "ar" ? "أتوقّع" : language === "fr" ? "Je prévois" : "I predict", state: "current" },
-                { title: language === "ar" ? "أجرّب" : language === "fr" ? "Je teste" : "I test", state: "upcoming" },
-                { title: language === "ar" ? "أشرح" : language === "fr" ? "J’explique" : "I explain", state: "upcoming" },
-              ]}
+              className="focus-learning-steps"
+              label={continuity.label}
+              steps={thinkingSteps}
             />
             <ActionLink className="button secondary" variant="secondary" to={`/mission/${nextId}?lang=${language}`}>
               {unfinished ? c.continueLab : c.openLab}{" "}
@@ -202,6 +219,9 @@ export function KidHomeV2() {
                 ? c.draftsSaved(unfinished.draft.trials.length)
                 : c.booksComplete(verified.length)}
             </p>
+            <Link className="focus-choose-lab" to={`/missions?lang=${language}`}>
+              {continuity.choose} <RouteArrow size={16} />
+            </Link>
           </div>
           <div className="focus-system">
             <LabDiagram
@@ -334,6 +354,14 @@ export function KidHomeV2() {
             </div>
           )}
         </section>
+        {latestCompleted?.labId && (
+          <PaperFollowUp
+            language={language}
+            id={latestCompleted.labId}
+            application={latestCompleted.application}
+            writtenLanguage={latestCompleted.applicationLanguage}
+          />
+        )}
         <p className="local-note">
           {c.localNote}
         </p>

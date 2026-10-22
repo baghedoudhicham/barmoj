@@ -8,10 +8,11 @@ import { canComplete, initialSettings, labIds, simulate, type LabId, type Settin
 import { emptyDraft, readDraft, removeDraft, saveDraft, type LabDraft } from "../src/lab-storage";
 import { missionWords, sharedCopy } from "../src/lab-copy";
 import type { BrandLanguage } from "../src/brand";
-import { ParentDashboardV2 } from "../src/pilot";
+import { KidHomeV2, ParentDashboardV2 } from "../src/pilot";
 import { pilotUiCopy } from "../src/pilot-ui-copy";
 import { Result } from "../src/mission-lab";
 import { voiceCopy } from "../src/learning-voice";
+import { continuityCopy } from "../src/continuity-copy";
 
 const languages: BrandLanguage[] = ["ar", "en", "fr"];
 const escapeHtml = (value: string) => value.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#x27;" }[c]!));
@@ -37,6 +38,10 @@ function parentPage(language: BrandLanguage) {
   return renderToStaticMarkup(createElement(MemoryRouter, { initialEntries: [`/parent?lang=${language}`] }, createElement(ParentDashboardV2)));
 }
 
+function kidPage(language: BrandLanguage) {
+  return renderToStaticMarkup(createElement(MemoryRouter, { initialEntries: [`/kid?lang=${language}`] }, createElement(KidHomeV2)));
+}
+
 for (const viewer of languages) for (const id of labIds) {
   test(`${id}: saved family work survives resume, parent language changes and local deletion (${viewer})`, () => {
     const records = new Map<string, string>([["another-app-setting", "keep"]]);
@@ -55,16 +60,26 @@ for (const viewer of languages) for (const id of labIds) {
       const explanation = "I changed one rule and checked the result again: <script>sample</script>.";
       assert.equal(saveProfile({ child: "Preview <explorer>" }), true);
       assert.deepEqual(getProfile(), { child: "Preview <explorer>" });
-      let draft: LabDraft = { ...emptyDraft(), observation, observationLanguage: "ar" };
+      const question = "كيف أتحقق من فكرتي؟ <b>سؤالي</b>";
+      const application = "I could compare two sources before helping someone decide.";
+      let draft: LabDraft = {
+        ...emptyDraft(), observation, observationLanguage: "ar",
+        question, application, questionLanguage: "ar", applicationLanguage: "en",
+      };
+      assert.equal(saveDraft(id, draft), true);
+      const observedDraft = readDraft(id)!;
+      const homeWithDraft = kidPage(viewer);
+      assert.ok(homeWithDraft.includes(escapeHtml(question)), "the child can see their saved question when they return");
+      assert.ok(homeWithDraft.includes(`/mission/${id}?lang=${viewer}`), "the main action resumes the saved lab in the chosen language");
+      assert.equal((homeWithDraft.match(/aria-current="step"/g) || []).length, 1, "the saved observation places the child at the prediction step");
+      assert.ok(homeWithDraft.includes(escapeHtml(continuityCopy[viewer].steps[1])), "the progress steps follow the selected interface language");
       const trials: Trial[] = steps(id).map((settings, index) => ({
         id: `preview-${id}-${index}`, at: new Date().toISOString(), settings,
         prediction: missionWords[written][id].outcomes[0], reason: "A & B: this is my original reason.", language: written,
         ...simulate(id, settings),
       }));
       assert.equal(canComplete(id, trials.slice(0, 1), trials[0].settings, observation, explanation), false);
-      const question = "كيف أتحقق من فكرتي؟ <b>سؤالي</b>";
-      const application = "I could compare two sources before helping someone decide.";
-      draft = { ...draft, settings: trials.at(-1)!.settings, trials, explanation, explanationLanguage: "en", question, application, questionLanguage: "ar", applicationLanguage: "en" };
+      draft = { ...observedDraft, settings: trials.at(-1)!.settings, trials, explanation, explanationLanguage: "en" };
       assert.equal(saveDraft(id, draft), true);
       const resumed = readDraft(id)!;
       assert.deepEqual(resumed, draft);
@@ -81,6 +96,10 @@ for (const viewer of languages) for (const id of labIds) {
       removeDraft(id);
       assert.equal(readDraft(id), null);
       assert.deepEqual(getEvidence()[0].trials, trials);
+      const homeWithFollowUp = kidPage(viewer);
+      assert.ok(homeWithFollowUp.includes(escapeHtml(application)), "the optional paper extension carries the child's own useful-knowledge reflection");
+      assert.ok(homeWithFollowUp.includes(escapeHtml(continuityCopy[viewer].activities[id][0])), "the follow-up exercise is available in the selected language");
+      assert.ok(homeWithFollowUp.includes(escapeHtml(continuityCopy[viewer].safety)), "the off-screen extension states its safety boundary");
 
       const before = records.get("barmoj-evidence");
       const html = parentPage(viewer);

@@ -104,7 +104,9 @@ Reusable React primitives live in `src/ui-kit.tsx`; visual rules and semantic to
 
 ### Learning steps
 
-`LearningSteps` renders an ordered list for three or four learning stages. Each step is `done`, `current`, or `upcoming`; the caller provides localized text and an accessible list label. Use order in the DOM that matches the cognitive sequence. In RTL the list reads from the inline start without changing the underlying stage order.
+`LearningSteps` renders an ordered list for three or four learning stages. Each step is `done`, `current`, or `upcoming`; the current stage also uses `aria-current="step"`. The caller provides localized text and an accessible list label. Kid Home derives progress only from the saved observation, trial milestones, active settings and explanation requirement. This describes the saved task, never the child's ability. Use order in the DOM that matches the cognitive sequence. In RTL the list reads from the inline start without changing the underlying stage order. The four-stage home variant uses two columns on narrow screens.
+
+After a completed lab, Kid Home may show one optional paper activity based on the most recent saved lab. It preserves the child's own useful-knowledge reflection, invites a family discussion, and states the paper-only boundary. It saves no extra answer, creates no score and never asks a child to use real equipment or roads.
 
 ### Status tags
 
