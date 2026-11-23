@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Shell } from "./components";
@@ -25,6 +25,8 @@ import {
   settingsDescription,
   trialDetail,
 } from "./lab-copy";
+
+const WaterWorkbench = lazy(() => import("./water-workbench").then(m => ({ default: m.WaterWorkbench })));
 
 const direction = (language: BrandLanguage) => language === "ar" ? "rtl" : "ltr";
 const localizedPath = (path: string, language: BrandLanguage) => `${path}?lang=${language}`;
@@ -405,6 +407,7 @@ function MissionLab({ id }: { id: LabId }) {
   const language: BrandLanguage = requestedLanguage === "en" || requestedLanguage === "fr" ? requestedLanguage : "ar";
   const c = sharedCopy[language];
   const lab = missionWords[language][id];
+  const isometricWater = id === "water" && params.get("workbench") === "iso";
   const [draft, setDraft] = useState<LabDraft>(
     () => readDraft(id) || emptyDraft(),
   );
@@ -528,7 +531,7 @@ function MissionLab({ id }: { id: LabId }) {
   }
   return (
     <Shell language={language}>
-      <main className={`wrap notebook-page lab-${id}`} lang={language} dir={direction(language)}>
+      <main className={`wrap notebook-page lab-${id}${isometricWater ? " lab-water-isometric" : ""}`} lang={language} dir={direction(language)}>
         <div className="lab-language-bar">
           <Link className="lab-back" to={localizedPath("/missions", language)}>{c.back}</Link>
           <div className="language-tabs" role="group" aria-label={c.chooseLanguage}>
@@ -539,12 +542,33 @@ function MissionLab({ id }: { id: LabId }) {
                 lang={item}
                 className={language === item ? "selected" : ""}
                 aria-pressed={language === item}
-                onClick={() => setParams({ lang: item }, { replace: true })}
+                onClick={() => setParams(prev => {
+                    const next = new URLSearchParams(prev);
+                    next.set("lang", item);
+                    return next;
+                  }, { replace: true })}
               >
                 {languageNames[item]}
               </button>
             ))}
           </div>
+          {id === "water" && (
+            <button
+              type="button"
+              className="wb-preview-switch"
+              aria-pressed={isometricWater}
+              onClick={() => setParams(prev => {
+                const next = new URLSearchParams(prev);
+                if (isometricWater) next.delete("workbench");
+                else next.set("workbench", "iso");
+                return next;
+              }, { replace: true })}
+            >
+              {language === "ar" ? (isometricWater ? "العودة إلى اللوحة البسيطة" : "جرّب ورشة الخزان") :
+                language === "fr" ? (isometricWater ? "Vue classique" : "Essayer l’atelier") :
+                (isometricWater ? "Classic diagram" : "Try the workbench")}
+            </button>
+          )}
         </div>
         <header className="notebook-heading">
           <div>
@@ -601,7 +625,17 @@ function MissionLab({ id }: { id: LabId }) {
                   : c.waiting}
               </b>
             </div>
-            <LabDiagram id={id} settings={s} trial={currentTrial} language={language} />
+            {isometricWater ? (
+              <Suspense fallback={<LabDiagram id={id} settings={s} trial={currentTrial} language={language} />}>
+                <WaterWorkbench
+                  settings={s}
+                  trial={currentTrial}
+                  language={language}
+                  editable={activeStep === 1}
+                  onConfigure={configure}
+                />
+              </Suspense>
+            ) : <LabDiagram id={id} settings={s} trial={currentTrial} language={language} />}
             <div className="system-coach">
               <b><span className="lab-guide-mark" aria-hidden="true">✳</span>{c.coach}</b>
               <p>{lab.hint}</p>
@@ -645,7 +679,7 @@ function MissionLab({ id }: { id: LabId }) {
                   <span aria-hidden="true">01</span>
                   <h3>{c.build}</h3>
                 </div>
-            {id === "water" && (
+            {id === "water" && !isometricWater && (
               <>
                 <Options
                   label={c.pumpAtLimit}
@@ -671,6 +705,13 @@ function MissionLab({ id }: { id: LabId }) {
                   onChange={(v) => configure({ safeguard: v })}
                 >{c.backupSensor}: {c.backupHelp}</Toggle>
               </>
+            )}
+            {id === "water" && isometricWater && (
+              <p className="wb-focus-hint">
+                {language === "ar" ? "اختر الحالة والقاعدة والحساس الاحتياطي من لوحة النظام، ثم اكتب توقّعك أدناه." :
+                  language === "fr" ? "Choisis le scénario, la règle et le capteur de secours dans l’atelier, puis note ta prédiction." :
+                  "Choose the scenario, rule and backup sensor on the workbench, then record your prediction."}
+              </p>
             )}
             {id === "routing" && (
               <>
