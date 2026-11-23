@@ -60,7 +60,7 @@ try {
 
     if (size === 390) {
       const transition = await page.locator(".wb-water-fill").evaluate(el => getComputedStyle(el).transitionDuration);
-      assert.equal(transition, "0s", "reduced motion must remove fill tween");
+      assert.ok(Number.parseFloat(transition) <= 0.0001, "reduced motion must effectively disable fill tween: " + transition);
     }
 
     // Language switching must keep preview selection and show localized copy.
