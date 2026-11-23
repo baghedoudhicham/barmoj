@@ -90,7 +90,7 @@
 }
 @media (max-width: 960px) {
   .lab-water-isometric .lab-stage-grid { grid-template-columns: minmax(0,1fr); }
-  .lab-water-isometric .lab-stage-model { grid-row: 1; position: static; }
+  .lab-water-isometric .lab-stage-model { grid-row: 1; display: block; position: static; }
   .lab-water-isometric .lab-stage-content { grid-row: 2; }
 }
 @media (max-width: 620px) {
