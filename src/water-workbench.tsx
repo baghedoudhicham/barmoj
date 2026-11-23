@@ -123,7 +123,7 @@ export function WaterWorkbench({
           <text x="208" y="35" fontSize="16" fontWeight="800" textAnchor="end" fill="#173E2B">{copy.tank}</text>
           <text x="585" y="46" fontSize="15" fontWeight="800" fill="#173E2B">{copy.sensorPart}</text>
           <text x="574" y="365" fontSize="15" fontWeight="800" fill="#151515">{copy.pump}</text>
-          <text x="188" y="201" fontSize="14" fontWeight="800" fill="#C02045">{copy.limitLine}</text>
+          <text x="188" y="201" textAnchor="end" fontSize="14" fontWeight="800" fill="#C02045">{copy.limitLine}</text>
           <path d="M193 195H248" stroke="#FF164D" strokeWidth="2" strokeDasharray="5 4" />
         </svg>
         <figcaption>{copy.discrete}</figcaption>
