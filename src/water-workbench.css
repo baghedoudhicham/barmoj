@@ -1,0 +1,108 @@
+/* Optional BRKAR scene. Existing classic lab remains the default. */
+.lab-water-isometric .lab-stage-grid {
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, .83fr);
+  direction: ltr;
+}
+.lab-water-isometric .lab-stage-model { top: 72px; }
+.lab-water-isometric .lab-stage-model .system-coach { padding: 16px; }
+.lab-water-isometric .lab-stage-model .system-coach p { margin: 6px 0; }
+.wb-preview-switch {
+  appearance: none; min-height: 44px; cursor: pointer;
+  border: 1px solid var(--deep); border-radius: 12px;
+  padding: 12px 16px; background: #fff; color: var(--deep);
+  font-size: .8rem; font-weight: 850;
+}
+.wb-preview-switch[aria-pressed="true"] { background: var(--learn); }
+.wb-preview-switch:hover { border-color: var(--ink); }
+.wb-preview-switch:focus-visible,
+.wb-root button:focus-visible,
+.wb-static summary:focus-visible {
+  outline: 3px solid var(--explore); outline-offset: 3px;
+}
+.wb-root { min-width: 0; font-size: .83rem; }
+.wb-header {
+  display: flex; justify-content: space-between; align-items: start; gap: 12px;
+  padding: 14px 16px 8px;
+}
+.wb-header strong { font-size: .96rem; }
+.wb-header span { text-align: end; color: #46584a; font-size: .67rem; line-height: 1.7; max-width: 210px; }
+.wb-scene { margin: 0; background: #dbe9d9; border-block: 1px solid #173e2b22; }
+.lab-water-isometric .wb-scene svg {
+  display: block; width: 100%; height: auto; max-height: none;
+  padding: 0; aspect-ratio: 720 / 430;
+}
+.wb-scene figcaption { padding: 3px 14px 10px; font-size: .69rem; color: #46574b; text-align: center; }
+.wb-water-fill { transition: y .2s ease, height .2s ease; }
+.wb-flow { animation: wb-flow-pulse 1.2s linear infinite; }
+@keyframes wb-flow-pulse { to { stroke-dashoffset: -42; } }
+.wb-readings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid #173e2b35; }
+.wb-readings > div { min-width: 0; display: grid; gap: 4px; padding: 12px 7px; text-align: center; }
+.wb-readings > div + div { border-inline-start: 1px solid #173e2b35; }
+.wb-readings span { font-size: .68rem; color: #425346; line-height: 1.6; }
+.wb-readings strong { font-size: clamp(1rem, 2.2vw, 1.45rem); line-height: 1.5; overflow-wrap: anywhere; }
+.wb-readings .wb-fault { background: #ff164d15; }
+.wb-feedback { margin: 0; padding: 10px 14px; text-align: center; font-size: .73rem; line-height: 1.7; font-weight: 800; }
+.wb-safe { background: #39dd5933; }
+.wb-risk { background: #ff164d24; }
+.wb-pending { background: #ffffffe8; color: #4f6251; }
+.wb-controls { padding: 15px; }
+.wb-scenarios { min-width: 0; margin: 0; padding: 0; border: 0; }
+.wb-scenarios legend, .wb-controls-label {
+  margin: 0 0 9px; padding: 0; font-size: .77rem; font-weight: 900; color: var(--deep);
+}
+.wb-scenario-buttons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+.wb-scenario-buttons button {
+  min-width: 0; min-height: 50px; padding: 7px; background: #fff;
+  border: 1px solid #173e2b6e; border-radius: 10px;
+  line-height: 1.6; font-size: .75rem; font-weight: 800;
+  cursor: pointer;
+}
+.wb-scenario-buttons button[aria-pressed="true"] {
+  background: var(--explore); border-color: var(--ink);
+  box-shadow: inset 0 -3px 0 #1515151a;
+}
+.wb-controls-label { margin: 15px 0 9px; }
+.wb-module-buttons { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; }
+.wb-module-buttons button {
+  display: flex; align-items: center; gap: 9px; min-height: 66px;
+  padding: 9px; text-align: start; background: white;
+  border: 1px solid #173e2b6e; border-radius: 10px; cursor: pointer;
+}
+.wb-module-buttons button[aria-pressed="true"] { background: #39dd5929; border-color: var(--deep); }
+.wb-module-buttons button > span:last-child { display: grid; gap: 2px; min-width: 0; }
+.wb-module-buttons button strong { font-size: .73rem; line-height: 1.7; }
+.wb-module-buttons button small { font-size: .68rem; }
+.wb-icon {
+  flex: 0 0 39px; width: 39px; height: 39px; display: grid; place-items: center;
+  border: 2px solid var(--ink); border-radius: 10px;
+  background: var(--explore); font: 900 .85rem/1 system-ui;
+}
+.wb-backup { background: var(--learn); }
+.wb-root button:disabled { cursor: default; opacity: .64; }
+.wb-hint { font-size: .72rem; line-height: 1.8; margin: 12px 0 0; color: #475b4b; }
+.wb-static { background: #f8f9f4; border-top: 1px solid #173e2b2a; padding: 12px 16px 16px; }
+.wb-static summary { cursor: pointer; min-height: 30px; font-size: .75rem; font-weight: 850; }
+.wb-static p { text-align: start !important; margin: 7px 0 0; line-height: 1.8; font-size: .7rem; }
+.wb-focus-hint {
+  padding: 12px 14px; margin: 4px 0 18px;
+  border-inline-start: 4px solid var(--learn); background: #ecfaea;
+  font-size: .82rem; line-height: 1.85;
+}
+@media (max-width: 960px) {
+  .lab-water-isometric .lab-stage-grid { grid-template-columns: minmax(0,1fr); }
+  .lab-water-isometric .lab-stage-model { grid-row: 1; position: static; }
+  .lab-water-isometric .lab-stage-content { grid-row: 2; }
+}
+@media (max-width: 620px) {
+  .wb-header { flex-direction: column; gap: 3px; }
+  .wb-readings strong { font-size: 1.03rem; }
+  .wb-readings > div { padding: 10px 5px; }
+  .wb-controls { padding: 12px; }
+  .wb-scenario-buttons { gap: 5px; }
+  .wb-scenario-buttons button { padding: 6px; font-size: .69rem; }
+  .wb-module-buttons { grid-template-columns: minmax(0,1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wb-flow { animation: none; }
+  .wb-water-fill { transition: none; }
+}
