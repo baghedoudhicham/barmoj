@@ -67,11 +67,12 @@ try {
     await page.locator('.language-tabs button[lang="fr"]').click();
     assert.match(page.url(), /lang=fr/);
     assert.match(page.url(), /workbench=iso/);
-    assert.equal(await page.locator("main").getAttribute("dir"), "ltr");
+    await page.locator('main[dir="ltr"]').waitFor({ state: "visible" });
     assert.match(await page.locator(".wb-header").innerText(), /réservoir/i);
     await page.locator('.language-tabs button[lang="en"]').click();
     assert.match(page.url(), /lang=en/);
-    assert.match(await page.locator(".wb-header").innerText(), /Tank workbench/);
+    await page.locator(".wb-header").getByText("Tank workbench").waitFor();
+    await page.screenshot({ path: "artifacts/water-workbench/isometric-" + size + ".png", fullPage: true });
 
     // The original view remains available and preserving the same local trial.
     await page.locator(".wb-preview-switch").click();
@@ -79,7 +80,7 @@ try {
     assert.equal(await page.locator(".water-model").count(), 1);
     assert.equal(await page.locator(".current-outcome").count(), 1);
     assert.equal(errors.length, 0, "browser errors: " + errors.join("; "));
-    await page.screenshot({ path: "artifacts/water-workbench/acceptance-" + size + ".png", fullPage: true });
+    await page.screenshot({ path: "artifacts/water-workbench/classic-" + size + ".png", fullPage: true });
     await context.close();
     console.log("PASS BRKAR water scene " + size + "px: RTL, keyboard, trial, persistence, locales, classic fallback");
   }
