@@ -124,6 +124,9 @@ try {
     .fill("أظهرت التجربة الأولى أن الحساس أعطى قراءة منخفضة رغم ارتفاع الماء. بعد إضافة الحساس الاحتياطي توقفت المضخة عند اختلاف القراءتين، كما اختبرت الحد 80% والحالة العادية.");
   await save.click();
   await page.waitForURL(/\/result/);
+  await page.locator(".notebook-page h1").getByText(/سجّلت تفكيرك/).waitFor({ state: "visible" });
+  await page.locator(".child-quote").waitFor({ state: "visible" });
+  assert.match(await page.locator(".child-quote").innerText(), /الحساس الاحتياطي/);
   await page.screenshot({ path: "artifacts/water-workbench/completed-ar-390.png", fullPage: true });
   console.log("PASS BRKAR four-trial water journey: failure → normal → 80% limit → safeguarded fault → explanation → saved result");
   await journey.close();
