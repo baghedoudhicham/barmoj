@@ -58,6 +58,7 @@ try {
     await page.locator(".current-outcome").waitFor({ state: "visible" });
     assert.match(await page.locator(".current-outcome").innerText(), /المضخة/);
 
+    await page.screenshot({ path: "artifacts/water-workbench/isometric-ar-" + size + ".png", fullPage: true });
     if (size === 390) {
       const transition = await page.locator(".wb-water-fill").evaluate(el => getComputedStyle(el).transitionDuration);
       assert.ok(Number.parseFloat(transition) <= 0.0001, "reduced motion must effectively disable fill tween: " + transition);
@@ -84,6 +85,48 @@ try {
     await context.close();
     console.log("PASS BRKAR water scene " + size + "px: RTL, keyboard, trial, persistence, locales, classic fallback");
   }
+
+  // One full child journey on a small touch viewport. This cannot be completed
+  // by pressing Run once. Every scenario is a real saved deterministic trial.
+  const journey = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
+  const page = await journey.newPage();
+  await page.goto(base + "/mission/water?lang=ar&workbench=iso", { waitUntil: "networkidle" });
+  await page.locator(".wb-root").waitFor({ state: "visible" });
+  await page.locator(".lab-stage-card .notebook-field textarea").first()
+    .fill("لمنع فيضان الخزان أحتاج إلى معرفة المستوى الحقيقي ومتى أوقف المضخة.");
+  await page.locator(".lab-stage-card .lab-primary-action").click();
+  async function testScenario(index, backup, predictionIndex) {
+    await page.locator(".wb-scenario-buttons button").nth(index).click();
+    const backupButton = page.locator(".wb-module-buttons button").nth(1);
+    if ((await backupButton.getAttribute("aria-pressed")) !== String(backup)) {
+      await backupButton.click();
+    }
+    await page.locator(".prediction-panel .lab-options button").nth(predictionIndex).click();
+    await page.locator(".prediction-panel textarea")
+      .fill("التوقع مبني على مقارنة مستوى الماء بقراءة الحساس وقاعدة التوقف.");
+    await page.locator(".prediction-panel .button").last().click();
+    await page.locator(".current-outcome").waitFor({ state: "visible" });
+    assert.match(page.url(), /mission\/water/);
+  }
+  await testScenario(2, false, 0); // Observe unsafe 96% / 60% false-reading case.
+  await page.locator(".lab-stage-actions button").first().click();
+  await page.locator(".wb-module-buttons button").nth(1).waitFor({ state: "visible" });
+  await testScenario(0, true, 0); // Normal with revised safeguard.
+  await page.locator(".lab-stage-actions button").first().click();
+  await testScenario(1, true, 1); // Exact 80% boundary.
+  await page.locator(".lab-stage-actions button").first().click();
+  await testScenario(2, true, 1); // Re-test failure after safeguard.
+  await page.locator(".lab-stage-actions button").nth(1).click();
+  const save = page.locator(".lab-evidence-checks .lab-primary-action");
+  await save.waitFor({ state: "visible" });
+  assert.equal(await save.isDisabled(), true, "explanation gate must remain locked");
+  await page.locator(".lab-explain-stage textarea").first()
+    .fill("أظهرت التجربة الأولى أن الحساس أعطى قراءة منخفضة رغم ارتفاع الماء. بعد إضافة الحساس الاحتياطي توقفت المضخة عند اختلاف القراءتين، كما اختبرت الحد 80% والحالة العادية.");
+  await save.click();
+  await page.waitForURL(/\/result/);
+  await page.screenshot({ path: "artifacts/water-workbench/completed-ar-390.png", fullPage: true });
+  console.log("PASS BRKAR four-trial water journey: failure → normal → 80% limit → safeguarded fault → explanation → saved result");
+  await journey.close();
 } finally {
   await browser.close();
 }
