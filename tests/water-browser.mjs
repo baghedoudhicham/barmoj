@@ -76,8 +76,8 @@ try {
 
     // The original view remains available and preserving the same local trial.
     await page.locator(".wb-preview-switch").click();
-    assert.equal(await page.locator(".wb-root").count(), 0);
-    assert.equal(await page.locator(".water-model").count(), 1);
+    await page.locator(".wb-root").waitFor({ state: "detached" });
+    await page.locator(".water-model").waitFor({ state: "visible" });
     assert.equal(await page.locator(".current-outcome").count(), 1);
     assert.equal(errors.length, 0, "browser errors: " + errors.join("; "));
     await page.screenshot({ path: "artifacts/water-workbench/classic-" + size + ".png", fullPage: true });
