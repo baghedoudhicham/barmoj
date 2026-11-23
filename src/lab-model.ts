@@ -81,17 +81,27 @@ export function initialSettings(): Settings {
     reward: 5,
   };
 }
+export function waterReadings(scenario: Settings["scenario"]) {
+  // Three exact deterministic fixtures; not a continuous or calibrated model.
+  if (scenario === "normal") return { actual: 45, sensor: 45 };
+  if (scenario === "limit") return { actual: 80, sensor: 80 };
+  return { actual: 96, sensor: 60 };
+}
+
+export function waterWorkbenchView(settings: Settings, trial?: Trial) {
+  const readings = waterReadings(settings.scenario);
+  const tested = !!trial && settingsKey("water", trial.settings) === settingsKey("water", settings);
+  const pump: "untested" | "running" | "stopped" =
+    !tested ? "untested" : trial!.outcome === "المضخة متوقفة" ? "stopped" : "running";
+  return { ...readings, tested, pump, safe: tested ? trial!.safe : undefined };
+}
+
 export function simulate(
   id: LabId,
   s: Settings,
 ): Pick<Trial, "outcome" | "detail" | "safe" | "values"> {
   if (id === "water") {
-    const [level, reading] =
-      s.scenario === "normal"
-        ? [45, 45]
-        : s.scenario === "limit"
-          ? [80, 80]
-          : [96, 60];
+    const { actual: level, sensor: reading } = waterReadings(s.scenario);
     const stopped =
       (s.stopAtLimit && reading >= 80) || (s.safeguard && level !== reading);
     return {
